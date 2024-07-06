@@ -1,0 +1,20 @@
+<!-- lista_actividad_control.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Actividades Control</title>
+</head>
+<body>
+    <h1>Lista de Actividades Control</h1>
+    <ul>
+        {% for actividad_control in actividades_control %}
+            <li>
+                {{ actividad_control.estudiante }} - 
+                <a href="{% url 'editar_actividad_control' pk=actividad_control.pk %}">Editar</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

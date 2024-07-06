@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+</head>
+<body>
+    <h1>Dashboard</h1>
+    <table>
+        <tr>
+            <th>Estudiante</th>
+            <th>Título</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+        {% for actividad in actividades %}
+        <tr>
+            <td>{{ actividad.estudiante }}</td>
+            <td>{{ actividad.titulo }}</td>
+            <td>{{ actividad.estado }}</td>
+            <td><a href="{% url 'revisar_actividad' actividad.id %}">Revisar</a></td>
+            
+        </tr>
+        {% endfor %}
+
+
+    </table>
+    <ul>
+        {% for actividad in actividades %}
+          <li>
+            <a href="{% url 'revision' actividad.id %}">Revisar {{ actividad.nombre }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+</body>
+</html>

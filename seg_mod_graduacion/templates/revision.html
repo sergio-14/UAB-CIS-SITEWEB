@@ -1,0 +1,24 @@
+{% extends 'dashboard.html' %}
+{% block content %}
+  <h1>Revisar Actividad</h1>
+  <p>Estudiante: {{ actividad.estudiante }}</p>
+  <p>Tutor: {{ actividad.tutor }}</p>
+  <p>Jurados:</p>
+  <ul>
+      <li>{{ actividad.jurado_1 }}</li>
+      <li>{{ actividad.jurado_2 }}</li>
+      <li>{{ actividad.jurado_3 }}</li>
+  </ul>
+  {% if todos_aprobados %}
+    <form method="post">
+      {% csrf_token %}
+      <button type="submit" name="cambiar_estado" class="btn btn-success">Cambiar Estado a Aprobado</button>
+    </form>
+  {% else %}
+    <p>Estado actual: {{ actividad.estado }}</p>
+    <p>Para cambiar el estado a 'Aprobado', todos los jurados deben haber aprobado la actividad.</p>
+    <button class="btn btn-success" disabled>Cambiar Estado a Aprobado</button>
+  {% endif %}
+  
+  <a href="{% url 'dashboard' %}">Volver al Dashboard</a>
+{% endblock %}

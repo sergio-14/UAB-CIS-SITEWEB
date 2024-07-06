@@ -1,0 +1,134 @@
+{% extends 'dashboard.html' %}
+{% block content %}
+{% load static %}
+<h1 class="text-center titulosgeneral">VISTA Y ESTADO PERFIL DE PROYECTO</h1>
+<br />
+
+<div class="container mt-3">
+    {% for actividad in actividades %}
+    <div class="card narrow-card no-gutters">
+      <div class="row ">
+        <!-- Foto en un lado -->
+        {% if actividad.estudiante.imagen %}
+          <div class="col-md-3 col-lg-3 centered-img">
+              <img src="{{ actividad.estudiante.imagen.url }}" class="card-img imgperfil p-2" alt="Foto del estudiante" />
+          </div>
+        {% else %}
+          <div class="col-md-3 col-lg-3 centered-img">
+              <img src="{% static 'img/SINFOTO.webp' %}" class="card-img imgperfil" alt="Sin foto" />
+          </div>
+        {% endif %}
+        
+        <!-- Contenido en el otro lado -->
+        <div class="col-md-7 col-lg-8 pb-5">
+          <div class="card-body">
+            <!-- Texto con formato pre -->
+            <pre id="aaa">MODALIDAD OPTADA: {{ actividad.modalidad.nombre }}                       {{ actividad.fecha }}</pre>
+            <!-- Título -->
+            <h5 class="card-title pb-2">Titulo: {{ actividad.titulo }}</h5>
+            <div class="row">
+                <div class="col-6 col-md-3">
+                    {% if actividad.tutor.imagen %}
+                      <img src="{{ actividad.tutor.imagen.url }}" class="rounded-img" alt="Foto del tutor">
+                    {% else %}
+                      <img src="{% static 'img/SINFOTO.webp' %}" class="rounded-img" alt="Sin foto">
+                    {% endif %}
+                    <p id="aaa" class="">Tutor: {{ actividad.tutor.nombre }} {{ actividad.tutor.apellido }}</p>
+                </div>
+                <div class="col-6 col-md-3">
+                    {% if actividad.jurado_1.imagen %}
+                      <img src="{{ actividad.jurado_1.imagen.url }}" class="rounded-img" alt="Foto del jurado 1">
+                    {% else %}
+                      <img src="{% static 'img/SINFOTO.webp' %}" class="rounded-img" alt="Sin foto">
+                    {% endif %}
+                    <p id="aaa" class="">Jurado: {{ actividad.jurado_1.nombre }} {{ actividad.jurado_1.apellido }}</p>
+                    <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="jurado_1_aprobado" name="jurado_1_aprobado" {% if actividad.jurado_1_aprobado %}checked{% endif %} disabled>
+                      <label id="aaa" class="form-check-label" for="jurado_1_aprobado">
+                          {% if actividad.jurado_1_aprobado %}
+                              Aprobado
+                          {% else %}
+                              No aprobado
+                          {% endif %}
+                      </label>
+                  </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    {% if actividad.jurado_2.imagen %}
+                      <img src="{{ actividad.jurado_2.imagen.url }}" class="rounded-img" alt="Foto del jurado 2">
+                    {% else %}
+                      <img src="{% static 'img/SINFOTO.webp' %}" class="rounded-img" alt="Sin foto">
+                    {% endif %}
+                    <p id="aaa" class="">Jurado: {{ actividad.jurado_2.nombre }} {{ actividad.jurado_2.apellido }}</p>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="jurado_2_aprobado" name="jurado_2_aprobado" {% if actividad.jurado_2_aprobado %}checked{% endif %} disabled>
+                      <label id="aaa" class="form-check-label" for="jurado_2_aprobado">
+                          {% if actividad.jurado_2_aprobado %}
+                              Aprobado
+                          {% else %}
+                              No aprobado
+                          {% endif %}
+                      </label>
+                  </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    {% if actividad.jurado_3.imagen %}
+                      <img src="{{ actividad.jurado_3.imagen.url }}" class="rounded-img" alt="Foto del jurado 3">
+                    {% else %}
+                      <img src="{% static 'img/SINFOTO.webp' %}" class="rounded-img" alt="Sin foto">
+                    {% endif %}
+                    <p id="aaa" class="">Jurado: {{ actividad.jurado_3.nombre }} {{ actividad.jurado_3.apellido }}</p>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="jurado_3_aprobado" name="jurado_3_aprobado" {% if actividad.jurado_3_aprobado %}checked{% endif %} disabled>
+                      <label id="aaa" class="form-check-label" for="jurado_3_aprobado">
+                          {% if actividad.jurado_3_aprobado %}
+                              Aprobado
+                          {% else %}
+                              No aprobado
+                          {% endif %}
+                      </label>
+                  </div>
+                </div>
+            </div>
+            <!-- Descripción -->
+            <p class="card-text">Descripción:<br>{{ actividad.resumen }}</p>
+            <div class="container text-center">
+              <div class="row">
+                <div class="col contdoc">
+                  <div class="d-flex align-items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-file-earmark-richtext-fill" viewBox="0 0 16 16">
+                      <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M7 6.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0m-.861 1.542 1.33.886 1.854-1.855a.25.25 0 0 1 .289-.047l1.888.974V9.5a.5.5 0 0 1-.5.5H5a.5.5 0 0 1-.5-.5V9s1.54-1.274 1.639-1.208M5 11h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1 0-1m0 2h3a.5.5 0 0 1 0 1H5a.5.5 0 0 1 0-1"/>
+                    </svg>
+                    {% if actividad.documentacion %}
+                    <a href="{{ actividad.documentacion.url }}" class="list-group-item list-group-item-action">Documento</a>
+                  {% else %}
+                    <span class="list-group-item list-group-item-action disabled">No hay documento</span>
+                  {% endif %}
+                </div>
+                </div>
+                <div class="col">
+                  <h5 class="card-state">Estado Revisión: {{ actividad.estado }}</h5>
+                </div>
+              </div> 
+            </div>
+             <!-- Comentarios -->
+             
+              <!--comentarios-->
+              <h5 class="card-title text-center pt-4">Comentarios Retroalimentativos</h5>
+              {% for comentario in actividad.comentarios.all %}
+              <h6 class="card-state">
+                {{ comentario.actfecha_post }} <br> Revisado por: {{ comentario.user.nombre }} {{ comentario.user.apellido }}
+              </h6>
+              <p class="card-text">Comentarios:<br> {{ comentario.actcomentario }}</p>
+              {% empty %}
+              <p class="card-text">No hay comentarios para este proyecto.</p>
+              {% endfor %}
+           
+        </div>
+      </div>
+    </div>
+    <br>
+    {% endfor %}
+  </div>
+
+{% endblock %}
