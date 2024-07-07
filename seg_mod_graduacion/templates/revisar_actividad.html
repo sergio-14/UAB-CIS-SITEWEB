@@ -1,58 +1,60 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Revisar Actividad</title>
-</head>
-<body>
-    <h1>Revisar Actividad</h1>
-    <p>Estudiante: {{ actividad.estudiante }}</p>
-    <p>Tutor: {{ actividad.tutor }}</p>
-    <p>Jurados:</p>
-    <ul>
-        <li>{{ actividad.jurado_1 }}</li>
-        <li>{{ actividad.jurado_2 }}</li>
-        <li>{{ actividad.jurado_3 }}</li>
-    </ul>
-    <form method="POST">
-        {% csrf_token %}
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="jurado_1_aprobado" name="jurado_1_aprobado" {% if actividad.jurado_1_aprobado %}checked{% endif %} {% if request.user != actividad.jurado_1 %}disabled{% endif %}>
-            <label id="aaa" class="form-check-label" for="jurado_1_aprobado">
-                Aprobación: 
-                {% if actividad.jurado_1_aprobado %}
-                    Aprobado
-                {% else %}
-                    No aprobado
-                {% endif %}
-            </label>
+{% extends 'dashboard.html'%} {% load static %} {% load crispy_forms_tags %}{% block content %}
+<h1 class="text-center font">CONFIRMAR APROBACION</h1>
+<div class="container mt-3 pt-3">
+  <div class="row pb-5 ">
+    <div class="col-md-8  offset-md-2 pb-5">
+      <div class="card no-gutters">
+        <div class="card-body font px-5 ">
+            <ul>
+                <li>{{ actividad.jurado_1 }}</li>
+                <li>{{ actividad.jurado_2 }}</li>
+                <li>{{ actividad.jurado_3 }}</li>
+            </ul>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="jurado_1_aprobado" name="jurado_1_aprobado" {% if actividad.jurado_1_aprobado %}checked{% endif %} {% if request.user != actividad.jurado_1 %}disabled{% endif %}>
+                    <label id="aaa" class="form-check-label" for="jurado_1_aprobado">
+                        Aprobación: 
+                        {% if actividad.jurado_1_aprobado %}
+                            Aprobado
+                        {% else %}
+                            No aprobado
+                        {% endif %}
+                    </label>
+                </div>
+            
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="jurado_2_aprobado" name="jurado_2_aprobado" {% if actividad.jurado_2_aprobado %}checked{% endif %} {% if request.user != actividad.jurado_2 %}disabled{% endif %}>
+                    <label id="aaa" class="form-check-label" for="jurado_2_aprobado">
+                        Aprobación: 
+                        {% if actividad.jurado_2_aprobado %}
+                            Aprobado
+                        {% else %}
+                            No aprobado
+                        {% endif %}
+                    </label>
+                </div>
+            
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="jurado_3_aprobado" name="jurado_3_aprobado" {% if actividad.jurado_3_aprobado %}checked{% endif %} {% if request.user != actividad.jurado_3 %}disabled{% endif %}>
+                    <label id="aaa" class="form-check-label" for="jurado_3_aprobado">
+                        Aprobación: 
+                        {% if actividad.jurado_3_aprobado %}
+                            Aprobado
+                        {% else %}
+                            No aprobado
+                        {% endif %}
+                    </label>
+                </div>
+            
+                <button type="submit" class="btn btn-primary">Guardar revisión</button>
+                <a class="btn btn-danger " href="{% url 'dashboard' %}">Cancelar</a>
+            </form>
         </div>
-    
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="jurado_2_aprobado" name="jurado_2_aprobado" {% if actividad.jurado_2_aprobado %}checked{% endif %} {% if request.user != actividad.jurado_2 %}disabled{% endif %}>
-            <label id="aaa" class="form-check-label" for="jurado_2_aprobado">
-                Aprobación: 
-                {% if actividad.jurado_2_aprobado %}
-                    Aprobado
-                {% else %}
-                    No aprobado
-                {% endif %}
-            </label>
-        </div>
-    
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="jurado_3_aprobado" name="jurado_3_aprobado" {% if actividad.jurado_3_aprobado %}checked{% endif %} {% if request.user != actividad.jurado_3 %}disabled{% endif %}>
-            <label id="aaa" class="form-check-label" for="jurado_3_aprobado">
-                Aprobación: 
-                {% if actividad.jurado_3_aprobado %}
-                    Aprobado
-                {% else %}
-                    No aprobado
-                {% endif %}
-            </label>
-        </div>
-    
-        <button type="submit" class="btn btn-primary">Guardar revisión</button>
-    </form>
-</body>
-</html>
+        <br />
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

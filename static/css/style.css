@@ -253,6 +253,14 @@
     font-style: normal;
 
   }
+  #aaat{
+    font-weight: 400;
+    font-size: 12px;
+    color: #757575;
+    font-family:"Anton";
+    font-style: normal;
+
+  }
 
   .narrow-card {
     max-width: 900px; /* Establecer el ancho máximo del card */

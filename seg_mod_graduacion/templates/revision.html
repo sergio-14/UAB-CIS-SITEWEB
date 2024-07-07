@@ -1,24 +1,28 @@
-{% extends 'dashboard.html' %}
-{% block content %}
-  <h1>Revisar Actividad</h1>
-  <p>Estudiante: {{ actividad.estudiante }}</p>
-  <p>Tutor: {{ actividad.tutor }}</p>
-  <p>Jurados:</p>
-  <ul>
-      <li>{{ actividad.jurado_1 }}</li>
-      <li>{{ actividad.jurado_2 }}</li>
-      <li>{{ actividad.jurado_3 }}</li>
-  </ul>
-  {% if todos_aprobados %}
-    <form method="post">
-      {% csrf_token %}
-      <button type="submit" name="cambiar_estado" class="btn btn-success">Cambiar Estado a Aprobado</button>
-    </form>
-  {% else %}
-    <p>Estado actual: {{ actividad.estado }}</p>
-    <p>Para cambiar el estado a 'Aprobado', todos los jurados deben haber aprobado la actividad.</p>
-    <button class="btn btn-success" disabled>Cambiar Estado a Aprobado</button>
-  {% endif %}
-  
-  <a href="{% url 'dashboard' %}">Volver al Dashboard</a>
+{% extends 'dashboard.html'%} {% load static %} {% load crispy_forms_tags %}{% block content %}
+<h1 class="text-center font">CONFIRMAR APROBACION</h1>
+<div class="container mt-3 pt-3">
+  <div class="row pb-5 ">
+    <div class="col-md-8  offset-md-2 pb-5">
+      <div class="card no-gutters">
+        <div class="card-body font px-5 ">
+          <h1>APROBAR PROYECTO DEL UNIVERSITARIO</h1>
+          <p>Estudiante: {{ actividad.estudiante }}</p>
+          <p>Tutor: {{ actividad.tutor }}</p>
+          {% if todos_aprobados %}
+          <form method="post">
+            {% csrf_token %}
+            <button type="submit" name="cambiar_estado" class="btn btn-dark">Cambiar Estado a Aprobado</button>
+            <a class="btn btn-danger" href="{% url 'dashboard' %}">Volver al Dashboard</a>
+          </form>
+          {% else %}
+          <p>Estado actual: {{ actividad.estado }}</p>
+          <p>Para cambiar el estado a 'Aprobado', todos los jurados deben haber aprobado la actividad.</p>
+          <button class="btn btn-secondary" disabled>Cambiar Estado a Aprobado</button>
+          {% endif %}
+        </div>
+        <br />
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

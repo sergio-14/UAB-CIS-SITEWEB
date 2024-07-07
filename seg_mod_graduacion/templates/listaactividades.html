@@ -1,36 +1,125 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Dashboard</title>
-</head>
-<body>
-    <h1>Dashboard</h1>
-    <table>
-        <tr>
-            <th>Estudiante</th>
-            <th>Título</th>
-            <th>Estado</th>
-            <th>Acciones</th>
-        </tr>
-        {% for actividad in actividades %}
-        <tr>
-            <td>{{ actividad.estudiante }}</td>
-            <td>{{ actividad.titulo }}</td>
-            <td>{{ actividad.estado }}</td>
-            <td><a href="{% url 'revisar_actividad' actividad.id %}">Revisar</a></td>
+{% extends 'dashboard.html' %}
+{% block content %}
+{% load static %}
+<h1 class="text-center titulosgeneral">PREVISTA DEL PROYECTO</h1>
+<br />
+ {% for actividad in actividades %}
+<div class="container mt-3">
+   
+    <div class="card narrow-card no-gutters">
+      <div class="row ">
+        <!-- Foto en un lado -->
+        {% if actividad.estudiante.imagen %}
+          <div class="col-md-3 col-lg-3 centered-img">
+              <img src="{{ actividad.estudiante.imagen.url }}" class="card-img imgperfil p-2" alt="Foto del estudiante" />
+          </div>
+        {% else %}
+          <div class="col-md-3 col-lg-3 centered-img">
+              <img src="{% static 'img/SINFOTO.webp' %}" class="card-img imgperfil" alt="Sin foto" />
+          </div>
+        {% endif %}
+        
+        <!-- Contenido en el otro lado -->
+        <div class="col-md-7 col-lg-8 pb-5">
+          <div class="card-body">
+            <!-- Texto con formato pre -->
+            <pre id="aaa">Universitario: {{ actividad.estudiante }}                       Modalidad Optada: {{ actividad.modalidad.nombre }}</pre>
+            <!-- Título -->
             
-        </tr>
-        {% endfor %}
+            <div class="row pb-3">
+                <div class="col-6 col-md-3">
+                    {% if actividad.tutor.imagen %}
+                      <img src="{{ actividad.tutor.imagen.url }}" class="rounded-img" alt="Foto del tutor">
+                    {% else %}
+                      <img src="{% static 'img/SINFOTO.webp' %}" class="rounded-img" alt="Sin foto">
+                    {% endif %}
+                    <p id="aaa" class="">Tutor: {{ actividad.tutor.nombre }} {{ actividad.tutor.apellido }}</p>
+                </div>
+                <div class="col-6 col-md-3">
+                    {% if actividad.jurado_1.imagen %}
+                      <img src="{{ actividad.jurado_1.imagen.url }}" class="rounded-img" alt="Foto del jurado 1">
+                    {% else %}
+                      <img src="{% static 'img/SINFOTO.webp' %}" class="rounded-img" alt="Sin foto">
+                    {% endif %}
+                    <p id="aaa" class="">Jurado: {{ actividad.jurado_1.nombre }} {{ actividad.jurado_1.apellido }}</p>
+                    <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="jurado_1_aprobado" name="jurado_1_aprobado" {% if actividad.jurado_1_aprobado %}checked{% endif %} disabled>
+                      <label id="aaa" class="form-check-label" for="jurado_1_aprobado">
+                          {% if actividad.jurado_1_aprobado %}
+                              Aprobado
+                          {% else %}
+                              No aprobado
+                          {% endif %}
+                      </label>
+                  </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    {% if actividad.jurado_2.imagen %}
+                      <img src="{{ actividad.jurado_2.imagen.url }}" class="rounded-img" alt="Foto del jurado 2">
+                    {% else %}
+                      <img src="{% static 'img/SINFOTO.webp' %}" class="rounded-img" alt="Sin foto">
+                    {% endif %}
+                    <p id="aaa" class="">Jurado: {{ actividad.jurado_2.nombre }} {{ actividad.jurado_2.apellido }}</p>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="jurado_2_aprobado" name="jurado_2_aprobado" {% if actividad.jurado_2_aprobado %}checked{% endif %} disabled>
+                      <label id="aaa" class="form-check-label" for="jurado_2_aprobado">
+                          {% if actividad.jurado_2_aprobado %}
+                              Aprobado
+                          {% else %}
+                              No aprobado
+                          {% endif %}
+                      </label>
+                  </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    {% if actividad.jurado_3.imagen %}
+                      <img src="{{ actividad.jurado_3.imagen.url }}" class="rounded-img" alt="Foto del jurado 3">
+                    {% else %}
+                      <img src="{% static 'img/SINFOTO.webp' %}" class="rounded-img" alt="Sin foto">
+                    {% endif %}
+                    <p id="aaa" class="">Jurado: {{ actividad.jurado_3.nombre }} {{ actividad.jurado_3.apellido }}</p>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="jurado_3_aprobado" name="jurado_3_aprobado" {% if actividad.jurado_3_aprobado %}checked{% endif %} disabled>
+                      <label id="aaa" class="form-check-label" for="jurado_3_aprobado">
+                          {% if actividad.jurado_3_aprobado %}
+                              Aprobado
+                          {% else %}
+                              No aprobado
+                          {% endif %}
+                      </label>
+                  </div>
+                </div>
+            </div>
+            <!-- Descripción -->
+            <div class=" text-center">
+              <div class="row">
+                <div class="col-5">
+                  <h5 class="card-state m-2">Revisión General: {{ actividad.estado }}</h5>
+                </div>
+                <div class="col-7">
+                  <a class="btn btn-sm btn-secondary" href="{% url 'revisar_actividad' actividad.id %}">Revisión de Jurado</a>
+                  <a class="btn btn-sm btn-dark" href="{% url 'revision' actividad.id %}">Revisión de Admin</a>
+                </div>
+              </div> 
+            </div>
+             <!-- Comentarios -->
+             
+              <!--comentarios-->
+              <h5 class="card-title text-center pt-3">Comentarios Retroalimentativos</h5>
+              {% for comentario in actividad.comentarios.all %}
+              <h6 class="card-state">
+                <span id="aaat">{{ comentario.actfecha_post }}</span> {{ comentario.user.nombre }} {{ comentario.user.apellido }}
+              </h6>
+              <p class="card-text">Comentarios: {{ comentario.actcomentario }}</p>
+              {% empty %}
+              <p class="card-text">No hay comentarios para este proyecto.</p>
+              {% endfor %}
+        </div>
+      </div>
+    </div>
+   
+</div> 
+{% endfor %}
+{% endblock %}
 
 
-    </table>
-    <ul>
-        {% for actividad in actividades %}
-          <li>
-            <a href="{% url 'revision' actividad.id %}">Revisar {{ actividad.nombre }}</a>
-          </li>
-        {% endfor %}
-      </ul>
-</body>
-</html>

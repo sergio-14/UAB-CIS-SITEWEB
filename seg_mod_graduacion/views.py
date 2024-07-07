@@ -284,7 +284,13 @@ def crear_actividad_control(request):
 
 @login_required
 def lista_actividad_control(request):
-    actividades_control = ActividadControl.objects.all()
+    # Obtén todas las actividades de control, asegurándote de no tener duplicados.
+    actividades_control = ActividadControl.objects.all().distinct()
+    
+    # Opcional: Para depuración, imprime los objetos recuperados.
+    for actividad in actividades_control:
+        print(actividad.estudiante)
+
     return render(request, 'lista_actividad_control.html', {'actividades_control': actividades_control})
 
 @login_required
@@ -363,9 +369,6 @@ def revisar_actividad(request, actividad_id):
         return redirect('dashboard')
 
     return render(request, 'revisar_actividad.html', {'actividad': actividad})
-
-
-
 
 def listaactividades(request):
     actividades = Actividad.objects.all()
