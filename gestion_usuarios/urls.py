@@ -28,4 +28,9 @@ urlpatterns = [
     path('grupos/crear/', views.crear_grupo, name='crear_grupo'),
     path('grupos/<int:pk>/actualizar/', views.actualizar_grupo, name='actualizar_grupo'),
     path('grupos/<int:pk>/eliminar/', views.eliminar_grupo, name='eliminar_grupo'),
+    
+     #mensajes correo
+    path('enviar-mensaje/', views.enviar_mensaje, name='enviar_mensaje'),
+    
+    
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

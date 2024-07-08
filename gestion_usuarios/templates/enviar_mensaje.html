@@ -1,0 +1,59 @@
+{% extends 'dashboard.html'%}
+{% block content %}
+<div class="container font">
+    <div class="row justify-content-center">
+        <br><br><br>
+        <div class="col-md-7 d-flex align-items-center">
+            <h3 class="modal-title me-auto" id="mensajeModalLabel">Enviar Correo</h3>
+            <a href="{% url 'dashboard' %}" class="btn-close"  aria-label="Close"></a>
+        </div>
+    </div>
+    <form class="row g-3 justify-content-center" action="{% url 'enviar_mensaje' %}" method="post">
+        {% csrf_token %}
+        <div class="col-md-3 ">
+            <label for="destinatario" class="form-label">Destinatario:</label>
+            <select class="fontf form-select" id="destinatario" name="destinatario">
+                {% for usuario in usuarios %}
+                    <option value="{{ usuario.id }}" data-firstname="{{ usuario.nombre }}" data-lastname="{{ usuario.apellido }}">{{ usuario.email }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label  class="form-label">Nombre completo del usuario seleccionado:</label>
+            <input type="text" class="form-control" id="nombreCompleto" readonly>
+        </div>
+        <div class="col-md-7">
+            <label for="asunto" class="form-label">Asunto:</label>
+            <input type="text" class="form-control" id="asunto" name="asunto">
+        </div>
+        <div class="col-md-7">
+          <label for="mensaje" class="form-label">Mensaje:</label>
+          <textarea class="form-control" id="mensaje" name="mensaje" rows="4"></textarea>
+        </div>
+        <div class="col-md-7">
+             <button type="submit" class="btn btn-primary">Enviar Mensaje</button>
+        </div>
+    </form>  
+    <br><br><br><br><br><br><br>
+</div>
+
+<script>
+    // Obtener el elemento select
+    var selectDestinatario = document.getElementById("destinatario");
+
+    // Escuchar el evento change del select
+    selectDestinatario.addEventListener("change", function() {
+        // Obtener el option seleccionado
+        var selectedOption = this.options[this.selectedIndex];
+        
+        // Obtener el nombre y apellido del option seleccionado
+        var firstName = selectedOption.getAttribute("data-firstname");
+        var lastName = selectedOption.getAttribute("data-lastname");
+
+        // Mostrar el nombre completo en el input
+        var nombreCompletoInput = document.getElementById("nombreCompleto");
+        nombreCompletoInput.value = firstName + " " + lastName;
+    });
+</script>
+
+{% endblock  %}

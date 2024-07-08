@@ -12,6 +12,7 @@ from django.http import JsonResponse
 from django.template.loader import render_to_string
 from django.contrib.admin.models import LogEntry, ADDITION, CHANGE, DELETION
 from django.contrib.contenttypes.models import ContentType
+from django.core.mail import send_mail
 
 User = get_user_model()
 
@@ -63,6 +64,25 @@ def signout(request):
 # DashBoard
 def dashboard(request):
     return render(request, "dashboard.html")
+
+#Correspondencia de la aplicacion
+@login_required
+def enviar_mensaje(request):
+    if request.method == 'POST':
+        destinatario_id = request.POST.get('destinatario')
+        destinatario = User.objects.get(id=destinatario_id)
+        asunto = request.POST.get('asunto')
+        mensaje = request.POST.get('mensaje')
+
+        # Envía el correo electrónico
+        send_mail(asunto, mensaje, 'shuerkk.14@gmail.com', [destinatario.email])
+
+        return redirect('dashboard')
+
+    # Obtener todos los usuarios excepto el usuario actual
+    usuarios = User.objects.exclude(id=request.user.id)
+    return render(request, 'enviar_mensaje.html', {'usuarios': usuarios})
+
 
 # Listar Usuarios
 def listar_usuarios(request):
