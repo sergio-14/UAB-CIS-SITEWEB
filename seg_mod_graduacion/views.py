@@ -344,28 +344,38 @@ def lista_actividad(request):
     actividades = Actividad.objects.filter(estudiante=user).prefetch_related('comentarios').order_by('-fecha')
     return render(request, 'lista_actividad.html', {'actividades': actividades})
 
+from .models import Comentarioactividad
+
 @login_required
 def revisar_actividad(request, actividad_id):
     actividad = get_object_or_404(Actividad, pk=actividad_id)
     user = request.user
 
     if request.method == 'POST':
-        # Procesar el formulario de revisión
+        # Procesar el formulario de revisión y comentarios
         if user == actividad.jurado_1 and 'jurado_1_aprobado' in request.POST:
-            jurado_1_aprobado = request.POST.get('jurado_1_aprobado') == 'on'
-            actividad.jurado_1_aprobado = jurado_1_aprobado
+            actividad.jurado_1_aprobado = request.POST.get('jurado_1_aprobado') == 'on'
 
         if user == actividad.jurado_2 and 'jurado_2_aprobado' in request.POST:
-            jurado_2_aprobado = request.POST.get('jurado_2_aprobado') == 'on'
-            actividad.jurado_2_aprobado = jurado_2_aprobado
+            actividad.jurado_2_aprobado = request.POST.get('jurado_2_aprobado') == 'on'
 
         if user == actividad.jurado_3 and 'jurado_3_aprobado' in request.POST:
-            jurado_3_aprobado = request.POST.get('jurado_3_aprobado') == 'on'
-            actividad.jurado_3_aprobado = jurado_3_aprobado
+            actividad.jurado_3_aprobado = request.POST.get('jurado_3_aprobado') == 'on'
 
         # Guardar la actividad después de la revisión
         actividad.save()
-        messages.success(request, 'Revisión de actividad guardada correctamente.')
+
+        # Crear comentario si existe
+        comentario_texto = request.POST.get('comentario_texto', '')
+        if comentario_texto:
+            comentario = Comentarioactividad(
+                actcomentario=comentario_texto,
+                user=request.user,
+                actproyecto_relacionado=actividad
+            )
+            comentario.save()
+
+        messages.success(request, 'Revisión de actividad y comentario guardados correctamente.')
         return redirect('dashboard')
 
     return render(request, 'revisar_actividad.html', {'actividad': actividad})
@@ -398,3 +408,49 @@ def revision(request, actividad_id):
             return redirect('dashboard')
 
     return render(request, 'revision.html', {'actividad': actividad, 'todos_aprobados': todos_aprobados})
+
+
+from .models import ActividadRepositorio
+from django.urls import reverse
+from .forms import TransferirActividadForm
+
+class TransferirActividadView(View):
+    def get(self, request, actividad_id):
+        actividad = get_object_or_404(Actividad, id=actividad_id, estado='Aprobado')
+        form = TransferirActividadForm()
+        return render(request, 'transferir_actividad.html', {'form': form, 'actividad': actividad})
+
+    def post(self, request, actividad_id):
+        actividad = get_object_or_404(Actividad, id=actividad_id, estado='Aprobado')
+        form = TransferirActividadForm(request.POST)
+        if form.is_valid():
+            anio_ingreso = form.cleaned_data['anio_ingreso']
+            anio_egreso = form.cleaned_data['anio_egreso']
+            numero_acta = form.cleaned_data['numero_acta']
+            nota_aprobacion = form.cleaned_data['nota_aprobacion']
+            actividad.transferir_a_repositorio(anio_ingreso, anio_egreso, numero_acta, nota_aprobacion)
+            return redirect('dashboard')
+        return render(request, 'transferir_actividad.html', {'form': form, 'actividad': actividad})
+    
+def listaractividadesaprovadas(request):
+    actividades_aprobadas = Actividad.objects.filter(estado='Aprobado')
+    return render(request, 'listaractividadesaprovadas.html', {'acti': actividades_aprobadas})
+
+def listarepositorios(request):
+    actividades_repositorio = ActividadRepositorio.objects.all()
+    return render(request, 'listarepositorios.html', {'actirepositorio': actividades_repositorio})
+
+from .forms import ActividadRepositorioForm
+
+def editar_actividad_repositorio(request, pk):
+    actividad = get_object_or_404(ActividadRepositorio, pk=pk)
+    
+    if request.method == 'POST':
+        form = ActividadRepositorioForm(request.POST, instance=actividad)
+        if form.is_valid():
+            form.save()
+            return redirect('detalle_actividad_repositorio', pk=actividad.pk)
+    else:
+        form = ActividadRepositorioForm(instance=actividad)
+    
+    return render(request, 'editar_actividad_repositorio.html', {'form': form, 'actividad': actividad})

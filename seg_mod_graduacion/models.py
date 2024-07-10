@@ -153,6 +153,30 @@ class Actividad(models.Model):
         
         super().save(*args, **kwargs)
     
+    def transferir_a_repositorio(self, anio_ingreso, anio_egreso, numero_acta, nota_aprobacion):
+        repo_actividad, created = ActividadRepositorio.objects.get_or_create(
+            estudiante=self.estudiante,
+            tutor=self.tutor,
+            jurado_1=self.jurado_1,
+            jurado_2=self.jurado_2,
+            jurado_3=self.jurado_3,
+            titulo=self.titulo,
+            resumen=self.resumen,
+            modalidad=self.modalidad,
+            fecha=self.fecha,
+            guia_externo=self.guia_externo,
+            documentacion=self.documentacion,
+            estado=self.estado,
+            jurado_1_aprobado=self.jurado_1_aprobado,
+            jurado_2_aprobado=self.jurado_2_aprobado,
+            jurado_3_aprobado=self.jurado_3_aprobado,
+            anio_ingreso=anio_ingreso,
+            anio_egreso=anio_egreso,
+            numero_acta=numero_acta,
+            nota_aprobacion=nota_aprobacion
+        )
+        return repo_actividad
+    
 class Comentarioactividad(models.Model):
     actcomentario = models.TextField(max_length=1000, help_text='', verbose_name='Ingrese Comentario Retroalimentativo')
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
@@ -164,5 +188,34 @@ class Comentarioactividad(models.Model):
 
     def __str__(self):
         return self.actcomentario[:15] + '...' if len(self.actcomentario) > 15 else self.actcomentario
+ 
+ 
+ 
+###  repositorio titulados  ###
+   
+class ActividadRepositorio(models.Model):
+    estudiante = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='repo_estudiante', on_delete=models.CASCADE)
+    tutor = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='repo_tutor', on_delete=models.CASCADE)
+    jurado_1 = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='repo_jurado_1', on_delete=models.CASCADE)
+    jurado_2 = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='repo_jurado_2', on_delete=models.CASCADE)
+    jurado_3 = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='repo_jurado_3', on_delete=models.CASCADE)
+    habilitada = models.BooleanField(default=False)
+    titulo = models.CharField(max_length=100, default='------')
+    resumen = models.TextField(max_length=500, default='Describa el Proyecto...')
+    modalidad = models.ForeignKey(Modalidad, on_delete=models.CASCADE, default=1, verbose_name='Seleccione Una Modalidad')
+    fecha = models.DateField(default=timezone.now)
+    guia_externo = models.CharField(max_length=250, default='-----------')
+    documentacion = models.FileField(upload_to='documento/proyecto', verbose_name='Agregar Documentacion', null=True, blank=True)
+    estado = models.CharField(max_length=10, choices=ESTADO_CHOICES, default='Pendiente')
+    jurado_1_aprobado = models.BooleanField(default=False)
+    jurado_2_aprobado = models.BooleanField(default=False)
+    jurado_3_aprobado = models.BooleanField(default=False)
+    anio_ingreso = models.IntegerField()
+    anio_egreso = models.IntegerField()
+    numero_acta = models.CharField(max_length=50)
+    nota_aprobacion = models.DecimalField(max_digits=4, decimal_places=2)
+
+    def __str__(self):
+        return f"Repositorio Actividad for {self.estudiante}"
 
 

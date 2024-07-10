@@ -47,6 +47,11 @@
                         {% endif %}
                     </label>
                 </div>
+                <!-- Campo de texto para comentario -->
+                <div class="form-group mt-3 pb-3">
+                    <label for="comentario_texto">Comentario:</label>
+                    <textarea class="form-control" id="comentario_texto" name="comentario_texto" rows="3" {% if request.user != actividad.jurado_1 and request.user != actividad.jurado_2 and request.user != actividad.jurado_3 %}disabled{% endif %}></textarea>
+                </div>
             
                 <button type="submit" class="btn btn-primary">Guardar revisión</button>
                 <a class="btn btn-danger " href="{% url 'dashboard' %}">Cancelar</a>

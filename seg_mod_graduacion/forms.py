@@ -1,5 +1,5 @@
 from django import forms
-from .models import InvCientifica, ComentarioInvCientifica, InvSettings, PerfilProyecto, ComentarioPerfil
+from .models import InvCientifica, ComentarioInvCientifica, InvSettings, PerfilProyecto, ComentarioPerfil, ActividadRepositorio
 
 # área de investigación científica 
 class InvCientificaForm(forms.ModelForm):
@@ -81,3 +81,29 @@ class ActComentarioForm(forms.ModelForm):
         widgets = {
             'actcomentario': forms.Textarea(attrs={'class': 'comentari-field'}),
         }
+        
+import datetime
+
+current_year = datetime.datetime.now().year
+YEAR_CHOICES = [(year, year) for year in range(1990, current_year + 1)]
+
+class TransferirActividadForm(forms.Form):
+    anio_ingreso = forms.ChoiceField(
+        label='Año de Ingreso',
+        choices=YEAR_CHOICES,
+        initial=current_year,  # Establece el año actual como valor inicial
+        widget=forms.Select(attrs={'id': 'anio_ingreso', 'size': 2})  # Ajusta el tamaño del selector
+    )
+    anio_egreso = forms.ChoiceField(
+        label='Año de Egreso',
+        choices=YEAR_CHOICES,
+        initial=current_year,  # Establece el año actual como valor inicial
+        widget=forms.Select(attrs={'id': 'anio_egreso', 'size': 2})  # Ajusta el tamaño del selector
+    )
+    numero_acta = forms.CharField(label='Número de Acta', max_length=50)
+    nota_aprobacion = forms.DecimalField(label='Nota de Aprobación', max_digits=4, decimal_places=2)
+    
+class ActividadRepositorioForm(forms.ModelForm):
+    class Meta:
+        model = ActividadRepositorio
+        fields = ['anio_ingreso', 'anio_egreso', 'numero_acta', 'nota_aprobacion']

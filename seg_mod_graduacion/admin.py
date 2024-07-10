@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import InvCientifica, Modalidad, ComentarioInvCientifica, ComentarioPerfil, InvSettings, PerfilProyecto
 
-from .models import Actividad, ActividadControl,Comentarioactividad
+from .models import Actividad, ActividadControl,Comentarioactividad,ActividadRepositorio
 
 admin.site.register(Actividad)
 admin.site.register(ActividadControl)
@@ -14,3 +14,4 @@ admin.site.register(ComentarioPerfil)
 admin.site.register(InvSettings)
 admin.site.register(PerfilProyecto)
 admin.site.register(Comentarioactividad)
+admin.site.register(ActividadRepositorio)

@@ -262,10 +262,13 @@
 
   }
 
+ 
+
   .narrow-card {
     max-width: 900px; /* Establecer el ancho máximo del card */
     margin: 0 auto; /* Centrar el card horizontalmente */
   }
+
 
 /*** Button ***/
 .btn {
