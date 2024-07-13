@@ -4,9 +4,9 @@
 {% block title %}Actualizar Grupo{% endblock %}
 {% block content %}
 <head>
-    <link type='text/css' href= "{% static "css\style_grupo.css" %}" rel='stylesheet'/>
+    <link type='text/css' href= "{% static 'css\style_grupo.css' %}" rel='stylesheet'/>
 </head>
-
+<div class="container no-gutters py-5 px-lg-5 px-2">
 <div class="container-fluid mt-4">
     <h2>Actualizar Grupo</h2>
     <form method="post">
@@ -33,5 +33,6 @@
         <button type="submit" class="btn btn-success">Guardar</button>
         <a href="{% url 'listar_grupos' %}" class="btn btn-secondary">Cancelar</a>
     </form>
+</div>
 </div>
 {% endblock %}

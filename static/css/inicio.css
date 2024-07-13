@@ -1,16 +1,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 
-.anton-regular {
-  font-family: "Anton", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-}
-
-
-body {
-  font-family: Arial, sans-serif;
-}
 
 #boton {
   font-family: "Anton";
@@ -125,7 +115,7 @@ body {
   z-index: 10;
 }
 
-/*ola de grid */
+/* home css */
 .logoprogramador{
   position: absolute;
   bottom: 0;
@@ -137,8 +127,8 @@ body {
   bottom: 0;
   left: 0;
   width:500px;
-  height: 700px;
-  opacity: 85%;
+  height: 100%;
+  opacity: 95%;
 }
 
 @media (max-width: 767px) {

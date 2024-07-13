@@ -2,18 +2,24 @@
 {% load static %}
 {% block content %}
 <head>
-    <link type='text/css' href= "{% static "css\style_crud.css" %}" rel='stylesheet'/>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 </head>
+<H1 class="text-center titlesuperior py-3">ADMINISTRACIÓN DE USUARIOS</H1>
 <div class="container no-gutters py-5 px-lg-5 px-2">
-    <h2>Usuarios Inactivos</h2>
+    <h2 class="titlegeneral pb-3">Actualizar Datos del Usuario <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-person-vcard" viewBox="0 0 16 16">
+        <path d="M5 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4m4-2.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5M9 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 9 8m1 2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5"/>
+        <path d="M2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zM1 4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H8.96q.04-.245.04-.5C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1 1 0 0 1 1 12z"/>
+      </svg>
+    </h2>
+    <a href="{% url 'listar_usuarios' %}" class="btn btn-dark btn-sm"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-arrow-bar-left" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5M10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5"/>
+      </svg> Volver a Usuarios Activos</a>
     <table class="table">
         <thead>
             <tr>
                 <th>Email</th>
-                <th>Nombre</th>
-                <th>Apellido</th>
+                <th>Nombre Completo</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -21,16 +27,17 @@
             {% for usuario in usuarios_inactivos %}
             <tr>
                 <td data-label="EMAIL">{{ usuario.email }}</td>
-                <td data-label="NOMBRE">{{ usuario.nombre }}</td>
-                <td data-label="APELLIDO">{{ usuario.apellido }}</td>
+                <td data-label="NOMBRE">{{ usuario.nombre }} {{ usuario.apellido }}</td>
                 <td data-label="ACCIONES">
-                    <a class="btn btn-success" href="javascript:void(0);" onclick="confirmReactivar('{{ usuario.pk }}')">Reactivar</a>
+                    <a class="btn btn-success" href="javascript:void(0);" onclick="confirmReactivar('{{ usuario.pk }}')"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+                      </svg> Reactivar</a>
                 </td>
             </tr>
             {% endfor %}
         </tbody>
     </table><br>
-    <a href="{% url 'listar_usuarios' %}" class="btn btn-primary ">Volver a Usuarios Activos</a>
 </div><br><br><br>
 
 <script src="{% static 'js/confirmations.js' %}"></script>

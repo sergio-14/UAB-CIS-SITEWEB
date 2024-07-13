@@ -1,10 +1,10 @@
 {% extends 'dashboard.html' %}
 {% block content %}
 {% load static %}
-<h1 class="text-center titulosgeneral">VISTA Y ESTADO PERFIL DE PROYECTO</h1>
-<br />
+<h1 class="text-center py-1 titlegeneral">VISTA Y ESTADO PERFIL DE PROYECTO</h1>
+
 {% if proyectos %}
-<div class="container mt-3">
+<div class="container  mt-lg-2 mt-5">
   {% for proyecto in proyectos %}
   <div class="card narrow-card">
     <div class="row no-gutters">
@@ -23,23 +23,23 @@
       <div class="col-md-7 col-lg-8 pb-5">
         <div class="card-body">
           <!-- Texto con formato pre -->
-          <pre id="aaa">MODALIDAD OPTADA: {{ proyecto.permodalidad.nombre }}              {{ proyecto.perfecha_creacion }}</pre>
+          <pre class="fecha colorfechas fontI">Modalidad Optada : {{ proyecto.permodalidad.nombre }}                                                    {{ proyecto.perfecha_creacion }}</pre>
           <!-- Título -->
-          <h5 class="card-title">Titulo: {{ proyecto.pertitulo }}</h5>
+          <h5 class="title colortitle fontI">Titulo: {{ proyecto.pertitulo }}</h5>
           <!-- Descripción -->
-          <p class="card-text">Descripción:<br>{{ proyecto.perdescripcion }}</p>
+          <p class="text colortext fontI ">Descripción:<br>{{ proyecto.perdescripcion }}</p>
           <div class="container text-center">
             <div class="row">
-              <div class="col contdoc">
+              <div class="col-5 contdoc">
                 <div class="d-flex align-items-center">
                   <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-file-earmark-richtext-fill" viewBox="0 0 16 16">
                     <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M7 6.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0m-.861 1.542 1.33.886 1.854-1.855a.25.25 0 0 1 .289-.047l1.888.974V9.5a.5.5 0 0 1-.5.5H5a.5.5 0 0 1-.5-.5V9s1.54-1.274 1.639-1.208M5 11h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1 0-1m0 2h3a.5.5 0 0 1 0 1H5a.5.5 0 0 1 0-1"/>
                   </svg>
-                  <a href="{{ proyecto.perdocumentacion.url }}" class="list-group-item list-group-item-action">Documento</a>
+                  <a href="{{ proyecto.perdocumentacion.url }}" class="list-group-item list-group-item-action">Documento Evaluar</a>
                 </div>
               </div>
-              <div class="col">
-                <h5 class="card-state">Estado Revisión: {{ proyecto.perestado }}</h5>
+              <div class="col-7">
+                <h5 class="estado colorestados fontI text-end">Estado Revisión: {{ proyecto.perestado }}</h5>
               </div>
             </div> 
           </div>
@@ -47,14 +47,14 @@
           <!-- Espacio de comentarios -->
           <br />
           <!-- Botón para ver documento -->
-          <h5 class="card-title text-center">Comentarios Retroalimentativos</h5>
+          <h5 class="text fontI colortitle text-center">Comentarios Retroalimentativos</h5>
           {% for comentario in proyecto.comentarios.all %}
-          <h6 class="card-state">
-            {{ comentario.perfecha_post }} <br> Revisado por: {{ comentario.user.nombre }} {{ comentario.user.apellido }}
+          <h6 class="text-end fontI  colorestados fechas">
+            {{ comentario.perfecha_post }} <br> por :  <span class="colortext fontI fecha">{{ comentario.user.nombre }} {{ comentario.user.apellido }}</span>
           </h6>
-          <p class="card-text">Comentarios:<br> {{ comentario.percomentario }}</p>
+          <p class="comentario fontI colortext">Comentarios:<br> {{ comentario.percomentario }}</p>
           {% empty %}
-          <p class="card-text">No hay comentarios para este proyecto.</p>
+          <p class="comentario fontI colortext">No hay comentarios para este proyecto.</p>
           {% endfor %}
         </div>
         <br>

@@ -1,4 +1,4 @@
-* {
+/* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -59,7 +59,7 @@ main {
     transform: translateY(-2px);
 }
 
-/* Formularios */
+/* Formulario
 .contenedor__login {
     width: 100%;
     max-width: 380px;
@@ -113,18 +113,18 @@ main {
     border: none;
 }
 .input-group .btn .bi-eye {
-    color: #003366; /* Cambia este valor al color que desees */
+    color: #003366; /* Cambia este valor al color que desees 
 }
 
 .input-group .btn .bi-eye-slash {
-    color: #003366; /* Cambia este valor al mismo color del icono bi-eye */
+    color: #003366; /* Cambia este valor al mismo color del icono bi-eye
 }
 
 .input-group .btn:active .bi-eye,
 .input-group .btn:active .bi-eye-slash,
 .input-group .btn:focus .bi-eye,
 .input-group .btn:focus .bi-eye-slash {
-    color: #003366; /* Cambia este valor al color que desees */
+    color: #003366; /* Cambia este valor al color que desees 
 }
 .contenedor__login form .input-group .btn {
     border-top-left-radius: 0;
@@ -175,7 +175,7 @@ main {
     margin-bottom: 10px;
 }
 
-/* Estilos para pantallas de tamaño máximo 600px */
+/* Estilos para pantallas de tamaño máximo 600px 
 @media only screen and (max-width: 400px) {
     .formulario__login {
         max-width: 100%;
@@ -183,32 +183,33 @@ main {
     }
 }
 
-/* Estilos para pantallas de tamaño máximo 600px */
+/* Estilos para pantallas de tamaño máximo 600px 
 @media only screen and (max-width: 600px) {
     .formulario__login {
         width: 80%;
         margin: 0 auto;
     }
     
-    /* Aquí puedes agregar más estilos responsivos según sea necesario */
+    /* Aquí puedes agregar más estilos responsivos según sea necesario 
 }
 
-/* Estilos para pantallas de tamaño máximo 992px */
+/* Estilos para pantallas de tamaño máximo 992px
 @media only screen and (max-width: 992px) {
     .formulario__login {
         width: 60%;
         margin: 0 auto;
     }
     
-    /* Aquí puedes agregar más estilos responsivos según sea necesario */
+    /* Aquí puedes agregar más estilos responsivos según sea necesario
 }
 
-/* Estilos para pantallas de tamaño máximo 1200px */
+/* Estilos para pantallas de tamaño máximo 1200px
 @media only screen and (max-width: 1200px) {
     .formulario__login {
         width: 50%;
         margin: 0 auto;
     }
     
-    /* Aquí puedes agregar más estilos responsivos según sea necesario */
+    /* Aquí puedes agregar más estilos responsivos según sea necesario
 }
+*/

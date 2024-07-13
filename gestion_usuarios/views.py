@@ -96,7 +96,7 @@ def listar_usuarios(request):
     else:
         usuarios = User.objects.filter(is_active=True)
 
-    paginator = Paginator(usuarios, 12)  
+    paginator = Paginator(usuarios, 5)  
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 

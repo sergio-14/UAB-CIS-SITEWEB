@@ -1,4 +1,4 @@
-/* Estilos personalizados */
+/* Estilos personalizados 
 * {
     margin: 0;
     padding: 0;
@@ -35,7 +35,7 @@ h2, h6{
     background-color: rgba(238, 255, 255, 0.422);
   }
 
-  /*---------*-*/
+  /*---------*-
   .narrow-card:hover {
     box-shadow: 0 10px 15px #0b6164;
 }
@@ -106,7 +106,7 @@ h2, h6{
     transform: translateY(-2px);
 }
 
-  /*Responsivo*/
+  /*Responsivo
   @media screen and (max-width: 768px) {
     .centered-img {
       justify-content: center;
@@ -116,6 +116,6 @@ h2, h6{
   }
   @media (max-width: 768px) {
     #aaa {
-      white-space: pre-wrap; /* Para manejar el texto largo en dispositivos móviles */
+      white-space: pre-wrap; /* Para manejar el texto largo en dispositivos móviles 
     }
-  }
+  }*/

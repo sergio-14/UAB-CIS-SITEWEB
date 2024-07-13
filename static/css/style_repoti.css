@@ -1,4 +1,4 @@
-/* Estilos generales */
+/* Estilos generales 
 * {
     margin: 0;
     padding: 0;
@@ -10,7 +10,7 @@ h2, h6{
     margin-top: 10px;
     margin-bottom: 10px;
 }
-/* Estilos de la lista de tarjetas */
+/* Estilos de la lista de tarjetas 
 .card-container {
     display: flex;
     flex-wrap: wrap;
@@ -18,12 +18,12 @@ h2, h6{
     max-width: 1200px;
     margin: 20px auto;
     align-items: center;
-    gap: 15px; /* Espacio entre tarjetas */
+    gap: 15px; /* Espacio entre tarjetas 
     padding: 15px;
 
 }
 
-/* Estilos de las tarjetas */
+/* Estilos de las tarjetas 
 .card {
     position: relative;
     flex: 1 1 400px;
@@ -132,13 +132,13 @@ h2, h6{
 
 .pagination-container {
     display: flex;
-    justify-content: center; /* Centra el contenedor de paginación */
+    justify-content: center; /* Centra el contenedor de paginación 
     margin-top: 20px;
 }
 
 .pagination {
     display: flex;
-    justify-content: center; /* Centra los elementos dentro del contenedor de paginación */
+    justify-content: center; /* Centra los elementos dentro del contenedor de paginación 
     align-items: center;
 }
 
@@ -146,12 +146,12 @@ h2, h6{
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px; /* Espacio entre botones */
+    gap: 10px; /* Espacio entre botones 
 }
 
 .step-links button {
-    background-color: #003366; /* Color de fondo */
-    color: white; /* Color del texto */
+    background-color: #003366; /* Color de fondo 
+    color: white; /* Color del texto 
     border: none;
     padding: 10px 20px;
     text-align: center;
@@ -159,13 +159,13 @@ h2, h6{
     display: inline-block;
     font-size: 14px;
     margin: 4px 2px;
-    transition: background-color 0.3s; /* Transición suave para el color de fondo */
+    transition: background-color 0.3s; /* Transición suave para el color de fondo 
     cursor: pointer;
-    border-radius: 5px; /* Bordes redondeados */
+    border-radius: 5px; /* Bordes redondeados 
 }
 
 .step-links button:hover {
-    background-color: #0b6164; /* Color de fondo al pasar el cursor */
+    background-color: #0b6164; /* Color de fondo al pasar el cursor 
 }
 
 .current {
@@ -173,7 +173,7 @@ h2, h6{
     align-items: center;
     padding: 10px;
 }
-/* Media queries para hacer los estilos responsivos */
+/* Media queries para hacer los estilos responsivos 
 @media (max-width: 400px) {
     .card-container {
         flex-direction: column;
@@ -204,3 +204,4 @@ h2, h6{
         margin: 10px 50px 10px 50px;
     }
 }
+*/

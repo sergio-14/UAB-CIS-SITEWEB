@@ -1,114 +1,118 @@
 {% extends "dashboard.html" %}
 {% load static %}
 {% block content %}
-<head>
-    <link type='text/css' href= "{% static "css\style_crud.css" %}" rel='stylesheet'/>
-</head>
-
-<div class="container mt-4  p-lg-5  p-3 no-gutters">
-    <h2>Actualizar Usuario</h2>
-    {% if errors %}
-        <div class="alert alert-danger">
-            <ul>
-                {% for field in form %}
-                    {% for error in field.errors %}
+<div class="px-lg-5 container">
+    <H1 class="text-center titlesuperior">ADMINISTRACIÓN DE USUARIOS</H1>
+    <div class="container mt-4  p-lg-5  p-3 no-gutters">
+        <h2 class="titlegeneral pb-3">Actualizar Datos del Usuario <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-person-vcard" viewBox="0 0 16 16">
+            <path d="M5 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4m4-2.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5M9 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 9 8m1 2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5"/>
+            <path d="M2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zM1 4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H8.96q.04-.245.04-.5C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1 1 0 0 1 1 12z"/>
+          </svg>
+        </h2>
+        {% if errors %}
+            <div class="alert alert-danger">
+                <ul>
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
                         <li>{{ error }}</li>
                     {% endfor %}
-                {% endfor %}
-                {% for error in form.non_field_errors %}
-                    <li>{{ error }}</li>
-                {% endfor %}
-            </ul>
-        </div>
-    {% endif %}
-    <form id="update-user-form" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="row radio-border= 50%">
-            <div class="col-md-6">
-                <div class="form-group">
-                    {{ form.imagen.label_tag }}
-                    {{ form.imagen }}
-                    {{ form.imagen.errors }}
+                </ul>
+            </div>
+        {% endif %}
+        <form id="update-user-form" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row radio-border= 50%">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        {{ form.imagen.label_tag }}
+                        {{ form.imagen }}
+                        {{ form.imagen.errors }}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <img id="preview" src="" alt="Vista previa de la imagen" style="display: none; max-width: 150px; height: 150px; border-radius: 50%;">                </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <img id="preview" src="" alt="Vista previa de la imagen" style="display: none; max-width: 150px; height: 150px; border-radius: 50%;">                </div>
+    
+            <div class="form-group">
+                {{ form.email.label_tag }}
+                {{ form.email }}
             </div>
-        </div>
-
-        <div class="form-group">
-            {{ form.email.label_tag }}
-            {{ form.email }}
-        </div>
-        <div class="form-group">
-            {{ form.nombre.label_tag }}
-            {{ form.nombre }}
-        </div>
-        <div class="form-group">
-            {{ form.apellido.label_tag }}
-            {{ form.apellido }}
-        </div>
-        <div class="row">
-            <div class="col-6 form-group">
-                {{ form.ci.label_tag }}
-                {{ form.ci }}
-                {{ form.ci.errors }}
+            <div class="form-group">
+                {{ form.nombre.label_tag }}
+                {{ form.nombre }}
             </div>
-            <div class="col-6 form-group">
-                {{ form.ru.label_tag }}
-                {{ form.ru }}
-                {{ form.ru.errors }}
+            <div class="form-group">
+                {{ form.apellido.label_tag }}
+                {{ form.apellido }}
             </div>
-        </div>
-        <div class="form-group">
-            {{ form.password1.label_tag }}
-            {{ form.password1 }}
-            {{ form.password1.errors }}
-        </div>
-        <div class="form-group">
-            {{ form.password2.label_tag }}
-            {{ form.password2 }}
-            {{ form.password2.errors }}
-        </div>
-        <div class="row fontf container">
-            <div class="col-lg-4 py-2 form-check form-switch d-flex align-items-center">
-                <div class="me-2 pb-3">
-                    {{ form.is_active.label_tag }}
+            <div class="row">
+                <div class="col-6 form-group">
+                    {{ form.ci.label_tag }}
+                    {{ form.ci }}
+                    {{ form.ci.errors }}
                 </div>
-                <div>
-                    {{ form.is_active }}
-                    {{ form.is_active.errors }}
+                <div class="col-6 form-group">
+                    {{ form.ru.label_tag }}
+                    {{ form.ru }}
+                    {{ form.ru.errors }}
                 </div>
             </div>
-            <div class="col-lg-4 py-2 form-check form-switch d-flex align-items-center">
-                <div class="me-2 pb-3">
-                    {{ form.is_staff.label_tag }}
+            <div class="form-group">
+                {{ form.password1.label_tag }}
+                {{ form.password1 }}
+                {{ form.password1.errors }}
+            </div>
+            <div class="form-group">
+                {{ form.password2.label_tag }}
+                {{ form.password2 }}
+                {{ form.password2.errors }}
+            </div>
+            <div class="row fontf container">
+                <div class="col-lg-4 py-2 form-check form-switch d-flex align-items-center">
+                    <div class="me-2 pb-5">
+                        {{ form.is_active.label_tag }}
+                    </div>
+                    <div>
+                        {{ form.is_active }}
+                        {{ form.is_active.errors }}
+                    </div>
                 </div>
-                <div>
-                    {{ form.is_staff }}
-                    {{ form.is_staff.errors }}
+                <div class="col-lg-4 py-2 form-check form-switch d-flex align-items-center">
+                    <div class="me-2 pb-5">
+                        {{ form.is_staff.label_tag }}
+                    </div>
+                    <div>
+                        {{ form.is_staff }}
+                        {{ form.is_staff.errors }}
+                    </div>
+                </div>
+                <div class="col-lg-4 py-2 form-check form-switch d-flex align-items-center">
+                    <div class="me-2 pb-5">
+                        {{ form.is_superuser.label_tag }}
+                    </div>
+                    <div>
+                        {{ form.is_superuser }}
+                        {{ form.is_superuser.errors }}
+                    </div>
                 </div>
             </div>
-            <div class="col-lg-4 py-2 form-check form-switch d-flex align-items-center">
-                <div class="me-2 pb-3">
-                    {{ form.is_superuser.label_tag }}
-                </div>
-                <div>
-                    {{ form.is_superuser }}
-                    {{ form.is_superuser.errors }}
-                </div>
+            <div class="form-group">
+                {{ form.groups.label_tag }}
+                {{ form.groups }}
+                {{ form.groups.errors }}
             </div>
-        </div>
-        <div class="form-group">
-            {{ form.groups.label_tag }}
-            {{ form.groups }}
-            {{ form.groups.errors }}
-        </div>
-        <button type="submit" class="btn btn-success">Guardar</button>
-        <a href="{% url 'listar_usuarios' %}" class="btn btn-secondary">Cancelar</a>
-    </form>
-</div>
+            <button type="submit" class="btn btn-success">Guardar</button>
+            <a href="{% url 'listar_usuarios' %}" class="btn btn-danger">Cancelar</a>
+        </form>
+    </div>
+    
+</div><br><br>
 
 
 <script>

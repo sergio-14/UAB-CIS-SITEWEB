@@ -1,5 +1,4 @@
-/* Estilos personalizados */
-* {
+/* Estilos personalizados 
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -41,7 +40,7 @@ header {
 .narrow-card {
     max-width: 1000px;
     text-align: center;
-    margin: 10px auto; /* Centra la tarjeta horizontalmente */
+    margin: 10px auto; /* Centra la tarjeta horizontalmente 
     border-radius: 5%;
     background-color: rgba(238, 255, 255, 0.427);
 }
@@ -98,7 +97,7 @@ header {
     transform: translateY(-2px);
 }
 
-/* Reglas de medios (media queries) optimizadas */
+/* Reglas de medios (media queries) optimizadas 
 @media (max-width: 1200px) {
     .card, .d-flex {
         flex: 1 1 calc(100% - 20px);
@@ -115,13 +114,13 @@ header {
         size: 80%;
     }
     .imgD{
-        width: 200px; /* Nuevo ancho de la imagen */
-        height: 200px; /* Nuevo alto de la imagen */
+        width: 200px; /* Nuevo ancho de la imagen 
+        height: 200px; /* Nuevo alto de la imagen 
         border-radius: 25%;
         margin-top: 20px;
     }
     #aaa {
-        white-space: pre-wrap; /* Para manejar el texto largo en dispositivos móviles */
+        white-space: pre-wrap; /* Para manejar el texto largo en dispositivos móviles 
     }
 }
 
@@ -131,8 +130,8 @@ header {
         size: 80%;
     }
     .imgD{
-        width: 200px; /* Nuevo ancho de la imagen */
-        height: 200px; /* Nuevo alto de la imagen */
+        width: 200px; /* Nuevo ancho de la imagen 
+        height: 200px; /* Nuevo alto de la imagen 
         border-radius: 25%;
         margin-top: 20px;
     }
@@ -146,9 +145,10 @@ header {
 
     }
     .imgD{
-        width: 200px; /* Nuevo ancho de la imagen */
-        height: 200px; /* Nuevo alto de la imagen */
+        width: 200px; /* Nuevo ancho de la imagen
+        height: 200px; /* Nuevo alto de la imagen 
         border-radius: 25%;
         margin-top: 20px;
     }
 }
+*/

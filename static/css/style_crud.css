@@ -1,4 +1,4 @@
-/* General Styles */
+/* General Styles 
 body {
     font-family: Arial, sans-serif;
     background-color: #f8f9fa;
@@ -57,7 +57,7 @@ h2 {
     color: #721c24;
 }
 
-/* Estilos para las tarjetas */
+/* Estilos para las tarjetas 
 .user-card {
     background-color: #f8f9fa;
     border: 1px solid #dee2e6;
@@ -95,26 +95,25 @@ h2 {
 
 .pagination-container {
     display: flex;
-    justify-content: center; /* Centra el contenedor de paginación */
+    justify-content: center; /* Centra el contenedor de paginación 
     margin-top: 20px;
 }
 
 .pagination {
     display: flex;
-    justify-content: center; /* Centra los elementos dentro del contenedor de paginación */
-    align-items: center;
+    justify-content: center; /* Centra los elementos dentro del contenedor de paginación
 }
 
 .step-links {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px; /* Espacio entre botones */
+    gap: 10px; /* Espacio entre botones 
 }
 
 .step-links button {
-    background-color: #052b2d; /* Color de fondo */
-    color: white; /* Color del texto */
+    background-color: #052b2d; /* Color de fondo 
+    color: white; /* Color del texto 
     border: none;
     padding: 10px 20px;
     text-align: center;
@@ -122,13 +121,13 @@ h2 {
     display: inline-block;
     font-size: 14px;
     margin: 4px 2px;
-    transition: background-color 0.3s; /* Transición suave para el color de fondo */
+    transition: background-color 0.3s; /* Transición suave para el color de fondo 
     cursor: pointer;
-    border-radius: 5px; /* Bordes redondeados */
+    border-radius: 5px; /* Bordes redondeados 
 }
 
 .step-links button:hover {
-    background-color: #09595c; /* Color de fondo al pasar el cursor */
+    background-color: #09595c; /* Color de fondo al pasar el cursor 
 }
 
 .current {
@@ -137,7 +136,7 @@ h2 {
     padding: 10px;
 }
 
-/* Ajustes para pantallas pequeñas */
+/* Ajustes para pantallas pequeñas 
 @media (max-width: 768px) {
     .container-fluid {
         padding: 15px;
@@ -153,8 +152,8 @@ h2 {
 }
 @media (max-width: 576px) {
     .col-lg-4, .col-md-6 {
-        flex: 0 0 100%; /* One card per row */
+        flex: 0 0 100%; /* One card per row 
         max-width: 100%;
     }
 }
-
+*/

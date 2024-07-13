@@ -40,7 +40,7 @@ class InvCientifica(models.Model):
     invtitulo = models.CharField(max_length=150, verbose_name='Agregar Titulo')
     slug = models.SlugField(unique=True)
     invfecha_creacion = models.DateTimeField(auto_now_add=True)
-    invdescripcion = models.TextField(verbose_name='Agregar una Descripcion', blank=True)
+    invdescripcion = models.TextField(verbose_name='Agregar una Descripcion Breve', blank=True)
     invdocumentacion = models.FileField(upload_to='documento/proyecto', verbose_name='Agregar Documentacion', null=True, blank=True)
     invmodalidad = models.ForeignKey(Modalidad, on_delete=models.CASCADE, verbose_name='Seleccione Una Modalidad')
     invdestacado = models.BooleanField(default=True, verbose_name='Destacar Formulario')

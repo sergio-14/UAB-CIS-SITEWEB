@@ -6,8 +6,8 @@
 
 <div class="container px-lg-5 font pb-5">
   <div class="no-gutters container px-lg-5 px-2">
-    <h1 id="letr" class="text-center pb-5 pt-4">AGREGAR NUEVO FORMULARIO PERFIL DE PROYECTO</h1>
-    <article class="pb-5" >
+    <h1  class="text-center pb-5 pt-4 fontI colortitle titlesuperior">AGREGAR NUEVO FORMULARIO PERFIL DE PROYECTO</h1>
+    <article class="pb-5 colortext" >
       <form method="post" enctype="multipart/form-data" id="perfilForm" onsubmit="showConfirmationModal(event)">
         {% csrf_token %}
         {{ formp|crispy }}
@@ -24,10 +24,10 @@
         {% endif %}
         {% if not form_disabled %}
         <br>
-        <input name="" id="" class="btn btn-success contsuccess" type="submit" value="Enviar Informacion" {% if form_disabled %}disabled{% endif %}> || 
-        <button type="button" class="btn btn-danger contdanger" data-toggle="modal" data-target="#cancelModal">Cancelar</button>
+        <input name="" id="" class="btn btn-success me-2" type="submit" value="Enviar Informacion" {% if form_disabled %}disabled{% endif %}>
+        <button type="button" class="btn btn-danger " data-toggle="modal" data-target="#cancelModal">Cancelar</button>
         {% else %}
-            <p class="text-end card-title">Formulario deshabilitado. Debes tener una investigación aprobada para agregar un perfil.</p>
+            <p class="text-end text colorestados">Formulario deshabilitado. Debes tener una investigación aprobada para agregar un perfil.</p>
         {% endif %}
       </form>
       <br>

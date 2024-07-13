@@ -6,7 +6,7 @@
 
 <div class="container px-lg-5 font pb-5">
   <div class="no-gutters container px-lg-5 px-2">
-    <h1 id="letr" class="text-center pb-5 pt-4">AGREGAR NUEVO FORMULARIO ALCANZE DE PROYECTO</h1>
+    <h1 class="text-center pb-4 pt-4  titlesuperior">AGREGAR NUEVO FORMULARIO ALCANZE DE PROYECTO</h1>
     {% if form_disabled %}
       <p class="text-end card-title ">El formulario de investigación está deshabilitado para el Usuario.</p>
     {% endif %}
@@ -15,8 +15,8 @@
         {% csrf_token %}
         {{ form|crispy }}
         <br>
-        <input name="" id="" class="btn btn-success contsuccess" type="submit" value="Enviar Informacion" {% if form_disabled %}disabled{% endif %}> || 
-        <button type="button" class="btn btn-danger contdanger" data-toggle="modal" data-target="#cancelModal">Cancelar</button>
+        <input name="" id="" class="btn btn-success me-2 " type="submit" value="Enviar Informacion" {% if form_disabled %}disabled{% endif %}>
+        <button type="button" class="btn btn-danger " data-toggle="modal" data-target="#cancelModal">Cancelar</button>
       </form>
       <br>
     </article>
