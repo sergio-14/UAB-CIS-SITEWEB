@@ -22,14 +22,15 @@
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
       crossorigin="anonymous"
     />
+    <script src="https://unpkg.com/scrollreveal"></script>
 </head>
 <body class="contenedorbody">    
     <div class="container mb-5">
-      <h2 class="title text-center pt-5 pb-3">PROYECTOS DE INVESTIGACIÓN E INTERRACIÓN SOCIAL</h2>
+      <h2 class="title text-center pt-5 pb-3 traba">PROYECTOS DE INVESTIGACIÓN E INTERRACIÓN SOCIAL</h2>
         <div class="row pt-2 pb-2">
             <div class="col-md-8">
                 <div class="row">
-                    <div class="col-6 ">
+                    <div class="col-6 trab ">
                         <div class="stilooo p-3 border d-flex flex-column justify-content-center align-items-center">
                             <div class="d-flex align-items-center pb-3">
                                 <img src="{% static 'img/titulados.gif' %}" class="user-img" alt="User Image">
@@ -46,7 +47,7 @@
                             </svg> Ver Repositorio</a>
                         </div>
                     </div>
-                    <div class="col-6 ">
+                    <div class="col-6 trab">
                         <div class="stilooo p-3 border d-flex flex-column justify-content-center align-items-center">
                             <div class="d-flex align-items-center pb-3">
                                 <img src="{% static 'img/interaccion.gif' %}" class="user-img" alt="User Image">
@@ -63,7 +64,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row mt-3">
+                <div class="row mt-3 trab">
                     <div class="col-6">
                       <div class=" stiloo p-5 border d-flex flex-column justify-content-center align-items-center">
                             <div class="d-flex align-items-center p-3">
@@ -79,7 +80,7 @@
             </div>
             <!-- Segunda columna -->
             <div class="col-md-4 ">
-                <img src="{% static 'img/logosoc.jpg' %}" id="imgmujersocial" class="img-fluid  " alt="Responsive image">
+                <img src="{% static 'img/logosoc.jpg' %}" id="imgmujersocial" class="img-fluid traba " alt="Responsive image">
             </div>
         </div>
     </div>
@@ -94,5 +95,19 @@
       integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
       crossorigin="anonymous"
     ></script>
+    <script>
+      window.sr = ScrollReveal();
+      sr.reveal(".trab", {
+        duration: 1000,
+        origin: "top",
+        distance: "-100px",
+      });
+      window.sr = ScrollReveal();
+      sr.reveal(".traba", {
+        duration: 1000,
+        origin: "left",
+        distance: "-100px",
+      });
+    </script>
 </body>
 </html>

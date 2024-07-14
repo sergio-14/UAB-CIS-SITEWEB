@@ -19,6 +19,8 @@
             crossorigin="anonymous"
         />
         <link type='text/css' href="{% static 'css/login.css' %}" rel='stylesheet'/>
+        <script src="https://unpkg.com/scrollreveal"></script>
+        
     </head>
 
     <body>
@@ -26,9 +28,9 @@
             <div class="container-fluid h-custom pt-5 px-3">
                 <div class="row d-flex justify-content-center align-items-center h-100">
                     <div class="col-md-9 col-lg-6 col-xl-5">
-                        <img src="{% static 'img/logint.JPG' %}" class="imgnone img-fluid" alt="Sample image">
+                        <img src="{% static 'img/logint.JPG' %}" class="imgnone img-fluid logojovens" alt="Sample image">
                     </div>
-                    <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1 fon-stilo p-5 ">
+                    <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1 fon-stilo p-5 logologin ">
                         <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
                             <img src="{% static 'img/titulados.gif' %}" class="imgr" alt="Sin foto">
                         </div>
@@ -92,7 +94,7 @@
                     </div>
                 </div>
             </div>
-            <img src="{% static 'img/logojovenes.JPG' %}" class="imgnone img-bottom-left" alt="Sin foto">
+            <img src="{% static 'img/logojovenes.JPG' %}" class="imgnone img-bottom-left logojovens" alt="Sin foto">
         </section>        
         <script
             src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
@@ -105,6 +107,20 @@
             integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
             crossorigin="anonymous"
         ></script>
+        <script>
+            window.sr = ScrollReveal();
+            sr.reveal(".logojovens ", {
+              duration: 3000,
+              origin: "right",
+              distance: "-100px",
+            });
+            window.sr = ScrollReveal();
+            sr.reveal(".logologin", {
+              duration: 3000,
+              origin: "top",
+              distance: "-100px",
+            });
+        </script>
     </body>
 </html>
 

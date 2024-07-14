@@ -9,6 +9,8 @@
     <link type="text/css" href="{% static 'css/inicio.css' %}" rel="stylesheet" />
     <!-- Bootstrap CSS v5.2.1 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"/>
+
+    <script src="https://unpkg.com/scrollreveal"></script>
   </head>
   <body>
     <div class="container-fluid">
@@ -19,15 +21,15 @@
         <div class="col-md-8 content">
           <div class="corner-lines"></div><br /><br /><br />
           <img src="{% static 'img/fondologo.gif' %}" class="logoprogramador" alt=""/>
-          <h1>CARRERA DE <span>INGENIERÍA DE SISTEMAS</span></h1>
-          <h3 class="subtitulo">Facultad de Ingeniería Tecnología</h3>
-          <p class="descrip">
+          <h1 class="titulos">CARRERA DE <span class="titulos">INGENIERÍA DE SISTEMAS</span></h1>
+          <h3 class="subtitulo titulos">Facultad de Ingeniería Tecnología</h3>
+          <p class="descrip titulos">
             La Universidad Autónoma del Beni "José Ballivián" y su carrera
             oficialmente acreditada. Reflejo de nuestro compromiso con la
             excelencia académica y la calidad educativa. Agradecemos a toda la
             comunidad universitaria por su dedicación y apoyo constante.
           </p>
-          <div class="btn-group btn-group-lg" role="group" aria-label="Large button group">
+          <div class="btn-group btn-group-lg titulos" role="group" aria-label="Large button group">
             {% if user.is_authenticated %}
             <form method="post" action="{% url 'logout' %}">
               {% csrf_token %}
@@ -129,5 +131,19 @@
       integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
       crossorigin="anonymous"
     ></script>
+    <script>
+      window.sr = ScrollReveal();
+      sr.reveal(".logomujer ", {
+        duration: 3000,
+        origin: "right",
+        distance: "-100px",
+      });
+      window.sr = ScrollReveal();
+      sr.reveal(".titulos", {
+        duration: 3000,
+        origin: "top",
+        distance: "-100px",
+      });
+    </script>
   </body>
 </html>
