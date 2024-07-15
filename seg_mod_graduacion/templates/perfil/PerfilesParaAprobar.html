@@ -34,7 +34,7 @@
             <br>
              <!-- Formulario para aprobar/rechazar con espacio para agregar comentario -->
             <p class="px-3 fontI colortext comentario">Comentario Dirigio para el Proyecto</p>
-            <div class="container">
+            <div class="container fontI">
                 <form id="approvalForm" method="POST" action="{% url 'PerfilesParaAprobar' %}">
                     {% csrf_token %}
                     <input type="hidden" name="proyecto_id" value="{{ proyecto.id }}">

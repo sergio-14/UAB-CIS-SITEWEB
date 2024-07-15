@@ -270,28 +270,27 @@ def agregar_perfil(request):
 from .models import ActividadControl
 from .forms import ActividadControlForm
 
+#controlador de proyecto final
 def crear_actividad_control(request):
     if request.method == 'POST':
         form = ActividadControlForm(request.POST)
         if form.is_valid():
             actividad_control = form.save()
             actividad_control.habilitar_actividad()
-            return redirect('dashboard')  # Redirige a una lista de ActividadControl o cualquier otra vista que prefieras
+            return redirect('dashboard') 
     else:
         form = ActividadControlForm()
     
-    return render(request, 'crear_actividad_control.html', {'form': form})
+    return render(request, 'controlador/crear_actividad_control.html', {'form': form})
 
+#lista de agregacion y proyectos finales
 @login_required
 def lista_actividad_control(request):
-    # Obtén todas las actividades de control, asegurándote de no tener duplicados.
     actividades_control = ActividadControl.objects.all().distinct()
-    
-    # Opcional: Para depuración, imprime los objetos recuperados.
     for actividad in actividades_control:
         print(actividad.estudiante)
 
-    return render(request, 'lista_actividad_control.html', {'actividades_control': actividades_control})
+    return render(request, 'controlador/lista_actividad_control.html', {'actividades_control': actividades_control})
 
 @login_required
 def editar_actividad_control(request, pk):
@@ -336,13 +335,13 @@ def crear_actividad(request):
     else:
         form = ActividadForm()  # or set form to None if no form is required in the template
 
-    return render(request, 'crear_actividad.html', {'form': form, 'actividad': actividad})
+    return render(request, 'proyectofinal/crear_actividad.html', {'form': form, 'actividad': actividad})
 
 
 def lista_actividad(request):
     user = request.user
     actividades = Actividad.objects.filter(estudiante=user).prefetch_related('comentarios').order_by('-fecha')
-    return render(request, 'lista_actividad.html', {'actividades': actividades})
+    return render(request, 'proyectofinal/lista_actividad.html', {'actividades': actividades})
 
 from .models import Comentarioactividad
 
@@ -380,9 +379,10 @@ def revisar_actividad(request, actividad_id):
 
     return render(request, 'revisar_actividad.html', {'actividad': actividad})
 
+
 def listaactividades(request):
     actividades = Actividad.objects.all()
-    return render(request, 'listaactividades.html', {'actividades': actividades})
+    return render(request, 'controlador/listaactividades.html', {'actividades': actividades})
 
 
 

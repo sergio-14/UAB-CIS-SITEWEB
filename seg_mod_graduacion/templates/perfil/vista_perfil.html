@@ -1,7 +1,7 @@
 {% extends 'dashboard.html' %}
 {% block content %}
 {% load static %}
-<h1 class="text-center py-1 titlegeneral">VISTA Y ESTADO PERFIL DE PROYECTO</h1>
+<h1 class="text-center py-1 titlesuperior">VISTA Y ESTADO PERFIL DE PROYECTO</h1>
 
 {% if proyectos %}
 <div class="container  mt-lg-2 mt-5">
@@ -50,7 +50,7 @@
           <h5 class="text fontI colortitle text-center">Comentarios Retroalimentativos</h5>
           {% for comentario in proyecto.comentarios.all %}
           <h6 class="text-end fontI  colorestados fechas">
-            {{ comentario.perfecha_post }} <br> por :  <span class="colortext fontI fecha">{{ comentario.user.nombre }} {{ comentario.user.apellido }}</span>
+            {{ comentario.perfecha_post }} por :  <span class="colortext fontI fecha">{{ comentario.user.nombre }} {{ comentario.user.apellido }}</span>
           </h6>
           <p class="comentario fontI colortext">Comentarios:<br> {{ comentario.percomentario }}</p>
           {% empty %}
@@ -61,30 +61,40 @@
       </div>
     </div>
   </div>
-  <br>
+ 
   {% endfor %}
 </div>
 
 {% if proyectos.has_other_pages %}
-<div class="pagination">
-  <span class="step-links">
-    {% if proyectos.has_previous %}
-    <a class="page-link" href="?page=1">&laquo; Primero</a>
-    <a class="page-link" href="?page={{ proyectos.previous_page_number }}">Anterior</a>
-    {% endif %}
-
-    <span class="current">
-      Página {{ proyectos.number }} de {{ proyectos.paginator.num_pages }}.
-    </span>
-
-    {% if proyectos.has_next %}
-    <a href="?page={{ proyectos.next_page_number }}">Siguiente</a>
-    <a href="?page={{ proyectos.paginator.num_pages }}">Último &raquo;</a>
-    {% endif %}
-  </span>
+<div class="pagination-container">
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      {% if proyectos.has_previous %}
+      <li class="page-item">
+        <a class="page-link dark-link" href="?page=1">&laquo; Primero</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link dark-link" href="?page={{ proyectos.previous_page_number }}">Anterior</a>
+      </li>
+      {% endif %}
+  
+      <li class="page-item disabled">
+        <a class="page-link dark-link">Página {{ proyectos.number }} de {{ proyectos.paginator.num_pages }}</a>
+      </li>
+  
+      {% if proyectos.has_next %}
+      <li class="page-item">
+        <a class="page-link dark-link" href="?page={{ proyectos.next_page_number }}">Siguiente</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link dark-link" href="?page={{ proyectos.paginator.num_pages }}">Último &raquo;</a>
+      </li>
+      {% endif %}
+    </ul>
+  </nav>
 </div>
 {% endif %}
 {% else %}
-<p>No hay proyectos asociados a este usuario. Consulta en la administración.</p>
+<p class="fecha fontI colorfechas pt-3">No hay proyectos asociados a este usuario. Consulta en la administración.</p>
 {% endif %}
 {% endblock %}

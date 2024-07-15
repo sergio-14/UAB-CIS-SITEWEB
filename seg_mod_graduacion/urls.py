@@ -28,16 +28,16 @@ urlpatterns = [
     
     
     
-    path('actividad_control/nueva/', views.crear_actividad_control, name='crear_actividad_control'),
+    path('controlador/actividad_control/nueva/', views.crear_actividad_control, name='crear_actividad_control'),
     path('actividad_control/<int:pk>/editar/', views.editar_actividad_control, name='editar_actividad_control'),
-    path('actividad_control/', views.lista_actividad_control, name='lista_actividad_control'),
+    path('controlador/lista_actividad_control/', views.lista_actividad_control, name='lista_actividad_control'),
     
     path('actividad/<int:actividad_id>/', views.revisar_actividad, name='revisar_actividad'),
     path('revision/<int:actividad_id>/', views.revision, name='revision'),
-    path('listaactividades/', views.listaactividades, name='listaactividades'),
+    path('controlador/listaactividades/', views.listaactividades, name='listaactividades'),
     
-    path('actividad/nueva/', views.crear_actividad, name='crear_actividad'),
-    path('actividad/', views.lista_actividad, name='lista_actividad'),
+    path('proyectofinal/crear_actividad/nueva/', views.crear_actividad, name='crear_actividad'),
+    path('proyectofinal/actividad/', views.lista_actividad, name='lista_actividad'),
     
     path('transferir_actividad/<int:actividad_id>/', TransferirActividadView.as_view(), name='transferir_actividad'),
     path('listarepositorios/', views.listarepositorios, name='listarepositorios'),
