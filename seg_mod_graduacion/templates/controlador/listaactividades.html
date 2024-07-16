@@ -24,7 +24,7 @@
             <!-- Texto con formato pre -->
             <pre class="text colorfechas fontI">Universitario:  {{ actividad.estudiante }}                                           Fecha: {{ actividad.fecha }}</pre>
             <!-- Título -->
-            <h5 class="text text-center fontI colortitle pb-2">{{ actividad.titulo }}</h5>
+            <h5 class="title text-center fontI colortitle pb-2">{{ actividad.titulo }}</h5>
             <div class="row pb-3">
                 <div class="col-6 col-md-3">
                     {% if actividad.tutor.imagen %}
@@ -97,11 +97,11 @@
             <div class=" text-center">
               <div class="row">
                 <div class="col-3">
-                  <h5 class="text colortext fontI ">Revision General: {{ actividad.estado }}</h5>
+                  <h5 class="text colortext fontI mt-1 ">Revision General: {{ actividad.estado }}</h5>
                 </div>
                 <div class="col-4">
-                  <div class="d-flex align-items-center text fontI contdoc p-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-file-earmark-richtext-fill" viewBox="0 0 16 16">
+                  <div class="d-flex align-items-center text fontI contdoc p-1 mt-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="26" fill="currentColor" class="bi bi-file-earmark-richtext-fill" viewBox="0 0 16 16">
                       <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M7 6.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0m-.861 1.542 1.33.886 1.854-1.855a.25.25 0 0 1 .289-.047l1.888.974V9.5a.5.5 0 0 1-.5.5H5a.5.5 0 0 1-.5-.5V9s1.54-1.274 1.639-1.208M5 11h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1 0-1m0 2h3a.5.5 0 0 1 0 1H5a.5.5 0 0 1 0-1"/>
                     </svg>
                     {% if actividad.documentacion %}
@@ -111,7 +111,7 @@
                   {% endif %}
                   </div>
                 </div>
-                <div class="col-5">
+                <div class="col-5 mt-2">
                   <a data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Para los Tribunales" class="btn btn-sm btn-secondary mb-1" href="{% url 'revisar_actividad' actividad.id %}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                     <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                     <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
@@ -126,20 +126,20 @@
              <!-- Comentarios -->
              
               <!--comentarios-->
-              <h5 class="card-title text-center pt-3">Comentarios Retroalimentativos</h5>
+              <h5 class="text fontI colortitle text-center pt-3">Comentarios Retroalimentativos</h5>
               {% for comentario in actividad.comentarios.all %}
-              <h6 class="card-state">
-                <span id="aaat">{{ comentario.actfecha_post }}</span> {{ comentario.user.nombre }} {{ comentario.user.apellido }}
+              <h6 class="text-end fontI  colorestados fechas">
+                {{ comentario.actfecha_post }} por :  <span class="colortext fontI fecha">{{ comentario.user.nombre }} {{ comentario.user.apellido }}</span>
               </h6>
-              <p class="card-text">Comentarios: {{ comentario.actcomentario }}</p>
+              <p class="comentario fontI colortext">Comentarios: {{ comentario.actcomentario }}</p>
               {% empty %}
-              <p class="card-text">No hay comentarios para este proyecto.</p>
+              <p class="comentario fontI colortext">No hay comentarios para este proyecto.</p>
               {% endfor %}
         </div>
       </div>
     </div>
    
-</div> 
+</div><br><br><br>
 {% endfor %}
 <script>
   document.addEventListener('DOMContentLoaded', function () {

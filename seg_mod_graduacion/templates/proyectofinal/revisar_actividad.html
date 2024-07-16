@@ -1,0 +1,98 @@
+{% extends 'dashboard.html'%} {% load static %} {% load crispy_forms_tags %}{% block content %}
+<h1 class="text-center fontI titlesuperior colortitle">CONFIRMAR APROBACIÓN</h1>
+<div class="container mt-3 pt-1">
+  <div class="row pb-5 ">
+    <div class="col-md-8  offset-md-2 pb-5">
+      <div class="card no-gutters">
+        <h2 class="text-center fontI text pt-3 colortitle">Administración de los Trubunales</h2>
+        <div class="card-body font px-5 ">
+            <form method="POST">
+                {% csrf_token %}
+                <div class="row pb-3">
+                    <div class="form-check col-6 col-md-4">
+                        <div class="d-flex justify-content-center">
+                            {% if actividad.jurado_1.imagen %}
+                              <img src="{{ actividad.jurado_1.imagen.url }}" class="rounded-img2" alt="Foto del jurado 1">
+                            {% else %}
+                              <img src="{% static 'img/SINFOTO.webp' %}" class="rounded-img2" alt="Sin foto">
+                            {% endif %}
+                        </div>
+                        <p class="fontI fechas colortext pt-1 text-center">Tribunal Calificador
+                          <br> {{ actividad.jurado_1.nombre }} {{ actividad.jurado_1.apellido }}</p>
+                        <input data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Marque solo si esta conforme con el documento" class="form-check-input ms-2" type="checkbox" id="jurado_1_aprobado" name="jurado_1_aprobado" {% if actividad.jurado_1_aprobado %}checked{% endif %} {% if request.user != actividad.jurado_1 %}disabled{% endif %}>
+                        <label  class="ms-1 form-check-label text colortext" for="jurado_1_aprobado">
+                            Revisión: 
+                            {% if actividad.jurado_1_aprobado %}
+                                Aprobado
+                            {% else %}
+                                Pendiente
+                            {% endif %}
+                        </label>
+                    </div>
+                
+                    <div class="form-check col-6 col-md-4">
+                        <div class="d-flex justify-content-center">
+                            {% if actividad.jurado_2.imagen %}
+                              <img src="{{ actividad.jurado_2.imagen.url }}" class="rounded-img2" alt="Foto del jurado 2">
+                            {% else %}
+                              <img src="{% static 'img/SINFOTO.webp' %}" class="rounded-img2" alt="Sin foto">
+                            {% endif %}
+                        </div>
+                        <p class="fontI fechas colortext pt-1 text-center">Tribunal Calificador
+                          <br>{{ actividad.jurado_2.nombre }} {{ actividad.jurado_2.apellido }}</p>
+                        <input class="form-check-input ms-2" type="checkbox" id="jurado_2_aprobado" name="jurado_2_aprobado" {% if actividad.jurado_2_aprobado %}checked{% endif %} {% if request.user != actividad.jurado_2 %}disabled{% endif %}>
+                        <label data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Marque solo si esta conforme con el documento" class="ms-1 text colortext form-check-label" for="jurado_2_aprobado">
+                            Revisión: 
+                            {% if actividad.jurado_2_aprobado %}
+                                Aprobado
+                            {% else %}
+                                Pendiente
+                            {% endif %}
+                        </label>
+                    </div>
+                
+                    <div class="form-check col-6 col-md-4">
+                        <div class="d-flex justify-content-center">
+                            {% if actividad.jurado_3.imagen %}
+                              <img src="{{ actividad.jurado_3.imagen.url }}" class="rounded-img2" alt="Foto del jurado 3">
+                            {% else %}
+                              <img src="{% static 'img/SINFOTO.webp' %}" class="rounded-img2" alt="Sin foto">
+                            {% endif %}
+                        </div>
+                        <p class="fontI fechas colortext pt-1 text-center">Tribunal Calificador 
+                          <br>{{ actividad.jurado_3.nombre }} {{ actividad.jurado_3.apellido }}</p>
+                        <input data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Marque solo si esta conforme con el documento" class="form-check-input ms-2" type="checkbox" id="jurado_3_aprobado" name="jurado_3_aprobado" {% if actividad.jurado_3_aprobado %}checked{% endif %} {% if request.user != actividad.jurado_3 %}disabled{% endif %}>
+                        <label class="ms-1 text colortext form-check-label" for="jurado_3_aprobado">
+                            Revisión: 
+                            {% if actividad.jurado_3_aprobado %}
+                                Aprobado
+                            {% else %}
+                                Pendiente
+                            {% endif %}
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="form-group mt-3 pb-3 fontII text">
+                    <label for="comentario_texto ">Comentario para el Postulante:</label>
+                    <textarea class="form-control" id="comentario_texto" name="comentario_texto" rows="3" {% if request.user != actividad.jurado_1 and request.user != actividad.jurado_2 and request.user != actividad.jurado_3 %}disabled{% endif %}></textarea>
+                </div>
+            
+                <button type="submit" class="btn btn-dark">Enviar Revisión</button>
+                <a class="btn btn-secondary " href="{% url 'listaactividades' %}">Cancelar</a>
+            </form>
+        </div>
+        <br />
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+      var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+      })
+    });
+</script>
+{% endblock %}

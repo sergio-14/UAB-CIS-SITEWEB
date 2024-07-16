@@ -375,9 +375,9 @@ def revisar_actividad(request, actividad_id):
             comentario.save()
 
         messages.success(request, 'Revisión de actividad y comentario guardados correctamente.')
-        return redirect('dashboard')
+        return redirect('listaactividades')
 
-    return render(request, 'revisar_actividad.html', {'actividad': actividad})
+    return render(request, 'proyectofinal/revisar_actividad.html', {'actividad': actividad})
 
 
 def listaactividades(request):

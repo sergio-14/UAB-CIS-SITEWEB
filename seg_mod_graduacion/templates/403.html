@@ -19,31 +19,35 @@
         />
     </head>
     <style>
+        @import url("https://fonts.googleapis.com/css2?family=Anton&display=swap");
         .imgg{
             padding-top:;
             border-radius:30px;
-            height:400px;
-            width:700px;
-            border: 1px solid YELLOW;
+            height:550px;
+            width:1100px;
+            border: 1px solid white;
         }
         body{
-            background:#020831;
+            background:#f9f9f9;
         }
         .text{
-            color: YELLOW;
+            color: #01282c;
+            font-family: "Anton";
+            font-size: 50px;
+
+        }
+        .textt{
+            color: #a04000;
 
         }
     </style>
     <body>
-        <div class="card text-center bg-transparent">
-            <div class="card mb-3 bg-transparent">
-                <div class="card-body pt-5">
-                  <img src="{% static 'img/403.jpg' %}" class="imgg" alt="...">
-                  <h1 class="card-title text">Permisos insuficientes</h1>
-                  <p class="card-text text">contactese con el administrador para asegurar el acceso y permisos para esta opcion.</p>
-                  <p class="card-text text">Visite Nuestra App Mobil</p>
-                </div>
+        <div class=" text-center bg-transparent">
+            <div class="card-body ">
+                <h1 class="card-title text pt-5">Permisos Insuficientes <span class="textt">"Usuario no Asignado"</span></h1>
+                <img src="{% static 'img/error-4031.jpg' %}" class="imgg" alt="...">
             </div>
+            
         </div>
         <!-- Bootstrap JavaScript Libraries -->
         <script

@@ -32,7 +32,7 @@ urlpatterns = [
     path('actividad_control/<int:pk>/editar/', views.editar_actividad_control, name='editar_actividad_control'),
     path('controlador/lista_actividad_control/', views.lista_actividad_control, name='lista_actividad_control'),
     
-    path('actividad/<int:actividad_id>/', views.revisar_actividad, name='revisar_actividad'),
+    path('proyectofinal/revision/<int:actividad_id>/', views.revisar_actividad, name='revisar_actividad'),
     path('revision/<int:actividad_id>/', views.revision, name='revision'),
     path('controlador/listaactividades/', views.listaactividades, name='listaactividades'),
     

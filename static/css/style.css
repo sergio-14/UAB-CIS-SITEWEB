@@ -218,6 +218,15 @@
   border-radius: 50%;
   object-fit: cover;
 }
+.rounded-img2 {
+  background: #f0f0f0;
+  box-shadow: 9px 9px 9px #a6a6a6, -9px -9px 9px #ffffff;
+  border: 3px solid rgb(255, 255, 255);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+}
 .fontfamili {
   font-family: "Lora";
 }
@@ -311,6 +320,7 @@
     align-items: center;
 
     transform: translateY(-25%);
+    color: #01282c;
   }
 }
 @media (max-width: 768px) {
