@@ -27,7 +27,8 @@ urlpatterns = [
     path('', include('gestion_usuarios.urls')),
 
     # APLICACION REPOSITORIO DE TITULADOS
-
+    path('', include('repositoriotitulados.urls')),
+    
     # APLICACION SEG_MOD_GRADUACION
     path('', include('seg_mod_graduacion.urls')),
     

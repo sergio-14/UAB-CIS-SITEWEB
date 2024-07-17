@@ -304,7 +304,7 @@ def editar_actividad_control(request, pk):
     else:
         form = ActividadControlForm(instance=actividad_control)
 
-    return render(request, 'editar_actividad_control.html', {'form': form})
+    return render(request, 'controlador/editar_actividad_control.html', {'form': form})
 
 from .models import Actividad
 from django.utils import timezone
@@ -403,54 +403,9 @@ def revision(request, actividad_id):
                 messages.success(request, 'Estado de la actividad cambiado a Aprobado.')
             else:
                 messages.error(request, 'Necesita que los 3 jurados aprueben la actividad para poder cambiar el estado.')
+                
+            return redirect('listaactividades')
 
-            # No es necesario guardar la actividad nuevamente aquí
-            return redirect('dashboard')
-
-    return render(request, 'revision.html', {'actividad': actividad, 'todos_aprobados': todos_aprobados})
+    return render(request, 'controlador/revision.html', {'actividad': actividad, 'todos_aprobados': todos_aprobados})
 
 
-from .models import ActividadRepositorio
-from django.urls import reverse
-from .forms import TransferirActividadForm
-
-class TransferirActividadView(View):
-    def get(self, request, actividad_id):
-        actividad = get_object_or_404(Actividad, id=actividad_id, estado='Aprobado')
-        form = TransferirActividadForm()
-        return render(request, 'transferir_actividad.html', {'form': form, 'actividad': actividad})
-
-    def post(self, request, actividad_id):
-        actividad = get_object_or_404(Actividad, id=actividad_id, estado='Aprobado')
-        form = TransferirActividadForm(request.POST)
-        if form.is_valid():
-            anio_ingreso = form.cleaned_data['anio_ingreso']
-            anio_egreso = form.cleaned_data['anio_egreso']
-            numero_acta = form.cleaned_data['numero_acta']
-            nota_aprobacion = form.cleaned_data['nota_aprobacion']
-            actividad.transferir_a_repositorio(anio_ingreso, anio_egreso, numero_acta, nota_aprobacion)
-            return redirect('dashboard')
-        return render(request, 'transferir_actividad.html', {'form': form, 'actividad': actividad})
-    
-def listaractividadesaprovadas(request):
-    actividades_aprobadas = Actividad.objects.filter(estado='Aprobado')
-    return render(request, 'listaractividadesaprovadas.html', {'acti': actividades_aprobadas})
-
-def listarepositorios(request):
-    actividades_repositorio = ActividadRepositorio.objects.all()
-    return render(request, 'listarepositorios.html', {'actirepositorio': actividades_repositorio})
-
-from .forms import ActividadRepositorioForm
-
-def editar_actividad_repositorio(request, pk):
-    actividad = get_object_or_404(ActividadRepositorio, pk=pk)
-    
-    if request.method == 'POST':
-        form = ActividadRepositorioForm(request.POST, instance=actividad)
-        if form.is_valid():
-            form.save()
-            return redirect('detalle_actividad_repositorio', pk=actividad.pk)
-    else:
-        form = ActividadRepositorioForm(instance=actividad)
-    
-    return render(request, 'editar_actividad_repositorio.html', {'form': form, 'actividad': actividad})

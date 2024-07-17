@@ -13,6 +13,11 @@ ESTADO_CHOICES = [
     ('Rechazado', 'Rechazado'),
 ]
 
+PERIODO_CHOICES = [
+    ('1', '1'),
+    ('2', '2'),
+]
+
 #class TutorExterno(models.Model):
 #    nombre = models.CharField(max_length=100)
 #   apellido = models.CharField(max_length=100)
@@ -123,7 +128,7 @@ class ActividadControl(models.Model):
 
     def __str__(self):
         return f"ActividadControl for {self.estudiante}"
-
+    
 class Actividad(models.Model):
     estudiante = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='actividades_estudiante', on_delete=models.CASCADE)
     tutor = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='actividades_tutor', on_delete=models.CASCADE)
@@ -210,6 +215,7 @@ class ActividadRepositorio(models.Model):
     jurado_1_aprobado = models.BooleanField(default=False)
     jurado_2_aprobado = models.BooleanField(default=False)
     jurado_3_aprobado = models.BooleanField(default=False)
+    periodo = models.CharField(max_length=5, choices=PERIODO_CHOICES, default='1')
     anio_ingreso = models.IntegerField()
     anio_egreso = models.IntegerField()
     numero_acta = models.CharField(max_length=50)

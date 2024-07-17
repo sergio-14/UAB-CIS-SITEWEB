@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap");
 
+.fontII{
+    font-family: "Lora";
+}
 .anton-regular {
     font-family: "Anton", sans-serif;
     font-weight: 50;
@@ -18,7 +22,7 @@
 .title{
     font-weight: 100;
     font-size: 40px;
-    color: #083741;
+    color: #02091d;
     font-family:"Anton";
     font-style: normal;
     margin-bottom: 13px;
@@ -26,8 +30,16 @@
 
 .contenedorbody{
     background: #f0f0f0;
+    padding-left:20px;
+    padding-right: 20px;
 }
-
+.rounded-img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #0a4049;
+  }
 .stilo{
     font-family: "Anton";
     color: #0a4049;
@@ -129,3 +141,85 @@
             inset -12px -12px 24px #ffffff;
 
 }
+
+.table {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    table-layout: fixed;
+  }
+  
+  .table caption {
+    font-size: 28px;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin: 8px 0px;
+  }
+  
+  .table tr {
+    background-color: #e4e9eb;
+    border: 1px solid #b3c3d1;
+  }
+  
+  .table th,
+  .table td {
+    font-size: 13px;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  .table thead th {
+    text-transform: uppercase;
+    background-color: #031a22;
+    color: #eef3f1;
+  }
+  
+  .table tbody td:hover {
+    background-color: rgba(9, 58, 97, 0.151);
+  }
+  
+  @media screen and (max-width: 600px) {
+    .table {
+      border: 0px;
+    }
+    .table caption {
+      font-size: 22px;
+    }
+    .table thead {
+      display: none;
+    }
+    .table tr {
+      margin-bottom: 8px;
+      border-bottom: 4px solid #ddd;
+      display: block;
+    }
+    .table th,
+    .table td {
+      font-size: 17px;
+    }
+    .table td {
+      display: block;
+      border-bottom: 1px solid #ddd;
+      text-align: right;
+    }
+    .table td:last-child {
+      border-bottom: 0px;
+    }
+    .table td::before {
+      content: attr(data-label);
+      font-weight: bold;
+      text-transform: uppercase;
+      float: left;
+    }
+    .btn {
+      font-size: 12px; /* Tamaño de fuente más pequeño */
+      padding: 5px 10px; /* Espaciado interno más pequeño */
+    }
+    .btn svg {
+      width: 16px; /* Ajustar tamaño del icono */
+      height: 16px; /* Ajustar tamaño del icono */
+    }
+  }
+  

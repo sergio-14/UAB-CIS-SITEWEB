@@ -51,6 +51,13 @@ class ActividadControlForm(forms.ModelForm):
     class Meta:
         model = ActividadControl
         fields = ['estudiante', 'tutor', 'jurado_1', 'jurado_2', 'jurado_3']
+        labels = {
+            'estudiante': 'Seleccione el Postulante',
+            'tutor': 'Seleccione al Tutor Designado',
+            'jurado_1': 'Seleccione al Primero Tribumal Designado',
+            'jurado_2': 'Seleccione al Segundo Tribumal Designado',
+            'jurado_3': 'Seleccione al Tercer Tribumal Designado',
+        }
         
 from .models import Actividad
 
@@ -82,28 +89,3 @@ class ActComentarioForm(forms.ModelForm):
             'actcomentario': forms.Textarea(attrs={'class': 'comentari-field'}),
         }
         
-import datetime
-
-current_year = datetime.datetime.now().year
-YEAR_CHOICES = [(year, year) for year in range(1990, current_year + 1)]
-
-class TransferirActividadForm(forms.Form):
-    anio_ingreso = forms.ChoiceField(
-        label='Año de Ingreso',
-        choices=YEAR_CHOICES,
-        initial=current_year,  # Establece el año actual como valor inicial
-        widget=forms.Select(attrs={'id': 'anio_ingreso', 'size': 2})  # Ajusta el tamaño del selector
-    )
-    anio_egreso = forms.ChoiceField(
-        label='Año de Egreso',
-        choices=YEAR_CHOICES,
-        initial=current_year,  # Establece el año actual como valor inicial
-        widget=forms.Select(attrs={'id': 'anio_egreso', 'size': 2})  # Ajusta el tamaño del selector
-    )
-    numero_acta = forms.CharField(label='Número de Acta', max_length=50)
-    nota_aprobacion = forms.DecimalField(label='Nota de Aprobación', max_digits=4, decimal_places=2)
-    
-class ActividadRepositorioForm(forms.ModelForm):
-    class Meta:
-        model = ActividadRepositorio
-        fields = ['anio_ingreso', 'anio_egreso', 'numero_acta', 'nota_aprobacion']

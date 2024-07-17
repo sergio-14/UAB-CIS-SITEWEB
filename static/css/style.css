@@ -27,6 +27,9 @@
 .text{
   font-size: 15px;
 }
+.textrepo{
+  font-size: 18px;
+}
 .estado{
   font-size: 25px;
 }
@@ -165,7 +168,7 @@
 :root {
   --primary: #f1b05b;
   --secondary: #191c24;
-  --light: #a1bcca;
+  --light: #b3c2df;
   --dark: #003c43;
 }
 #hh {

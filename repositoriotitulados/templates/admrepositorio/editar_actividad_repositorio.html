@@ -1,0 +1,34 @@
+{% extends 'dashboard.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="px-lg-5">
+  <div class="container no-gutters fontI py-3 px-5">
+    <h2 class="colortext titlesuperior pt-2">Crear Nuevo Repositorio <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-hdd-rack" viewBox="0 0 16 16">
+      <path d="M4.5 5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1M3 4.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0m2 7a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0m-2.5.5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1"/>
+      <path d="M2 2a2 2 0 0 0-2 2v1a2 2 0 0 0 2 2h1v2H2a2 2 0 0 0-2 2v1a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-1a2 2 0 0 0-2-2h-1V7h1a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zm13 2v1a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1m0 7v1a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-1a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1m-3-4v2H4V7z"/>
+    </svg></h2>
+    <div class="row">
+      <div class="col-8 px-4 card-text">
+        <p class="text colortext">Titulo:</p>
+        <p class="colorestados title ">{{ actividad.titulo }}</p>
+        <p class="textrepo colortext">Estudiante: {{ actividad.estudiante }}</p>
+        <p  class="textrepo colortext">Tutor: {{ actividad.tutor }}</p>
+        <p  class="textrepo colortext">Jurados:</p>
+        <li class="px-3">{{ actividad.jurado_1 }}</li>
+        <li class="px-3">{{ actividad.jurado_2 }}</li>
+        <li class="px-3">{{ actividad.jurado_3 }}</li>
+        <p  class="textrepo colortext pt-2">Tutor Externo: {{ actividad.guia_externo }}</p>
+      </div>
+      <div class="col-4 colorestados text ">
+        <form method="post">
+          {% csrf_token %}
+          {{ form|crispy }}
+          <button class="btn btn-dark fontII" type="submit">Generar</button>
+          <a class="btn btn-secondary fontII" href="{% url 'dashboard' %}">Cancelar</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</div><br>
+{% endblock %}

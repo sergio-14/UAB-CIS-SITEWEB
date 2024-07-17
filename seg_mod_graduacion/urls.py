@@ -4,7 +4,6 @@ from django.conf.urls.static import static
 from django.conf.urls import handler403
 from .views import handle_permission_denied
 from seg_mod_graduacion import views
-from .views import TransferirActividadView
 urlpatterns = [    
     #segguimiento modalidad de graduacion investigacion cientifica
     path('invcientifica/agregar_investigacion/', views.agregar_investigacion, name='agregar_investigacion'),
@@ -22,26 +21,15 @@ urlpatterns = [
     path('RechazarPerfil/<int:proyecto_id>/', views.RechazarPerfil.as_view(), name='RechazarPerfil'),
 
     #seguimiento modalidad de graduacion proyecto final
-    
-    
-    
-    
-    
-    
     path('controlador/actividad_control/nueva/', views.crear_actividad_control, name='crear_actividad_control'),
-    path('actividad_control/<int:pk>/editar/', views.editar_actividad_control, name='editar_actividad_control'),
+    path('controlador/editar_actividad_control/<int:pk>/editar/', views.editar_actividad_control, name='editar_actividad_control'),
     path('controlador/lista_actividad_control/', views.lista_actividad_control, name='lista_actividad_control'),
     
     path('proyectofinal/revision/<int:actividad_id>/', views.revisar_actividad, name='revisar_actividad'),
-    path('revision/<int:actividad_id>/', views.revision, name='revision'),
+    path('controlador/revision/<int:actividad_id>/', views.revision, name='revision'),
     path('controlador/listaactividades/', views.listaactividades, name='listaactividades'),
     
     path('proyectofinal/crear_actividad/nueva/', views.crear_actividad, name='crear_actividad'),
     path('proyectofinal/actividad/', views.lista_actividad, name='lista_actividad'),
-    
-    path('transferir_actividad/<int:actividad_id>/', TransferirActividadView.as_view(), name='transferir_actividad'),
-    path('listarepositorios/', views.listarepositorios, name='listarepositorios'),
-    path('listaractividadesaprovadas/', views.listaractividadesaprovadas, name='listaractividadesaprovadas'),
-    path('actividad_repositorio/<int:pk>/editar/', views.editar_actividad_repositorio, name='editar_actividad_repositorio'),
 ]
 handler403 = handle_permission_denied
