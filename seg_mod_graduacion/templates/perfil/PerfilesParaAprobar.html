@@ -5,6 +5,7 @@
 
 <article class="container "> 
     <h1 class="text-center fontI titulosgeneral pb-2">AREA REVISION DE FORMULARIOS PERFIL DE PROYECTO</h1>
+    {% if proyectos.items %}
     {% for proyecto, formulario in proyectos.items %}
     <div class="container">
         <div class="card mb-4 mx-auto contrevision" style="max-width: 840px;">
@@ -40,13 +41,16 @@
                     <input type="hidden" name="proyecto_id" value="{{ proyecto.id }}">
                     <textarea class="comentari-field contdoc" name="comentario_texto" required></textarea>
                     <br><br>
-                    <button type="button" name="aprobar" class="btn btn-success " data-bs-toggle="modal" data-bs-target="#approveModal">Aprobar</button> ||
-                    <button type="button" name="rechazar" class="btn btn-danger " data-bs-toggle="modal" data-bs-target="#rejectModal">Rechazar</button>
+                    <button type="button" name="aprobar" class="btn btn-success fontII " data-bs-toggle="modal" data-bs-target="#approveModal">Aprobar</button> ||
+                    <button type="button" name="rechazar" class="btn btn-danger fontII" data-bs-toggle="modal" data-bs-target="#rejectModal">Rechazar</button>
                 </form>
                 <br>
             </div>
         </div><br><br>
     {% endfor %}
+    {% else %}
+    <p class="text-center fontI colorestados">Lista Formularios Perfil de Proyectos para Aprobar Vacía</p>
+    {% endif %}
 </article> 
 <br>
 <!-- Modal de confirmación de aprobación -->

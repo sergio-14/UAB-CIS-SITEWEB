@@ -2,57 +2,72 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap");
 
-body{
-    background: #f0f0f0;
+::-webkit-scrollbar {
+  width: 1px;
+}
+
+/* Fondo del scrollbar */
+::-webkit-scrollbar-track {
+  background: transparent;
+  height: 300px;
+}
+
+/* Thumb del scrollbar (la parte que se mueve) */
+::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
+body {
+  background: #f0f0f0;
 }
 .fon-stilo {
-    border-radius: 18px;
-    background: #f0f0f0;
-    box-shadow: 9px 9px 9px #a6a6a6, -9px -9px 9px #ffffff;
-    z-index: 12;
-    position: relative;
+  border-radius: 18px;
+  background: #f0f0f0;
+  box-shadow: 9px 9px 9px #a6a6a6, -9px -9px 9px #ffffff;
+  z-index: 12;
+  position: relative;
 }
 .divider:after,
 .divider:before {
-content: "";
-flex: 1;
-height: 1px;
-background: #eee;
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #eee;
 }
 .h-custom {
-height: calc(100% - 73px);
+  height: calc(100% - 73px);
 }
-.imgr{
-    width:350px ;
-    height: 200px;
+.imgr {
+  width: 350px;
+  height: 200px;
 }
 @media (max-width: 450px) {
-.h-custom {
-height: 100%;
-}
+  .h-custom {
+    height: 100%;
+  }
 }
 
 .img-bottom-left {
-    position: absolute;
-    z-index:10;
-    bottom: 0;
-    left: 0;
-    width: 830px; 
-    height: auto;
-    
-    border-top-right-radius: 20px; /* Ajusta el valor según tus necesidades */
-    border-bottom-right-radius: 20px;
+  position: absolute;
+  z-index: 10;
+  bottom: 0;
+  left: 0;
+  width: 830px;
+  height: auto;
+
+  border-top-right-radius: 20px; /* Ajusta el valor según tus necesidades */
+  border-bottom-right-radius: 20px;
 }
 
 @media (max-width: 867.98px) {
-    .imgnone {
-        display: none !important;
-    }
+  .imgnone {
+    display: none !important;
+  }
 }
 .font {
-    font-family: "Anton";
-  }
+  font-family: "Anton";
+}
 .fontf {
-    font-family: "Lora";
-    color: #1c3b3f;
+  font-family: "Lora";
+  color: #1c3b3f;
 }

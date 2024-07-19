@@ -228,13 +228,12 @@ class RechazarPerfil(View):
 @user_passes_test(lambda u: permiso_Estudiantes(u, 'Estudiantes'))
 def agregar_perfil(request):
     tiene_investigacion_aprobada = InvCientifica.objects.filter(user=request.user, investado='Aprobado').exists()
-    form_disabled = not tiene_investigacion_aprobada
+    tiene_perfil_aprobado = PerfilProyecto.objects.filter(user=request.user, perestado='Aprobado').exists()
+    form_disabled = not tiene_investigacion_aprobada or tiene_perfil_aprobado
 
     if request.method == 'POST' and not form_disabled:
         formp = PerfilForm(request.POST, request.FILES)
-        print("Formulario enviado. Método POST.")
         if formp.is_valid():
-            print("Formulario es válido.")
             proyecto = formp.save(commit=False)
             
             slug = slugify(proyecto.pertitulo)

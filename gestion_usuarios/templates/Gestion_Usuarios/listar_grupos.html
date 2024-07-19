@@ -3,7 +3,7 @@
 {% load static %}
 {% block content %}
 <H1 class="text-center titlesuperior py-2">ADMINISTRACIÓN DE USUARIOS</H1>
-<div class="container-fluid mt-4 no-gutters py-5 px-lg-5 px-2">
+<div class="container-fluid mt-1 no-gutters py-5 px-lg-5 px-2">
     <h2 class="titlegeneral pb-3">Lista de Grupos <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
         <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.24 2.24 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.3 6.3 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
       </svg>
@@ -28,7 +28,7 @@
                             <a href="{% url 'actualizar_grupo' grupo.id %}" class="btn btn-success btn-sm">Actualizar</a>
                             <form action="{% url 'eliminar_grupo' grupo.id %}" method="post" class="d-inline">
                                 {% csrf_token %}
-                                <button type="submit" class="btn btn-danger btn-sm ">Eliminar</button>
+                                <button type="submit" class="btn btn-warning btn-sm ">Eliminar</button>
                             </form>
                         </td>
                     </tr>

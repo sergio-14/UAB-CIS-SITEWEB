@@ -6,133 +6,126 @@
 
 <div class="container px-lg-5 font pb-5">
     <div class="no-gutters container px-lg-5 px-2">
-      <h1 id="letr" class="text-center pb-5 pt-4">AGREGAR PROYECTO FINAL</h1>
-      <article class="pb-5" >
-      {% if actividad and actividad.habilitada %}
-      <form method="post" enctype="multipart/form-data" id="perfilForm" onsubmit="enableFieldsAndSubmit(event)">
-          {% csrf_token %}
-          <div class="form-row">
-              <div class="form-group col-md-6">
-                  <label for="{{ form.estudiante.id_for_label }}">Estudiante</label>
-                  {{ form.estudiante }}
-              </div>
-              <div class="form-group col-md-6">
-                  <label for="{{ form.tutor.id_for_label }}">Tutor</label>
-                  {{ form.tutor }}
-              </div>
-          </div>
-          <div class="form-row">
-              <div class="form-group col-md-4">
-                  <label for="{{ form.jurado_1.id_for_label }}">Jurado 1</label>
-                  {{ form.jurado_1 }}
-              </div>
-              <div class="form-group col-md-4">
-                  <label for="{{ form.jurado_2.id_for_label }}">Jurado 2</label>
-                  {{ form.jurado_2 }}
-              </div>
-              <div class="form-group col-md-4">
-                  <label for="{{ form.jurado_3.id_for_label }}">Jurado 3</label>
-                  {{ form.jurado_3 }}
-              </div>
-          </div>
-         
-          <div class="form-group">
-              <label for="{{ form.titulo.id_for_label }}">Título</label>
-              {{ form.titulo }}
-          </div>
-          <div class="form-group">
-              <label for="{{ form.resumen.id_for_label }}">Resumen</label>
-              {{ form.resumen }}
-          </div>
-          <div class="form-row">
-              <div class="form-group col-md-6">
-                  <label for="{{ form.modalidad.id_for_label }}">Modalidad</label>
-                  {{ form.modalidad }}
-              </div>
-              <div class="form-group col-md-6">
-                  <label for="{{ form.guia_externo.id_for_label }}">Guía Externo</label>
-                  {{ form.guia_externo }}
-              </div>
-          </div>
-          <div class="form-group">
-              <label for="{{ form.documentacion.id_for_label }}">Documentación</label>
-              {{ form.documentacion }}
-          </div>
-          <button name="" id="" class="btn btn-success " type="submit">Confirmar Envio</button>
-          
-          <button type="button" class="btn btn-danger " data-toggle="modal" data-target="#cancelModal">Cancelar</button>
-      </form><br>
-      {% elif actividad %}
-      <p>Este usuario no está habilitado para llenar la actividad.</p>
-      {% else %}
-      <p>Aún no se ha habilitado una actividad para este usuario.</p>
-      {% endif %}
-      </article>
-    </div> 
-  </div>
-  
-  <!-- Modal de confirmación -->
-  <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content bg-mdal">
-        <div class="modal-header">
-          <h5 class="modal-title font" id="confirmationModalLabel"> Confirmación de Formulario</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body text-center font">
-          <img src="{% static 'img/close.png' %}" class="img-close" alt="" /><br>
-          ¡Formulario Enviado con Éxito!
-        </div>
-        <div class="modal-footer">
-        </div>
-      </div>
+        <h1 class="titlesuperior colortitle text-center pb-5 pt-4">AGREGAR PROYECTO FINAL</h1>
+        <article class="pb-5 colortext">
+            {% if actividad and actividad.habilitada %}
+            <form method="post" enctype="multipart/form-data" id="perfilForm" onsubmit="enableFieldsAndSubmit(event)">
+                {% csrf_token %}
+                <div class="row pb-2">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="{{ form.estudiante.id_for_label }}" class="form-label colorestados">Postulante Habilitado:</label>
+                            {{ form.estudiante }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="{{ form.tutor.id_for_label }}" class="colorestados form-label">Tutor Asignado:</label>
+                            {{ form.tutor }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row pb-2">
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label for="{{ form.jurado_1.id_for_label }}" class="colorestados form-label">Primer Tribunal Asignado:</label>
+                            {{ form.jurado_1 }}
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label for="{{ form.jurado_2.id_for_label }}" class="colorestados form-label">Segundo Tribunal Asignado:</label>
+                            {{ form.jurado_2 }}
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label for="{{ form.jurado_3.id_for_label }}" class="colorestados form-label">Tercer Tribunal Asignado:</label>
+                            {{ form.jurado_3 }}
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3 pb-2">
+                    <label for="{{ form.titulo.id_for_label }}" class="colorestados form-label">Titulo de Proyecto:</label>
+                    {{ form.titulo }}
+                </div>
+                <div class="mb-3 pb-2">
+                    <label for="{{ form.resumen.id_for_label }}" class="colorestados form-label">Descripción Breve Del Proyecto:</label>
+                    {{ form.resumen }}
+                </div>
+                <div class="row pb-2">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                          <label for="{{ form.modalidad.id_for_label }}" class="colorestados form-label">Modalidad Aporbada en Perfil:</label>
+                          {{ form.modalidad }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="{{ form.guia_externo.id_for_label }}" class="colorestados form-label">Tutor Externo "Opcional":</label>
+                            {{ form.guia_externo }}
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3 pb-4">
+                    <label for="{{ form.documentacion.id_for_label }}" class="colorestados form-label">Agregar Documento a Evaluar:</label><br>
+                    {{ form.documentacion }}
+                </div>
+                <button class="btn btn-success fontII" type="submit">Confirmar Envio</button>
+                <a class="btn btn-danger fontII" href="{% url 'dashboard' %}">Cancelar</a>
+            </form>
+            <br>
+            {% elif actividad %}
+            <p class="text colorestados">Este usuario no está habilitado para llenar la actividad.</p>
+            {% else %}
+            <p class="text colorestados">Aún no se ha habilitado un formulario de Proyecto Final para este Usuario.</p>
+            {% endif %}
+        </article>
     </div>
-  </div>
-  
-  <!-- Modal de cancelación -->
-  <div class="modal fade" id="cancelModal" tabindex="-1" aria-labelledby="cancelModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content bg-mdal">
-        <div class="modal-header">
-          <h5 class="modal-title font" id="cancelModalLabel">Confirmar Salida de Formulario</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body text-center font">
-          <img src="{% static 'img/close.png' %}" class="img-close" alt="" /><br>
-          ¿Estás seguro que quieres salir del formulario?
-        </div>
-        <div class="modal-footer">
-          <a href="{% url 'dashboard' %}" class="btn btn-danger">Sí, Cancelar</a>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script>
-    $(document).ready(function() {
-      // Deshabilitar campos al cargar la página
-      $('#id_estudiante, #id_tutor, #id_jurado_1, #id_jurado_2, #id_jurado_3').prop('disabled', true);
-    });
+</div>
 
+<!-- Modal de confirmación -->
+<div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-mdal">
+            <div class="modal-header">
+                <h5 class="modal-title font" id="confirmationModalLabel">Confirmación de Formulario</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center font">
+                <img src="{% static 'img/close.png' %}" class="img-close" alt="" /><br>
+                ¡Formulario Enviado con Éxito!
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary fontII" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts necesarios para Bootstrap 5 -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+
+
+<script>
     // Función para mostrar modal de confirmación y enviar el formulario
     function enableFieldsAndSubmit(event) {
         event.preventDefault();
-        
+
         // Habilitar temporalmente los campos deshabilitados
-        $('#id_estudiante, #id_tutor, #id_jurado_1, #id_jurado_2, #id_jurado_3').prop('disabled', false);
-        
+        document.querySelectorAll('#id_estudiante, #id_tutor, #id_jurado_1, #id_jurado_2, #id_jurado_3, #id_modalidad').forEach(field => {
+            field.disabled = false;
+        });
+
         // Mostrar el modal de confirmación
-        $('#confirmationModal').modal('show');
+        var confirmationModal = new bootstrap.Modal(document.getElementById('confirmationModal'));
+        confirmationModal.show();
         
+        // Enviar el formulario después de un retraso
         setTimeout(function() {
-          // Enviar el formulario
-          document.getElementById("perfilForm").submit();
+            document.getElementById("perfilForm").submit();
         }, 2000);
     }
-  </script>
+</script>
+
 {% endblock %}

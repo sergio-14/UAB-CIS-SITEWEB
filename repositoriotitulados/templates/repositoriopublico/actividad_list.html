@@ -52,7 +52,7 @@
         </div>
     </form>
 </div>
-<div class=" px-4 pt-2 ">
+<div class=" px-lg-4 pt-2 ">
     <div class=" stilo p-3">
         <table class="table ">
             <thead>
@@ -63,7 +63,7 @@
                     <th>Documento</th>
                     <th >Tutor</th>
                     <th >T. Externo</th>
-                    <th >Tribunales</th>
+                    <th class="tribunales" >Tribunales Asignados</th>
                     <th>Modalidad</th>
                     <th >Año Egreso</th>
                     <th >Nota</th>
@@ -71,16 +71,16 @@
             </thead>
             <tbody>
                 {% for actividad in actividades %}
-                <tr>
-                    <td>{{ actividad.fecha }}</td>
-                    <td data-label="FOTO"> {% if actividad.estudiante.imagen %}
+                <tr class="fontII">
+                    <td data-label="Fecha">{{ actividad.fecha }}</td>
+                    <td data-label="Imagen"> {% if actividad.estudiante.imagen %}
                         <img src="{{ actividad.estudiante.imagen.url }}" class="rounded-img" alt="Foto del tutor">
                       {% else %}
                         <img src="{% static 'img/SINFOTO.webp' %}" class="rounded-img" alt="Sin foto">
                       {% endif %}
                     </td>
-                    <td>{{ actividad.estudiante }}</td>
-                    <td>
+                    <td data-label="Nombre">{{ actividad.estudiante }}</td>
+                    <td data-label="Documento">
                         <a href="{{ actividad.documentacion.url }}" target="_blank" class="btn btn-sm btn-dark">
                             <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-file-earmark-pdf" viewBox="0 0 16 16">
                                 <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
@@ -90,12 +90,12 @@
                         </a>
                     </td>
                     
-                    <td>{{ actividad.tutor }}</td>
-                    <td>{{ actividad.guia_externo }}</td>
-                    <td>1: {{ actividad.jurado_1 }}<br>2: {{ actividad.jurado_2 }}<br>3: {{ actividad.jurado_3 }}</td>
-                    <td>{{ actividad.modalidad }}</td>
-                    <td>{{ actividad.anio_egreso }}</td>
-                    <td>{{ actividad.nota_aprobacion }} Pts.</td>
+                    <td data-label="Tutor">{{ actividad.tutor }}</td>
+                    <td data-label="Tutor Externo">{{ actividad.guia_externo }}</td>
+                    <td data-label="Tribunales" class="tribunales">1: {{ actividad.jurado_1 }}<br>2: {{ actividad.jurado_2 }}<br>3: {{ actividad.jurado_3 }}</td>
+                    <td data-label="Modalidad">{{ actividad.modalidad }}</td>
+                    <td data-label="Año Egreso">{{ actividad.anio_egreso }}</td>
+                    <td data-label="Nota">{{ actividad.nota_aprobacion }} Pts.</td>
                 </tr>
                 {% endfor %}
             </tbody>

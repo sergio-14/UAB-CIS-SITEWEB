@@ -64,7 +64,8 @@
                 </a>
                 <div class="navbar-nav w-100 fontfamili">
                     <a href="{% url 'dashboard' %}" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-                        <!--gestion de usuarios-->
+                    
+                   
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-users me-2"></i>Gta. de Usuarios</a>
                         <div class="dropdown-menu bg-transparent border-0">
@@ -84,8 +85,9 @@
                             </a>
                         </div>
                     </div>
-
-                    <!--Modalidad de graduation-->
+                  
+                    <!--Para estudiantes-->
+                    {% if contenido.estudiantes %}
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-graduation-cap me-2"></i>Mod.Graduacion</a>
                         <div class="dropdown-menu bg-transparent border-0">
@@ -107,6 +109,7 @@
                         </div>
                     </div>
 
+                    <!--Para estudiantes-->
                     <div class="nav-item dropdown ">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-spinner me-2"></i>Estado Mod. G.</a>
                         <div class="dropdown-menu bg-transparent border-0">
@@ -130,7 +133,10 @@
                             </a>
                         </div>
                     </div>
-                    <!--docentes de  investigacion y interaccion-->
+                    {% endif %}
+
+                    <!--Para docentes-->
+                    {% if contenido.docentes %}
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-graduation-cap me-2"></i>Investigación S.</a>
                         <div class="dropdown-menu bg-transparent border-0">
@@ -145,7 +151,10 @@
                             </a>
                         </div>
                     </div>
-                    <!--Adminitracion de Modalidad De Graduacion-->
+                    {% endif %}
+
+                    <!--Para admmgs y docentes-->
+                    {% if contenido.admmgs %}
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-solid fa-layer-group me-2"></i>Adm.Mod.Grad.</a>
                         <div class="dropdown-menu bg-transparent border-0">
@@ -159,6 +168,7 @@
                                 <path d="M7 2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5zM0 12a3 3 0 1 1 6 0 3 3 0 0 1-6 0m7-1.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5zm0-5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0 8a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5M3 1a3 3 0 1 0 0 6 3 3 0 0 0 0-6m0 4.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/>
                                 </svg> Revision Formulario
                             </a> 
+                            
                             <div class="mx-4 fontsub text-end"><i class="fa fa-solid fa-pen-fancy"></i> Proyecto Mod. G.</div> 
                             <a href="{% url 'listaactividades' %}" class="mx-2 subtext pe-4 dropdown-item d-flex align-items-center"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-ui-radios me-1" viewBox="0 0 16 16">
                                 <path d="M7 2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5zM0 12a3 3 0 1 1 6 0 3 3 0 0 1-6 0m7-1.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5zm0-5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0 8a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5M3 1a3 3 0 1 0 0 6 3 3 0 0 0 0-6m0 4.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/>
@@ -177,11 +187,23 @@
                             </a>
                         </div>
                     </div>
+                    {% endif %}
+                    <!--docentes-->
+                    {% if contenido.docentes %}
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-solid fa-layer-group me-2"></i>Adm.Mod.Grad.</a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <div class="mx-4 fontsub text-end"><i class="fa fa-solid fa-pen-fancy"></i> Proyecto Mod. G.</div> 
+                            <a href="{% url 'listaactividades' %}" class="mx-2 subtext pe-4 dropdown-item d-flex align-items-center"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-ui-radios me-1" viewBox="0 0 16 16">
+                                <path d="M7 2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5zM0 12a3 3 0 1 1 6 0 3 3 0 0 1-6 0m7-1.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5zm0-5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0 8a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5M3 1a3 3 0 1 0 0 6 3 3 0 0 0 0-6m0 4.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/>
+                                </svg> Revision de Proyecto
+                            </a>  
+                        </div>
+                    </div>
+                    {% endif %}
 
-                    <!--Trabajos de Investigacion Social-->
-                    
-
-                    <!--Administracion de Trabajos de investigacion-->
+                    <!--Para admiiisp-->
+                    {% if contenido.admiiisp %}
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-solid fa-layer-group me-2"></i>Adm. Inv. Soc.</a>
                         <div class="dropdown-menu bg-transparent border-0">
@@ -217,6 +239,8 @@
                             </a>
                         </div>
                     </div>
+                    {% endif %}
+
                     
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-info me-2"></i>Informacion</a>

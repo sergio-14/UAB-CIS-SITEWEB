@@ -3,6 +3,7 @@
 {% load static %}
 <div class="container">
   <h1 class="text-center titlesuperior colortitle py-5 py-lg-2 fontI">VISTA Y ESTADO  DEL PROYECTO FINAL</h1>
+  {% if actividades %}
     {% for actividad in actividades %}
     <div class="card narrow-card no-gutters">
       <div class="row ">
@@ -133,5 +134,7 @@
     <br>
     {% endfor %}
   </div>
-
+  {% else %}
+  <p class="text fontI colorestados text-center pt-3">No hay proyectos asociados a este usuario.</p>
+  {% endif %}
 {% endblock %}

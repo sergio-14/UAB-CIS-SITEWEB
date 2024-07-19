@@ -42,13 +42,11 @@ class Modalidad(models.Model):
 
 class InvCientifica(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='Usuario relacionado')
-    invtitulo = models.CharField(max_length=150, verbose_name='Agregar Titulo')
+    invtitulo = models.CharField(max_length=450, verbose_name='Agregar Titulo')
     slug = models.SlugField(unique=True)
     invfecha_creacion = models.DateTimeField(auto_now_add=True)
     invdescripcion = models.TextField(verbose_name='Agregar una Descripcion Breve', blank=True)
     invdocumentacion = models.FileField(upload_to='documento/proyecto', verbose_name='Agregar Documentacion', null=True, blank=True)
-    invmodalidad = models.ForeignKey(Modalidad, on_delete=models.CASCADE, verbose_name='Seleccione Una Modalidad')
-    invdestacado = models.BooleanField(default=True, verbose_name='Destacar Formulario')
     investado = models.CharField(max_length=10, choices=ESTADO_CHOICES, default='Pendiente')
 
     def __str__(self):
@@ -74,7 +72,7 @@ class InvSettings(models.Model):
 
 class PerfilProyecto(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='Usuario relacionado')
-    pertitulo = models.CharField(max_length=150, verbose_name='Agregar Titulo Perfil')
+    pertitulo = models.CharField(max_length=450, verbose_name='Agregar Titulo Perfil')
     slug = models.SlugField(unique=True)
     perfecha_creacion = models.DateTimeField(auto_now_add=True)
     perdescripcion = models.TextField(verbose_name='Agregar una Descripcion', blank=True)
@@ -105,6 +103,7 @@ class ActividadControl(models.Model):
     jurado_1 = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='actividad_jurado_1', on_delete=models.CASCADE)
     jurado_2 = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='actividad_jurado_2', on_delete=models.CASCADE)
     jurado_3 = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='actividad_jurado_3', on_delete=models.CASCADE)
+    modalidad = models.ForeignKey(Modalidad, on_delete=models.CASCADE, default=1, verbose_name='Seleccione Una Modalidad')
 
     def habilitar_actividad(self):
         actividad, created = Actividad.objects.get_or_create(
@@ -114,6 +113,7 @@ class ActividadControl(models.Model):
                 'jurado_1': self.jurado_1,
                 'jurado_2': self.jurado_2,
                 'jurado_3': self.jurado_3,
+                'modalidad': self.modalidad,
                 'habilitada': True
             }
         )
@@ -122,6 +122,7 @@ class ActividadControl(models.Model):
             actividad.jurado_1 = self.jurado_1
             actividad.jurado_2 = self.jurado_2
             actividad.jurado_3 = self.jurado_3
+            actividad.modalidad = self.modalidad
             actividad.habilitada = True
             actividad.save()
         return actividad
@@ -135,10 +136,10 @@ class Actividad(models.Model):
     jurado_1 = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='actividades_jurado_1', on_delete=models.CASCADE)
     jurado_2 = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='actividades_jurado_2', on_delete=models.CASCADE)
     jurado_3 = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='actividades_jurado_3', on_delete=models.CASCADE)
+    modalidad = models.ForeignKey(Modalidad, on_delete=models.CASCADE)
     habilitada = models.BooleanField(default=False)
-    titulo = models.CharField(max_length=100, default='------')
+    titulo = models.CharField(max_length=450, default='------')
     resumen = models.TextField(max_length=500, default='Describa el Proyecto...')
-    modalidad = models.ForeignKey(Modalidad, on_delete=models.CASCADE, default=1, verbose_name='Seleccione Una Modalidad')
     fecha = models.DateField(default=timezone.now)
     guia_externo = models.CharField(max_length=250, default='-----------')
     documentacion = models.FileField(upload_to='documento/proyecto', verbose_name='Agregar Documentacion', null=True, blank=True)
@@ -205,7 +206,7 @@ class ActividadRepositorio(models.Model):
     jurado_2 = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='repo_jurado_2', on_delete=models.CASCADE)
     jurado_3 = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='repo_jurado_3', on_delete=models.CASCADE)
     habilitada = models.BooleanField(default=False)
-    titulo = models.CharField(max_length=100, default='------')
+    titulo = models.CharField(max_length=450, default='------')
     resumen = models.TextField(max_length=500, default='Describa el Proyecto...')
     modalidad = models.ForeignKey(Modalidad, on_delete=models.CASCADE, default=1, verbose_name='Seleccione Una Modalidad')
     fecha = models.DateField(default=timezone.now)

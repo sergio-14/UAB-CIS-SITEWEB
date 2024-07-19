@@ -8,8 +8,8 @@
             <form method="post">
                 {% csrf_token %}
                 {{ form|crispy }}
-                <button class="btn btn-primary" type="submit">Guardar</button>
-                <a class="btn btn-danger" href="{% url 'dashboard' %}">Camcelar</a>
+                <button class="btn btn-primary fontII" type="submit">Guardar</button>
+                <a class="btn btn-danger fontII" href="{% url 'dashboard' %}">Camcelar</a>
             </form>
         </div>
         <br />
