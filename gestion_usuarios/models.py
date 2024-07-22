@@ -31,12 +31,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     imagen = models.ImageField(upload_to='path/to/upload', null=True, blank=True)
     nombre = models.CharField(max_length=50)
     apellido = models.CharField(max_length=50)
-    ru = models.CharField(max_length=20, null=True, blank=True, unique=True )  # Registro Universitario
     ci = models.CharField(max_length=20, null=True, blank=True, unique=True)  # Cédula de Identidad
     fecha_nac = models.DateField(null=True, blank=True)
     telefono = models.CharField(max_length=20, null=True, blank=True)
-    anio_ingreso = models.IntegerField(null=True, blank=True)
-    gestion_ingreso = models.CharField(max_length=10, null=True, blank=True)
     estado = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)

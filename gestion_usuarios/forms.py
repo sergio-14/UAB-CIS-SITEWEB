@@ -54,7 +54,7 @@ class CustomLoginForm(forms.Form):
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ('email', 'nombre', 'apellido', 'ci', 'ru', 'is_active', 'is_staff','is_superuser', 'password1', 'password2', 'groups')
+        fields = ('email', 'nombre', 'apellido', 'ci',  'is_active', 'is_staff','is_superuser', 'password1', 'password2', 'groups')
         widgets = {
             'is_active': forms.CheckboxInput(attrs={'class': 'form-check-input', 'role': 'switch', 'id': 'flexSwitchCheckActive'}),
             'is_staff': forms.CheckboxInput(attrs={'class': 'form-check-input', 'role': 'switch', 'id': 'flexSwitchCheckStaff'}),
@@ -104,7 +104,7 @@ class CustomUserCreationForm(UserCreationForm):
 class CustomUserChangeForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ('email', 'nombre', 'apellido', 'imagen', 'ru', 'ci', 'fecha_nac', 'telefono', 'anio_ingreso', 'gestion_ingreso', 'is_active', 'is_staff','is_superuser', 'groups')
+        fields = ('email', 'nombre', 'apellido', 'imagen', 'ci', 'fecha_nac', 'telefono', 'is_active', 'is_staff','is_superuser', 'groups')
         widgets = {
             'is_active': forms.CheckboxInput(attrs={'class': 'form-check-input', 'role': 'switch', 'id': 'flexSwitchCheckActive'}),
             'is_staff': forms.CheckboxInput(attrs={'class': 'form-check-input', 'role': 'switch', 'id': 'flexSwitchCheckStaff'}),

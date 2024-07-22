@@ -31,7 +31,7 @@
   font-size: 18px;
 }
 .estado{
-  font-size: 25px;
+  font-size: 20px;
 }
 .comentario{
   font-size: 14px;
@@ -292,7 +292,7 @@
 
 .list-group-item-action {
   font-weight: 100;
-  font-size: 20px;
+  font-size: 16px;
   color: #05262c;
   font-family: "Anton";
   font-style: normal;
