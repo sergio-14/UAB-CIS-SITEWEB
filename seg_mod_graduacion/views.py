@@ -285,11 +285,14 @@ def crear_actividad_control(request):
 #lista de agregacion y proyectos finales
 @login_required
 def lista_actividad_control(request):
-    actividades_control = ActividadControl.objects.all().distinct()
-    for actividad in actividades_control:
-        print(actividad.estudiante)
+    actividades_control = ActividadControl.objects.all().order_by('-id').distinct()
 
-    return render(request, 'controlador/lista_actividad_control.html', {'actividades_control': actividades_control})
+    paginator = Paginator(actividades_control, 3) 
+    page_number = request.GET.get('page') 
+    page_obj = paginator.get_page(page_number) 
+
+    return render(request, 'controlador/lista_actividad_control.html', {'page_obj': page_obj})
+
 
 @login_required
 def editar_actividad_control(request, pk):
@@ -320,19 +323,24 @@ def crear_actividad(request):
     except Actividad.DoesNotExist:
         actividad = None
 
-    if actividad and actividad.habilitada:
+    if actividad and actividad.estado == 'Aprobado':
+        # Si la actividad está aprobada, se renderiza el formulario deshabilitado
+        form = ActividadForm(instance=actividad)
+        for field in form.fields.values():
+            field.widget.attrs['disabled'] = True
+    elif actividad and actividad.habilitada:
         if request.method == 'POST':
             form = ActividadForm(request.POST, request.FILES, instance=actividad)
             if form.is_valid():
                 actividad = form.save(commit=False)
                 actividad.fecha = timezone.now()
-                actividad.estado = 'Pendiente'  # Puedes ajustar este valor según sea necesario
+                actividad.estado = 'Pendiente' 
                 actividad.save()
                 return redirect('dashboard')
         else:
             form = ActividadForm(instance=actividad)
     else:
-        form = ActividadForm()  # or set form to None if no form is required in the template
+        form = ActividadForm()  
 
     return render(request, 'proyectofinal/crear_actividad.html', {'form': form, 'actividad': actividad})
 
@@ -379,11 +387,23 @@ def revisar_actividad(request, actividad_id):
     return render(request, 'proyectofinal/revisar_actividad.html', {'actividad': actividad})
 
 
+def listaractividades(request):
+    actividades = Actividad.objects.exclude(
+        estado='Aprobado'
+    ).order_by('-fecha')
+    
+    return render(request, 'controlador/listaractividades.html', {'actividades': actividades})
+
+from django.db.models import Q
+@login_required
 def listaactividades(request):
-    actividades = Actividad.objects.all()
+    usuario = request.user
+    actividades = Actividad.objects.filter(
+        Q(tutor=usuario) | Q(jurado_1=usuario) | Q(jurado_2=usuario) | Q(jurado_3=usuario)
+    ).exclude(
+        estado='Aprobado'
+    ).order_by('-fecha')
     return render(request, 'controlador/listaactividades.html', {'actividades': actividades})
-
-
 
 
 @user_passes_test(lambda u: permiso_M_G(u, 'ADMMGS'))

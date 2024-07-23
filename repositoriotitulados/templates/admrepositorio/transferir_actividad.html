@@ -10,22 +10,23 @@
     </svg></h2>
     <div class="row">
       <div class="col-8 px-4 card-text">
-        <p class="text colortext">Titulo:</p>
-        <p class="colorestados title ">{{ actividad.titulo }}</p>
+        <p class="colorestados text pt-4 ">Fecha:{{ actividad.fecha }}</p>
+        <p class="colortext title text-center ">{{ actividad.titulo }}</p>
         <p class="textrepo colortext">Estudiante: {{ actividad.estudiante }}</p>
         <p  class="textrepo colortext">Tutor: {{ actividad.tutor }}</p>
+        <p  class="textrepo colortext pt-1">Tutor Externo: {{ actividad.guia_externo }}</p>
+        <p  class="textrepo colortext pt-1">Documentacion: {{ actividad.estado }}</p>
         <p  class="textrepo colortext">Jurados:</p>
         <li class="px-3">{{ actividad.jurado_1 }}</li>
         <li class="px-3">{{ actividad.jurado_2 }}</li>
         <li class="px-3">{{ actividad.jurado_3 }}</li>
-        <p  class="textrepo colortext pt-2">Tutor Externo: {{ actividad.guia_externo }}</p>
       </div>
-      <div class="col-4 colorestados text ">
+      <div class="col-4 colorestados text pb-5 ">
         <form method="post">
           {% csrf_token %}
           {{ form|crispy }}
           <button class="btn btn-dark fontII" type="submit">Generar</button>
-          <a class="btn btn-secondary fontII" href="{% url 'dashboard' %}">Cancelar</a>
+          <a class="btn btn-secondary fontII" href="{% url 'listaractividadesaprovadas' %}">Volver</a>
         </form>
       </div>
     </div>

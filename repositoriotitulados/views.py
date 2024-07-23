@@ -33,10 +33,22 @@ class TransferirActividadView(View):
             actividad.transferir_a_repositorio(anio_ingreso, anio_egreso, numero_acta, nota_aprobacion)
             return redirect('dashboard')
         return render(request, 'admrepositorio/transferir_actividad.html', {'form': form, 'actividad': actividad})
+   
+   
     
 def listaractividadesaprovadas(request):
-    actividades_aprobadas = Actividad.objects.filter(estado='Aprobado')
+    # Obtén todos los IDs de estudiantes que ya tienen un ActividadRepositorio
+    repositorios_existentes = ActividadRepositorio.objects.values_list('estudiante_id', flat=True)
+    
+    # Filtra las actividades aprobadas, excluyendo aquellas donde el estudiante ya tiene un repositorio
+    actividades_aprobadas = Actividad.objects.filter(
+        estado='Aprobado'
+    ).exclude(
+        estudiante_id__in=repositorios_existentes
+    )
+    
     return render(request, 'admrepositorio/listaractividadesaprovadas.html', {'acti': actividades_aprobadas})
+
 
 def listarepositorios(request):
     actividades_repositorio = ActividadRepositorio.objects.all()
@@ -76,3 +88,5 @@ def actividad_list(request):
             actividades = actividades.filter(fecha=fecha)
 
     return render(request, 'repositoriopublico/actividad_list.html', {'form': form, 'actividades': actividades})
+
+

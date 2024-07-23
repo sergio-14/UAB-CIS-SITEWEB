@@ -54,7 +54,7 @@ class ActividadControlForm(forms.ModelForm):
         model = ActividadControl
         fields = ['estudiante', 'tutor', 'jurado_1', 'jurado_2', 'jurado_3','modalidad']
         labels = {
-            'estudiante': 'Seleccione el Postulante',
+            'estudiante': 'El Postulante no Puede ser Editado campo Bloqueado',
             'tutor': 'Seleccione al Tutor Designado',
             'jurado_1': 'Seleccione al Primero Tribumal Designado',
             'jurado_2': 'Seleccione al Segundo Tribumal Designado',
@@ -77,6 +77,10 @@ class ActividadControlForm(forms.ModelForm):
         self.fields['jurado_1'].queryset = User.objects.filter(groups=docentes_group)
         self.fields['jurado_2'].queryset = User.objects.filter(groups=docentes_group)
         self.fields['jurado_3'].queryset = User.objects.filter(groups=docentes_group)
+        
+         # Deshabilitar el campo estudiante si es una instancia existente
+        if self.instance and self.instance.pk:
+            self.fields['estudiante'].disabled = True
         
 from .models import Actividad
 

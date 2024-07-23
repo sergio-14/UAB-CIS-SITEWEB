@@ -138,10 +138,10 @@ class Actividad(models.Model):
     jurado_3 = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='actividades_jurado_3', on_delete=models.CASCADE)
     modalidad = models.ForeignKey(Modalidad, on_delete=models.CASCADE)
     habilitada = models.BooleanField(default=False)
-    titulo = models.CharField(max_length=450, default='------')
-    resumen = models.TextField(max_length=500, default='Describa el Proyecto...')
+    titulo = models.CharField(max_length=450, default='Agrege el titulo de su proyecto....')
+    resumen = models.TextField(max_length=500, default='Describa breve de su proyecto ....')
     fecha = models.DateField(default=timezone.now)
-    guia_externo = models.CharField(max_length=250, default='-----------')
+    guia_externo = models.CharField(max_length=250, default='Ninguno')
     documentacion = models.FileField(upload_to='documento/proyecto', verbose_name='Agregar Documentacion', null=True, blank=True)
     estado = models.CharField(max_length=10, choices=ESTADO_CHOICES, default='Pendiente')
     jurado_1_aprobado = models.BooleanField(default=False)
@@ -150,6 +150,10 @@ class Actividad(models.Model):
 
     def __str__(self):
         return f"Actividad for {self.estudiante}"
+    
+    @property
+    def latest_comments(self):
+        return self.comentarios.order_by('-actfecha_post')[:7]
     
     def save(self, *args, **kwargs):
         if self.estado in ['Aprobada', 'Rechazada']:

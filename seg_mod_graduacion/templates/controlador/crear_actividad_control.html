@@ -9,7 +9,7 @@
                 {% csrf_token %}
                 {{ form|crispy }}
                 {% comment %} <button class="btn btn-success me-2 fontII " type="submit">Confirmar Activacion</button> {% endcomment %}
-                <button type="button" name="aprobar" class="btn btn-success " data-bs-toggle="modal" data-bs-target="#approveModal">Confirmar Activacion</button>
+                <button type="button" name="aprobar" class="btn btn-success fontII " data-bs-toggle="modal" data-bs-target="#approveModal">Confirmar Activacion</button>
                 <a class="btn btn-danger fontII " href="{% url 'dashboard' %}">Cancelar</a>
             </form>
         </div>

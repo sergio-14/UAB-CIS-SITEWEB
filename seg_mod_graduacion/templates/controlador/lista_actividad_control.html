@@ -1,46 +1,74 @@
 {% extends 'dashboard.html' %}
 {% load crispy_forms_tags %}
-{% block title %}Crear Form{% endblock %}
+{% block title %}Lista de Proyectos{% endblock %}
 {% load static %}
 {% block content %}
 <div class="container px-lg-5 font pb-5">
     <div class="no-gutters container px-lg-5 px-2">
         <h1 class="text-center titlesuperior colortitle pb-2 pt-4">LISTA DE PROYECTOS FINAL ACTIVADOS</h1>
-        <a class="btn btn-dark btn-sm fontII text-white " href="{% url 'crear_actividad_control' %}">
+        <a class="btn btn-dark btn-sm fontII text-white" href="{% url 'crear_actividad_control' %}">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard-plus mb-1" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M8 7a.5.5 0 0 1 .5.5V9H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V10H6a.5.5 0 0 1 0-1h1.5V7.5A.5.5 0 0 1 8 7"/>
                 <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z"/>
                 <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0z"/>
-            </svg> Habilittar Nuevo Postulante</a>
-        <article class="pb-5" >
-            <table class="table fontII ">
-                <thead class="" >
+            </svg> Habilitar Nuevo Postulante
+        </a>
+        <article class="pb-5">
+            <table class="table fontII">
+                <thead>
                     <tr>
-                        <th >FOTO</th>
-                        <th >UNIVERSITARIO</th>
-                        <th >ACCIONES</th>
+                        <th>FOTO</th>
+                        <th>UNIVERSITARIO</th>
+                        <th>ACCIONES</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for actividad_control in actividades_control %}
+                    {% for actividad_control in page_obj %}
                     <tr>
-                        <td data-label="FOTO"> {% if actividad_control.estudiante.imagen %}
-                            <img src="{{ actividad_control.estudiante.imagen.url }}" class="rounded-img" alt="Foto del tutor">
-                          {% else %}
-                            <img src="{% static 'img/SINFOTO.webp' %}" class="rounded-img" alt="Sin foto">
-                          {% endif %}
+                        <td data-label="FOTO">
+                            {% if actividad_control.estudiante.imagen %}
+                                <img src="{{ actividad_control.estudiante.imagen.url }}" class="rounded-img" alt="Foto del estudiante">
+                            {% else %}
+                                <img src="{% static 'img/SINFOTO.webp' %}" class="rounded-img" alt="Sin foto">
+                            {% endif %}
                         </td>
                         <td class="fontII" data-label="UNIVERSITARIO">{{ actividad_control.estudiante }}</td>
-                        <td data-label="ACCIONES"><a class="btn btn-sm btn-success" href="{% url 'editar_actividad_control' pk=actividad_control.pk %}"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
-                          </svg> Editar</a>
+                        <td data-label="ACCIONES">
+                            <a class="btn btn-sm btn-success" href="{% url 'editar_actividad_control' pk=actividad_control.pk %}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+                                </svg> Editar
+                            </a>
                         </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="3">No hay actividades de control disponibles.</td>
                     </tr>
                     {% endfor %}
                 </tbody>
-            </table><br>
+            </table>
+
+            <!-- Controles de paginación -->
+            <div class="pagination-container">
+                <span class="step-links ">
+                    {% if page_obj.has_previous %}
+                        <a class="btn btn-sm btn-dark fontII" href="?page=1">&laquo; Primera</a>
+                        <a class="btn btn-sm btn-dark fontII" href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+                    {% endif %}
+
+                    <span class="current fontII">
+                        Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+                    </span>
+
+                    {% if page_obj.has_next %}
+                        <a class="btn btn-sm btn-dark fontII" href="?page={{ page_obj.next_page_number }}">Siguiente</a>
+                        <a class="btn btn-sm btn-dark fontII" href="?page={{ page_obj.paginator.num_pages }}">Última &raquo;</a>
+                    {% endif %}
+                </span>
+            </div>
         </article>
-    </div> 
+    </div>
 </div>
 {% endblock %}

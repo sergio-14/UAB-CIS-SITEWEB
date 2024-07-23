@@ -1,8 +1,9 @@
 {% extends 'dashboard.html' %}
 {% block content %}
 {% load static %}
-<h1 class="text-center titlesuperior colortitle py-5 py-lg-2 fontI">PREVISTA DEL PROYECTO FINAL</h1>
- {% for actividad in actividades %}
+<h1 class="text-center titlesuperior colortitle py-5 py-lg-2 fontI">PREVISTA DEL PROYECTOS FINAL PARA REVISIÓN</h1>
+{% if actividades %}
+{% for actividad in actividades %}
 <div class="container mt-3">
    
     <div class="card narrow-card no-gutters">
@@ -127,19 +128,22 @@
              
               <!--comentarios-->
               <h5 class="text fontI colortitle text-center pt-3">Comentarios Retroalimentativos</h5>
-              {% for comentario in actividad.comentarios.all %}
-              <h6 class="text-end fontI  colorestados fechas">
-                {{ comentario.actfecha_post }} por :  <span class="colortext fontI fecha">{{ comentario.user.nombre }} {{ comentario.user.apellido }}</span>
-              </h6>
-              <p class="comentario fontI colortext">Comentarios: {{ comentario.actcomentario }}</p>
-              {% empty %}
-              <p class="comentario fontI colortext">No hay comentarios para este proyecto.</p>
-              {% endfor %}
+              <div class="contenedorcomentarios p-1">
+                {% for comentario in actividad.latest_comments%}
+                <h6 class="text-end fontI  colorestados fechas">
+                  {{ comentario.actfecha_post }} por :  <span class="colortext fontI fecha">{{ comentario.user.nombre }} {{ comentario.user.apellido }}</span>
+                </h6>
+                <p class="comentario fontI colortext">Comentarios: {{ comentario.actcomentario }}</p>
+                {% empty %}
+                <p class="comentario fontI colortext">No hay comentarios para este proyecto.</p>
+                {% endfor %}
+              </div>
         </div>
       </div>
     </div>
    
 </div><br><br><br>
+
 {% endfor %}
 <script>
   document.addEventListener('DOMContentLoaded', function () {
@@ -149,6 +153,9 @@
     })
   });
 </script>
+{% else %}
+  <p class="text-center text fontI colorestados">El Usuario no tiene Proyectos de Modalidad de Graduación o no a sido asignado como tribunal por el momento.</p>
+{% endif %}
 {% endblock %}
 
 

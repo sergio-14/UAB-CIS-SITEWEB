@@ -305,6 +305,11 @@
   background: #ebeaea;
   box-shadow: 6px 6px 5px #a7a6a6, -6px -6px 5px #ffffff;
 }
+.contenedorcomentarios{
+  height: 120px;
+  overflow-y: auto; /* Esto permite el desplazamiento vertical */
+  overflow-x: hidden; /* Esto oculta el desplazamiento horizontal si es necesario */
+}
 .centered-img {
   display: flex;
   justify-content: center;

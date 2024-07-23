@@ -27,6 +27,8 @@ urlpatterns = [
     
     path('proyectofinal/revision/<int:actividad_id>/', views.revisar_actividad, name='revisar_actividad'),
     path('controlador/revision/<int:actividad_id>/', views.revision, name='revision'),
+    
+    path('controlador/listaractividades/', views.listaractividades, name='listaractividades'),
     path('controlador/listaactividades/', views.listaactividades, name='listaactividades'),
     
     path('proyectofinal/crear_actividad/nueva/', views.crear_actividad, name='crear_actividad'),

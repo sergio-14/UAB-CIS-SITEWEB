@@ -33,3 +33,5 @@ class ActividadFilterForm(forms.Form):
     nombre = forms.CharField(max_length=100, required=False, label='Nombre')
     modalidad = forms.ModelChoiceField(queryset=Modalidad.objects.all(), required=False, label='Modalidad')
     fecha = forms.DateField(required=False, label='Fecha', widget=forms.DateInput(attrs={'type': 'date'}))
+    
+    
