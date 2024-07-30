@@ -25,7 +25,7 @@
         {% if not form_disabled %}
         <br>
         <input name="" id="" class="btn btn-success me-2 fontII" type="submit" value="Enviar Informacion" {% if form_disabled %}disabled{% endif %}>
-        <button type="button" class="btn btn-danger fontII " data-toggle="modal" data-target="#cancelModal">Cancelar</button>
+        <a href="{% url 'dashboard' %}" class="btn btn-danger fontII ">Cancelar</a>
         {% else %}
             <p class="text-end text colorestados">Formulario deshabilitado. Su Perfil de a sido "Aprobado" o Debes tener la investigación "Aprobada" para agregar un perfil.</p>
         {% endif %}
@@ -46,7 +46,7 @@
         </button>
       </div>
       <div class="modal-body text-center font">
-        <img src="{% static 'img/close.png' %}" class="img-close" alt="" /><br>
+        <img src="{% static 'img/confi.png' %}" class="img-close" alt="" /><br>
         ¡Formulario Enviado con Exito!
       </div>
       <div class="modal-footer">

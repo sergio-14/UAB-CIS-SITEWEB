@@ -4,7 +4,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
-from datetime import date
+from datetime import date, datetime, timedelta
 from django.conf import settings
 
 User = get_user_model()
@@ -83,8 +83,15 @@ class IntSocSettings(models.Model):
         return "Configuración Global"
 
     def tiempo_restante(self):
-        hoy = date.today()
-        if self.fecha_fin_habilitacion and hoy <= self.fecha_fin_habilitacion:
-            return (self.fecha_fin_habilitacion - hoy).days
-        return None
+        hoy = datetime.now()
+        if self.fecha_fin_habilitacion:
+            fecha_fin = datetime.combine(self.fecha_fin_habilitacion, datetime.min.time())
+            tiempo_restante = fecha_fin - hoy
+
+            if tiempo_restante.days >= 0:
+                dias = tiempo_restante.days
+                horas = tiempo_restante.seconds // 3600
+                return f"{dias} días y {horas} horas"
+        
+        return "0 Tiempo"
   

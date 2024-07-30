@@ -37,8 +37,8 @@
                         <input type="hidden" name="proyecto_id" value="{{ proyecto.id }}">
                         <textarea class="comentari-field contdoc" name="comentario_texto" required></textarea>
                         <br><br>
-                        <button type="button" name="aprobar" class="btn btn-success " data-bs-toggle="modal" data-bs-target="#approveModal">Aprobar</button> ||
-                        <button type="button" name="rechazar" class="btn btn-danger " data-bs-toggle="modal" data-bs-target="#rejectModal">Rechazar</button>
+                        <button type="button" name="aprobar" class="btn btn-success fontII " data-bs-toggle="modal" data-bs-target="#approveModal">Aprobar</button> ||
+                        <button type="button" name="rechazar" class="btn btn-danger fontII " data-bs-toggle="modal" data-bs-target="#rejectModal">Rechazar</button>
                     </form>
                     <br>
                 </div><br>
@@ -77,12 +77,12 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body text-center font">
-            <img src="{% static 'img/confi.png' %}" class="img-close" alt="" /><br>
+            <img src="{% static 'img/rechazado.png' %}" class="img-close" alt="" /><br>
             ¿Estás seguro que quiere Rechazar formulario?
         </div>
-        <div class="modal-footer fontII">
-          <button type="button" class="btn btn-secondary " data-bs-dismiss="modal">Cerrar</button>
-          <button type="button" class="btn btn-danger " onclick="submitForm('rechazar')">Sí, Rechazar</button>
+        <div class="modal-footer ">
+          <button type="button" class="btn btn-secondary fontII " data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-danger  fontII" onclick="submitForm('rechazar')">Sí, Rechazar</button>
         </div>
       </div>
     </div>

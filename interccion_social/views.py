@@ -65,7 +65,7 @@ def proyecto_detail(request):
     settings = IntSocSettings.objects.first()
     hoy = date.today()
     habilitado = settings and (settings.fecha_inicio_habilitacion <= hoy <= settings.fecha_fin_habilitacion)
-    tiempo_restante = settings.tiempo_restante() if settings else None
+    tiempo_restante = settings.tiempo_restante() if settings else "0 tiempo"
 
     if request.method == 'POST':
         form = T_ProyectosForm(request.POST, request.FILES)

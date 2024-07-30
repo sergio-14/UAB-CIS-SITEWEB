@@ -65,8 +65,52 @@ class PerComentarioForm(forms.ModelForm):
 
 
 from .models import ActividadControl
-
 class ActividadControlForm(forms.ModelForm):
+    class Meta:
+        model = ActividadControl
+        fields = ['estudiante', 'tutor', 'jurado_1', 'jurado_2', 'jurado_3', 'modalidad']
+        labels = {
+            'estudiante': 'Postulante',
+            'tutor': 'Seleccione al Tutor Designado',
+            'jurado_1': 'Primero Tribunal Designado',
+            'jurado_2': 'Segundo Tribunal Designado',
+            'jurado_3': 'Tercer Tribunal Designado',
+            'modalidad': 'Seleccione modalidad ',
+        }
+        widgets = {
+            'estudiante': forms.Select(attrs={'class': 'form-select'}),
+            'tutor': forms.Select(attrs={'class': 'form-select'}),
+            'jurado_1': forms.Select(attrs={'class': 'form-select'}),
+            'jurado_2': forms.Select(attrs={'class': 'form-select'}),
+            'jurado_3': forms.Select(attrs={'class': 'form-select'}),
+            'modalidad': forms.Select(attrs={'class': 'form-select'})
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        estudiantes_group = Group.objects.get(name="Estudiantes")
+        docentes_group = Group.objects.get(name="Docentes")
+
+        # Obtiene los IDs de los usuarios que ya tienen una actividad asignada
+        usuarios_con_actividad = ActividadControl.objects.values_list('estudiante', flat=True)
+
+        # Obtiene los IDs de los usuarios que tienen al menos un PerfilProyecto aprobado
+        usuarios_con_perfil_aprobado = PerfilProyecto.objects.filter(perestado='Aprobado').values_list('user', flat=True).distinct()
+
+        # Filtra los usuarios del grupo "Estudiantes" que no tienen una actividad asignada y que tienen al menos un PerfilProyecto aprobado
+        self.fields['estudiante'].queryset = User.objects.filter(
+            groups=estudiantes_group
+        ).exclude(id__in=usuarios_con_actividad).filter(id__in=usuarios_con_perfil_aprobado)
+
+        # Filtra los usuarios del grupo "Docentes"
+        self.fields['tutor'].queryset = User.objects.filter(groups=docentes_group)
+        self.fields['jurado_1'].queryset = User.objects.filter(groups=docentes_group)
+        self.fields['jurado_2'].queryset = User.objects.filter(groups=docentes_group)
+        self.fields['jurado_3'].queryset = User.objects.filter(groups=docentes_group)
+
+
+          
+class EditarActividadControlForm(forms.ModelForm):
     class Meta:
         model = ActividadControl
         fields = ['estudiante', 'tutor', 'jurado_1', 'jurado_2', 'jurado_3','modalidad']
@@ -89,23 +133,17 @@ class ActividadControlForm(forms.ModelForm):
         
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        estudiantes_group = Group.objects.get(name="Estudiantes")
         docentes_group = Group.objects.get(name="Docentes")
-        # Obtiene los IDs de los usuarios que ya tienen una actividad asignada
-        usuarios_con_actividad = ActividadControl.objects.values_list('estudiante', flat=True)
-        # Filtra los usuarios del grupo "Estudiantes" que no tienen una actividad asignada
-        self.fields['estudiante'].queryset = User.objects.filter(
-            groups=estudiantes_group
-        ).exclude(id__in=usuarios_con_actividad)
-        # Filtra los usuarios del grupo "Docentes"
         self.fields['tutor'].queryset = User.objects.filter(groups=docentes_group)
         self.fields['jurado_1'].queryset = User.objects.filter(groups=docentes_group)
         self.fields['jurado_2'].queryset = User.objects.filter(groups=docentes_group)
         self.fields['jurado_3'].queryset = User.objects.filter(groups=docentes_group)
         
-         # Deshabilitar el campo estudiante si es una instancia existente
+        # Deshabilitar el campo estudiante si es una instancia existente
         if self.instance and self.instance.pk:
-            self.fields['estudiante'].disabled = True
+          self.fields['estudiante'].disabled = True
+          
+          
         
 from .models import Actividad
 

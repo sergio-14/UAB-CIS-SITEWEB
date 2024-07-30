@@ -224,7 +224,7 @@ class ActividadRepositorio(models.Model):
     anio_ingreso = models.IntegerField()
     anio_egreso = models.IntegerField()
     numero_acta = models.CharField(max_length=50)
-    nota_aprobacion = models.DecimalField(max_digits=4, decimal_places=2)
+    nota_aprobacion = models.DecimalField(max_digits=5, decimal_places=2)
 
     def __str__(self):
         return f"Repositorio Actividad for {self.estudiante}"

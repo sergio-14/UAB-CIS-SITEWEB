@@ -267,7 +267,7 @@ def agregar_perfil(request):
 
 
 from .models import ActividadControl
-from .forms import ActividadControlForm
+from .forms import ActividadControlForm, EditarActividadControlForm
 
 #controlador de proyecto final
 def crear_actividad_control(request):
@@ -299,14 +299,15 @@ def editar_actividad_control(request, pk):
     actividad_control = get_object_or_404(ActividadControl, pk=pk)
 
     if request.method == 'POST':
-        form = ActividadControlForm(request.POST, instance=actividad_control)
+        form = EditarActividadControlForm(request.POST, instance=actividad_control)
         if form.is_valid():
             form.save()
             return redirect('lista_actividad_control')
     else:
-        form = ActividadControlForm(instance=actividad_control)
+        form = EditarActividadControlForm(instance=actividad_control)
 
     return render(request, 'controlador/editar_actividad_control.html', {'form': form})
+
 
 from .models import Actividad
 from django.utils import timezone
@@ -421,7 +422,7 @@ def revision(request, actividad_id):
                 actividad.save()
                 messages.success(request, 'Estado de la actividad cambiado a Aprobado.')
             else:
-                messages.error(request, 'Necesita que los 3 jurados aprueben la actividad para poder cambiar el estado.')
+                messages.error(request, 'Necesita que los 3 jurados aprueben la documentación para poder cambiar el estado.')
                 
             return redirect('listaactividades')
 

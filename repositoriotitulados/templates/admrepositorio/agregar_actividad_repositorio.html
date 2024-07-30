@@ -7,73 +7,159 @@
           <path d="M2 13c0 1 1 1 1 1h5.256A4.5 4.5 0 0 1 8 12.5a4.5 4.5 0 0 1 1.544-3.393Q8.844 9.002 8 9c-5 0-6 3-6 4"/>
         </svg></h1>
         <div class="card-body px-lg-5 px-3">
-            <form method="post" id="approvalForm" enctype="multipart/form-data">
-                {% csrf_token %}
-                <div class="fechas">
-                    <div class="row mb-3">
-                      <div class="col-md-4">
-                        {{ form.estudiante.label_tag }} <br>{{ form.estudiante }}
-                      </div>
-                      <div class="col-md-4">
-                        {{ form.tutor.label_tag }} <br>{{ form.tutor }}
-                      </div>
-                      <div class="col-md-4">
-                        {{ form.periodo.label_tag }}<br> {{ form.periodo }}
-                      </div>
-                    </div>
-              
-                    <div class="row mb-3">
-                      <div class="col-md-4">
-                        {{ form.jurado_1.label_tag }}<br> {{ form.jurado_1 }}
-                      </div>
-                      <div class="col-md-4">
-                        {{ form.jurado_2.label_tag }}<br> {{ form.jurado_2 }}
-                      </div>
-                      <div class="col-md-4">
-                        {{ form.jurado_3.label_tag }}<br> {{ form.jurado_3 }}
-                      </div>
-                    </div>
-              
-                    <div class="row mb-3">
-                      <div class="col-md-12">
-                        {{ form.titulo.label_tag }}<br> {{ form.titulo }}
-                      </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-md-12">
-                          {{ form.resumen.label_tag }}<br> {{ form.resumen }}
-                        </div>
-                    </div>
+          <form method="post" id="approvalForm" enctype="multipart/form-data">
+            {% csrf_token %}
 
-                    <div class="row mb-3">
-                        <div class="col-md-4">
-                          {{ form.modalidad.label_tag }} <br>{{ form.modalidad }}
-                        </div>
-                        <div class="col-md-4">
-                          {{ form.guia_externo.label_tag }}<br> {{ form.guia_externo }}
-                        </div>
-                        <div class="col-md-4">
-                          {{ form.documentacion.label_tag }}<br> {{ form.documentacion }}
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-md-3">
-                          {{ form.anio_ingreso.label_tag }}<br> {{ form.anio_ingreso }}
-                        </div>
-                        <div class="col-md-3">
-                          {{ form.anio_egreso.label_tag }}<br> {{ form.anio_egreso }}
-                        </div>
-                        <div class="col-md-3">
-                          {{ form.numero_acta.label_tag }} <br>{{ form.numero_acta }}
-                        </div>
-                        <div class="col-md-3">
-                            {{ form.nota_aprobacion.label_tag }}<br> {{ form.nota_aprobacion }}
-                        </div>
-                    </div><br>
-                <button type="button" name="aprobar" class="btn btn-dark fontII " data-bs-toggle="modal" data-bs-target="#approveModal">Confirmar Repositorio</button>
-                <a class="btn btn-secondary fontII " href="{% url 'listarepositorios' %}">Cancelar</a>
+            <!-- Mostrar errores generales del formulario -->
+            {% if form.non_field_errors %}
+            <div class="alert alert-danger">
+                <ul>
+                    {% for error in form.non_field_errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
             </div>
-            </form>
+            {% endif %}
+            <div class="fechas">
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        {{ form.estudiante.label_tag }} <br>{{ form.estudiante }}
+                        {% if form.estudiante.errors %}
+                            <div class="text-danger">
+                                {{ form.estudiante.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-4">
+                        {{ form.tutor.label_tag }} <br>{{ form.tutor }}
+                        {% if form.tutor.errors %}
+                            <div class="text-danger">
+                                {{ form.tutor.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-4">
+                        {{ form.periodo.label_tag }}<br> {{ form.periodo }}
+                        {% if form.periodo.errors %}
+                            <div class="text-danger">
+                                {{ form.periodo.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+              
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        {{ form.jurado_1.label_tag }}<br> {{ form.jurado_1 }}
+                        {% if form.jurado_1.errors %}
+                            <div class="text-danger">
+                                {{ form.jurado_1.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-4">
+                        {{ form.jurado_2.label_tag }}<br> {{ form.jurado_2 }}
+                        {% if form.jurado_2.errors %}
+                            <div class="text-danger">
+                                {{ form.jurado_2.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-4">
+                        {{ form.jurado_3.label_tag }}<br> {{ form.jurado_3 }}
+                        {% if form.jurado_3.errors %}
+                            <div class="text-danger">
+                                {{ form.jurado_3.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+              
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        {{ form.titulo.label_tag }}<br> {{ form.titulo }}
+                        {% if form.titulo.errors %}
+                            <div class="text-danger">
+                                {{ form.titulo.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        {{ form.resumen.label_tag }}<br> {{ form.resumen }}
+                        {% if form.resumen.errors %}
+                            <div class="text-danger">
+                                {{ form.resumen.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+        
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        {{ form.modalidad.label_tag }} <br>{{ form.modalidad }}
+                        {% if form.modalidad.errors %}
+                            <div class="text-danger">
+                                {{ form.modalidad.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-4">
+                        {{ form.guia_externo.label_tag }}<br> {{ form.guia_externo }}
+                        {% if form.guia_externo.errors %}
+                            <div class="text-danger">
+                                {{ form.guia_externo.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-4">
+                        {{ form.documentacion.label_tag }}<br> {{ form.documentacion }}
+                        {% if form.documentacion.errors %}
+                            <div class="text-danger">
+                                {{ form.documentacion.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        {{ form.anio_ingreso.label_tag }}<br> {{ form.anio_ingreso }}
+                        {% if form.anio_ingreso.errors %}
+                            <div class="text-danger">
+                                {{ form.anio_ingreso.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-3">
+                        {{ form.anio_egreso.label_tag }}<br> {{ form.anio_egreso }}
+                        {% if form.anio_egreso.errors %}
+                            <div class="text-danger">
+                                {{ form.anio_egreso.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-3">
+                        {{ form.numero_acta.label_tag }} <br>{{ form.numero_acta }}
+                        {% if form.numero_acta.errors %}
+                            <div class="text-danger">
+                                {{ form.numero_acta.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-3">
+                        {{ form.nota_aprobacion.label_tag }}<br> {{ form.nota_aprobacion }}
+                        {% if form.nota_aprobacion.errors %}
+                            <div class="text-danger">
+                                {{ form.nota_aprobacion.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div><br>
+                <button type="button" name="aprobar" class="btn btn-dark fontII" data-bs-toggle="modal" data-bs-target="#approveModal">Confirmar Repositorio</button>
+                <a class="btn btn-secondary fontII" href="{% url 'listarepositorios' %}">Cancelar</a>
+            </div>
+        </form>
         </div>
         <br />
       </div>
