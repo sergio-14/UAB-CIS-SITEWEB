@@ -4,6 +4,8 @@ from django.conf.urls.static import static
 from django.conf.urls import handler403
 from .views import handle_permission_denied
 from seg_mod_graduacion import views
+from .views import ModalidadCreateView, ModalidadListView, ModalidadUpdateView
+
 urlpatterns = [    
     #segguimiento modalidad de graduacion investigacion cientifica
     path('invcientifica/agregar_investigacion/', views.agregar_investigacion, name='agregar_investigacion'),
@@ -33,5 +35,9 @@ urlpatterns = [
     
     path('proyectofinal/crear_actividad/nueva/', views.crear_actividad, name='crear_actividad'),
     path('proyectofinal/actividad/', views.lista_actividad, name='lista_actividad'),
+    
+    path('modalidad/modalidadagregar/', ModalidadCreateView.as_view(), name='modalidadagregar'),
+    path('modalidades/', ModalidadListView.as_view(), name='listarmodalidades'),
+    path('modalidad/editarmodalidad/<int:pk>/', ModalidadUpdateView.as_view(), name='editarmodalidad'),
 ]
 handler403 = handle_permission_denied

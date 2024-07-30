@@ -3,6 +3,23 @@ from django.contrib.auth.models import Group
 from gestion_usuarios.models import User 
 from .models import InvCientifica, ComentarioInvCientifica, InvSettings, PerfilProyecto, ComentarioPerfil, ActividadRepositorio
 
+
+from .models import Modalidad
+from django.utils.text import slugify
+
+class ModalidadForm(forms.ModelForm):
+    class Meta:
+        model = Modalidad
+        fields = ['nombre']
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        instance.slug = slugify(instance.nombre)
+        if commit:
+            instance.save()
+        return instance
+    
+    
 # área de investigación científica 
 class InvCientificaForm(forms.ModelForm):
     class Meta:
@@ -54,12 +71,20 @@ class ActividadControlForm(forms.ModelForm):
         model = ActividadControl
         fields = ['estudiante', 'tutor', 'jurado_1', 'jurado_2', 'jurado_3','modalidad']
         labels = {
-            'estudiante': 'El Postulante no Puede ser Editado campo Bloqueado',
+            'estudiante': 'Postulante',
             'tutor': 'Seleccione al Tutor Designado',
-            'jurado_1': 'Seleccione al Primero Tribumal Designado',
-            'jurado_2': 'Seleccione al Segundo Tribumal Designado',
-            'jurado_3': 'Seleccione al Tercer Tribumal Designado',
+            'jurado_1': 'Primero Tribumal Designado',
+            'jurado_2': 'Segundo Tribumal Designado',
+            'jurado_3': 'Tercer Tribumal Designado',
             'modalidad': 'Seleccione modalidad ',
+        }
+        widgets = {
+            'estudiante': forms.Select(attrs={'class': 'form-select'}),
+            'tutor': forms.Select(attrs={'class': 'form-select'}),
+            'jurado_1': forms.Select(attrs={'class': 'form-select'}),
+            'jurado_2': forms.Select(attrs={'class': 'form-select'}),
+            'jurado_3': forms.Select(attrs={'class': 'form-select'}),
+            'modalidad': forms.Select(attrs={'class': 'form-select'})
         }
         
     def __init__(self, *args, **kwargs):

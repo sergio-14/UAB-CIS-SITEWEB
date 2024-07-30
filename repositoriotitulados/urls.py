@@ -15,8 +15,12 @@ urlpatterns = [
     
     path('repositoriopublico/actividades/', views.actividad_list, name='actividad_list'),
     
+    path('agregar-actividad-repositorio/', views.agregar_actividad_repositorio, name='agregar_actividad_repositorio'),
+    
     #path('repositoriopublico/crear_repositorio/add/', crear_repositorio.as_view(), name='crear_repositorio'),
     
     #path('repositoriopublico/crearrepositorio/add/', views.crear_repositorio, name='crear_repositorio'),
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 #handler403 = handle_permission_denied

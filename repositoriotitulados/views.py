@@ -50,9 +50,29 @@ def listaractividadesaprovadas(request):
     return render(request, 'admrepositorio/listaractividadesaprovadas.html', {'acti': actividades_aprobadas})
 
 
+#def listarepositorios(request):
+#    actividades_repositorio = ActividadRepositorio.objects.all()
+#   return render(request, 'admrepositorio/listarepositorios.html', {'actirepositorio': actividades_repositorio})
+
 def listarepositorios(request):
-    actividades_repositorio = ActividadRepositorio.objects.all()
-    return render(request, 'admrepositorio/listarepositorios.html', {'actirepositorio': actividades_repositorio})
+    # Filtrado por nombre del estudiante
+    query = request.GET.get('q')
+    if query:
+        actividades_repositorio = ActividadRepositorio.objects.filter(estudiante__nombre__icontains=query)
+    else:
+        actividades_repositorio = ActividadRepositorio.objects.all()
+
+    # Paginación
+    paginator = Paginator(actividades_repositorio, 4)  # 4 elementos por página
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    context = {
+        'actirepositorio': page_obj,
+        'query': query,  # Pasar la consulta al contexto para mantener el valor en el formulario de búsqueda
+    }
+    return render(request, 'admrepositorio/listarepositorios.html', context)
+
 
 def editar_actividad_repositorio(request, pk):
     actividad = get_object_or_404(ActividadRepositorio, pk=pk)
@@ -61,7 +81,7 @@ def editar_actividad_repositorio(request, pk):
         form = ActividadRepositorioForm(request.POST, instance=actividad)
         if form.is_valid():
             form.save()
-            return redirect('detalle_actividad_repositorio', pk=actividad.pk)
+            return redirect('listarepositorios')
     else:
         form = ActividadRepositorioForm(instance=actividad)
     
@@ -90,3 +110,16 @@ def actividad_list(request):
     return render(request, 'repositoriopublico/actividad_list.html', {'form': form, 'actividades': actividades})
 
 
+
+from .forms import AgregarForm
+
+def agregar_actividad_repositorio(request):
+    if request.method == 'POST':
+        form = AgregarForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse('listarepositorios')) 
+    else:
+        form = AgregarForm()
+    
+    return render(request, 'admrepositorio/agregar_actividad_repositorio.html', {'form': form})

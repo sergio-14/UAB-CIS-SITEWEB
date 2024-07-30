@@ -221,6 +221,12 @@
   border-radius: 50%;
   object-fit: cover;
 }
+.imgrepo{
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  object-fit: cover;
+}
 .rounded-img2 {
   background: #f0f0f0;
   box-shadow: 9px 9px 9px #a6a6a6, -9px -9px 9px #ffffff;
@@ -240,7 +246,7 @@
 }
 
 .img-close {
-  width: 150px;
+  width: 200px;
   height: 150px;
 }
 

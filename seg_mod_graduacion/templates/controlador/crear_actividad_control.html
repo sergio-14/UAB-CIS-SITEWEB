@@ -1,19 +1,50 @@
-{% extends 'dashboard.html'%} {% load static %} {% load crispy_forms_tags %}{% block content %}
-<div class="container mt-3  fontI colortext">
-  <div class="row pb-5 ">
-    <div class="col-md-8  offset-md-2 pb-5">
-      <div class="card no-gutters">
-        <h1 class="text-center titlegeneral colortitle pt-3 fontI">Habilitación de Documento Final para el Postulante</h1>
-        <div class="card-body font px-5 pt-5 ">
-            <form method="post" id="approvalForm">
-                {% csrf_token %}
-                {{ form|crispy }}
-                {% comment %} <button class="btn btn-success me-2 fontII " type="submit">Confirmar Activacion</button> {% endcomment %}
-                <button type="button" name="aprobar" class="btn btn-success fontII " data-bs-toggle="modal" data-bs-target="#approveModal">Confirmar Activacion</button>
-                <a class="btn btn-danger fontII " href="{% url 'dashboard' %}">Cancelar</a>
-            </form>
-        </div>
-        <br />
+{% extends 'dashboard.html'%}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container mt-3 px-lg-5 fontI colortext">
+  <div class="pb-5 px-lg-5">
+    <div class="no-gutters">
+      <h1 class="px-lg-5 title px-3 colortext py-5 fontI">
+        Habilitación de Documento Final para el Postulante
+        <svg xmlns="http://www.w3.org/2000/svg" width="76" height="76" fill="currentColor" class="bi bi-person-fill-add" viewBox="0 0 16 16">
+          <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0m-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+          <path d="M2 13c0 1 1 1 1 1h5.256A4.5 4.5 0 0 1 8 12.5a4.5 4.5 0 0 1 1.544-3.393Q8.844 9.002 8 9c-5 0-6 3-6 4"/>
+        </svg>
+      </h1>
+      <div class="card-body font px-lg-5 px-3">
+        <form method="post" id="approvalForm" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="fechas">
+            <div class="row mb-3">
+              <div class="col-md-4 pt-1">
+                {{ form.estudiante.label_tag }} <br>{{ form.estudiante }}
+              </div>
+              <div class="col-md-4 pt-1">
+                {{ form.tutor.label_tag }} <br>{{ form.tutor }}
+              </div>
+              <div class="col-md-4 pt-1">
+                {{ form.modalidad.label_tag }}<br> {{ form.modalidad }}
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-4 pt-1">
+                {{ form.jurado_1.label_tag }}<br> {{ form.jurado_1 }}
+              </div>
+              <div class="col-md-4 pt-1">
+                {{ form.jurado_2.label_tag }}<br> {{ form.jurado_2 }}
+              </div>
+              <div class="col-md-4 pt-1">
+                {{ form.jurado_3.label_tag }}<br> {{ form.jurado_3 }}
+              </div>
+            </div>
+            <br>
+            <button type="button" class="btn btn-dark fontII" data-bs-toggle="modal" data-bs-target="#approveModal">Confirmar Activacion</button>
+            <a class="btn btn-secondary fontII" href="{% url 'dashboard' %}">Cancelar</a>
+          </div>
+        </form>
+        <br><br>
       </div>
     </div>
   </div>
@@ -27,12 +58,11 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body text-center font">
-          <img src="{% static 'img/siguiente.png' %}" class="img-close" alt="" /><br>
-          ¿Estás seguro que quiere habilitar proyecto final a este usuario?
+        <img src="{% static 'img/confi.png' %}" class="img-close" alt="" /><br>
+        ¿Estás seguro que quiere habilitar proyecto final a este usuario?
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary fontII" data-bs-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-success fontII" onclick="submitForm('aprobar')">Sí, Aprobar</button>
+        <button type="button" class="btn btn-dark fontII" onclick="submitForm('aprobar')">Sí, Aprobar</button>
       </div>
     </div>
   </div>
@@ -44,6 +74,7 @@
     const hiddenInput = document.createElement('input');
     hiddenInput.type = 'hidden';
     hiddenInput.name = action;
+    hiddenInput.value = 'true'; // Agrega un valor al input oculto
     form.appendChild(hiddenInput);
     form.submit();
   }

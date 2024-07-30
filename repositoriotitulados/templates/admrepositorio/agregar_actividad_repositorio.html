@@ -1,0 +1,111 @@
+{% extends 'dashboard.html'%} {% load static %} {% load crispy_forms_tags %}{% block content %}
+<div class="container mt-3 px-lg-5 fontI colortext ">
+    <div class="pb-5 px-lg-5">
+      <div class="no-gutters">
+        <h1 class=" px-lg-5 titlesuperior px-3 colortext py-5 fontI">Habilitación de Repositorio Para Egresados  <svg xmlns="http://www.w3.org/2000/svg" width="76" height="76" fill="currentColor" class="bi bi-person-fill-add" viewBox="0 0 16 16">
+          <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0m-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+          <path d="M2 13c0 1 1 1 1 1h5.256A4.5 4.5 0 0 1 8 12.5a4.5 4.5 0 0 1 1.544-3.393Q8.844 9.002 8 9c-5 0-6 3-6 4"/>
+        </svg></h1>
+        <div class="card-body px-lg-5 px-3">
+            <form method="post" id="approvalForm" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="fechas">
+                    <div class="row mb-3">
+                      <div class="col-md-4">
+                        {{ form.estudiante.label_tag }} <br>{{ form.estudiante }}
+                      </div>
+                      <div class="col-md-4">
+                        {{ form.tutor.label_tag }} <br>{{ form.tutor }}
+                      </div>
+                      <div class="col-md-4">
+                        {{ form.periodo.label_tag }}<br> {{ form.periodo }}
+                      </div>
+                    </div>
+              
+                    <div class="row mb-3">
+                      <div class="col-md-4">
+                        {{ form.jurado_1.label_tag }}<br> {{ form.jurado_1 }}
+                      </div>
+                      <div class="col-md-4">
+                        {{ form.jurado_2.label_tag }}<br> {{ form.jurado_2 }}
+                      </div>
+                      <div class="col-md-4">
+                        {{ form.jurado_3.label_tag }}<br> {{ form.jurado_3 }}
+                      </div>
+                    </div>
+              
+                    <div class="row mb-3">
+                      <div class="col-md-12">
+                        {{ form.titulo.label_tag }}<br> {{ form.titulo }}
+                      </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                          {{ form.resumen.label_tag }}<br> {{ form.resumen }}
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                          {{ form.modalidad.label_tag }} <br>{{ form.modalidad }}
+                        </div>
+                        <div class="col-md-4">
+                          {{ form.guia_externo.label_tag }}<br> {{ form.guia_externo }}
+                        </div>
+                        <div class="col-md-4">
+                          {{ form.documentacion.label_tag }}<br> {{ form.documentacion }}
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-3">
+                          {{ form.anio_ingreso.label_tag }}<br> {{ form.anio_ingreso }}
+                        </div>
+                        <div class="col-md-3">
+                          {{ form.anio_egreso.label_tag }}<br> {{ form.anio_egreso }}
+                        </div>
+                        <div class="col-md-3">
+                          {{ form.numero_acta.label_tag }} <br>{{ form.numero_acta }}
+                        </div>
+                        <div class="col-md-3">
+                            {{ form.nota_aprobacion.label_tag }}<br> {{ form.nota_aprobacion }}
+                        </div>
+                    </div><br>
+                <button type="button" name="aprobar" class="btn btn-dark fontII " data-bs-toggle="modal" data-bs-target="#approveModal">Confirmar Repositorio</button>
+                <a class="btn btn-secondary fontII " href="{% url 'listarepositorios' %}">Cancelar</a>
+            </div>
+            </form>
+        </div>
+        <br />
+      </div>
+    </div>
+</div>
+
+<div class="modal fade" id="approveModal" tabindex="-1" aria-labelledby="approveModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content bg-mdal">
+      <div class="modal-header">
+        <h5 class="modal-title font" id="approveModalLabel">Confirmar Habilitación de Repositorio</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center font">
+          <img src="{% static 'img/siguiente.png' %}" class="img-close" alt="" /><br>
+          ¿Estás seguro que quiere habilitar repositorio para este usuario?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-dark fontII" onclick="submitForm('aprobar')">Sí, habilitar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function submitForm(action) {
+    const form = document.getElementById('approvalForm');
+    const hiddenInput = document.createElement('input');
+    hiddenInput.type = 'hidden';
+    hiddenInput.name = action;
+    form.appendChild(hiddenInput);
+    form.submit();
+  }
+</script>
+{% endblock %}

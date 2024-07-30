@@ -428,3 +428,25 @@ def revision(request, actividad_id):
     return render(request, 'controlador/revision.html', {'actividad': actividad, 'todos_aprobados': todos_aprobados})
 
 
+from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.list import ListView
+from django.urls import reverse_lazy
+from .models import Modalidad
+from .forms import ModalidadForm
+
+class ModalidadCreateView(CreateView):
+    model = Modalidad
+    form_class = ModalidadForm
+    template_name = 'modalidad/modalidadagregar.html'
+    success_url = reverse_lazy('listarmodalidades')
+
+class ModalidadListView(ListView):
+    model = Modalidad
+    template_name = 'modalidad/listarmodalidades.html'
+    context_object_name = 'modalidades'
+
+class ModalidadUpdateView(UpdateView):
+    model = Modalidad
+    form_class = ModalidadForm
+    template_name = 'modalidad/editarmodalidad.html'
+    success_url = reverse_lazy('listarmodalidades')

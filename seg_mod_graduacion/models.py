@@ -215,7 +215,7 @@ class ActividadRepositorio(models.Model):
     modalidad = models.ForeignKey(Modalidad, on_delete=models.CASCADE, default=1, verbose_name='Seleccione Una Modalidad')
     fecha = models.DateField(default=timezone.now)
     guia_externo = models.CharField(max_length=250, default='-----------')
-    documentacion = models.FileField(upload_to='documento/proyecto', verbose_name='Agregar Documentacion', null=True, blank=True)
+    documentacion = models.FileField(upload_to='documento/repositorios', verbose_name='Agregar Documentacion', null=True, blank=True)
     estado = models.CharField(max_length=10, choices=ESTADO_CHOICES, default='Pendiente')
     jurado_1_aprobado = models.BooleanField(default=False)
     jurado_2_aprobado = models.BooleanField(default=False)
