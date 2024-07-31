@@ -25,7 +25,7 @@
                     <div class="col-md-4">
                         {{ form.estudiante.label_tag }} <br>{{ form.estudiante }}
                         {% if form.estudiante.errors %}
-                            <div class="text-danger">
+                            <div class="text-danger fontII">
                                 {{ form.estudiante.errors }}
                             </div>
                         {% endif %}
@@ -33,7 +33,7 @@
                     <div class="col-md-4">
                         {{ form.tutor.label_tag }} <br>{{ form.tutor }}
                         {% if form.tutor.errors %}
-                            <div class="text-danger">
+                            <div class="text-danger  fontII">
                                 {{ form.tutor.errors }}
                             </div>
                         {% endif %}
@@ -41,7 +41,7 @@
                     <div class="col-md-4">
                         {{ form.periodo.label_tag }}<br> {{ form.periodo }}
                         {% if form.periodo.errors %}
-                            <div class="text-danger">
+                            <div class="text-danger  fontII">
                                 {{ form.periodo.errors }}
                             </div>
                         {% endif %}
@@ -52,7 +52,7 @@
                     <div class="col-md-4">
                         {{ form.jurado_1.label_tag }}<br> {{ form.jurado_1 }}
                         {% if form.jurado_1.errors %}
-                            <div class="text-danger">
+                            <div class="text-danger  fontII">
                                 {{ form.jurado_1.errors }}
                             </div>
                         {% endif %}
@@ -60,7 +60,7 @@
                     <div class="col-md-4">
                         {{ form.jurado_2.label_tag }}<br> {{ form.jurado_2 }}
                         {% if form.jurado_2.errors %}
-                            <div class="text-danger">
+                            <div class="text-danger  fontII">
                                 {{ form.jurado_2.errors }}
                             </div>
                         {% endif %}
@@ -68,7 +68,7 @@
                     <div class="col-md-4">
                         {{ form.jurado_3.label_tag }}<br> {{ form.jurado_3 }}
                         {% if form.jurado_3.errors %}
-                            <div class="text-danger">
+                            <div class="text-danger  fontII">
                                 {{ form.jurado_3.errors }}
                             </div>
                         {% endif %}
@@ -79,7 +79,7 @@
                     <div class="col-md-12">
                         {{ form.titulo.label_tag }}<br> {{ form.titulo }}
                         {% if form.titulo.errors %}
-                            <div class="text-danger">
+                            <div class="text-danger  fontII">
                                 {{ form.titulo.errors }}
                             </div>
                         {% endif %}
@@ -89,7 +89,7 @@
                     <div class="col-md-12">
                         {{ form.resumen.label_tag }}<br> {{ form.resumen }}
                         {% if form.resumen.errors %}
-                            <div class="text-danger">
+                            <div class="text-danger  fontII">
                                 {{ form.resumen.errors }}
                             </div>
                         {% endif %}
@@ -100,7 +100,7 @@
                     <div class="col-md-4">
                         {{ form.modalidad.label_tag }} <br>{{ form.modalidad }}
                         {% if form.modalidad.errors %}
-                            <div class="text-danger">
+                            <div class="text-danger  fontII">
                                 {{ form.modalidad.errors }}
                             </div>
                         {% endif %}
@@ -108,7 +108,7 @@
                     <div class="col-md-4">
                         {{ form.guia_externo.label_tag }}<br> {{ form.guia_externo }}
                         {% if form.guia_externo.errors %}
-                            <div class="text-danger">
+                            <div class="text-danger  fontII">
                                 {{ form.guia_externo.errors }}
                             </div>
                         {% endif %}
@@ -116,7 +116,7 @@
                     <div class="col-md-4">
                         {{ form.documentacion.label_tag }}<br> {{ form.documentacion }}
                         {% if form.documentacion.errors %}
-                            <div class="text-danger">
+                            <div class="text-danger  fontII">
                                 {{ form.documentacion.errors }}
                             </div>
                         {% endif %}
@@ -124,17 +124,25 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-3">
+                        {{ form.fecha.label_tag }}<br> {{ form.fecha }}
+                        {% if form.fecha.errors %}
+                            <div class="text-danger  fontII">
+                                {{ form.fecha.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-2">
                         {{ form.anio_ingreso.label_tag }}<br> {{ form.anio_ingreso }}
                         {% if form.anio_ingreso.errors %}
-                            <div class="text-danger">
+                            <div class="text-danger  fontII">
                                 {{ form.anio_ingreso.errors }}
                             </div>
                         {% endif %}
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         {{ form.anio_egreso.label_tag }}<br> {{ form.anio_egreso }}
                         {% if form.anio_egreso.errors %}
-                            <div class="text-danger">
+                            <div class="text-danger  fontII">
                                 {{ form.anio_egreso.errors }}
                             </div>
                         {% endif %}
@@ -142,15 +150,15 @@
                     <div class="col-md-3">
                         {{ form.numero_acta.label_tag }} <br>{{ form.numero_acta }}
                         {% if form.numero_acta.errors %}
-                            <div class="text-danger">
+                            <div class="text-danger  fontII">
                                 {{ form.numero_acta.errors }}
                             </div>
                         {% endif %}
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         {{ form.nota_aprobacion.label_tag }}<br> {{ form.nota_aprobacion }}
                         {% if form.nota_aprobacion.errors %}
-                            <div class="text-danger">
+                            <div class="text-danger  fontII">
                                 {{ form.nota_aprobacion.errors }}
                             </div>
                         {% endif %}

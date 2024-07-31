@@ -1,4 +1,4 @@
-from seg_mod_graduacion.models import ActividadRepositorio, PERIODO_CHOICES,Modalidad
+from seg_mod_graduacion.models import ActividadRepositorio, Modalidad
 from django import forms
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.core.exceptions import ValidationError
@@ -8,7 +8,11 @@ current_year = datetime.datetime.now().year
 YEAR_CHOICES = [(year, year) for year in range(1990, current_year + 1)]
 
 class TransferirActividadForm(forms.Form):
-    periodo = forms.ChoiceField(choices=PERIODO_CHOICES) 
+    periodo = forms.CharField(
+        max_length=50,
+        label='Periodo y Gestion',
+        widget=forms.TextInput(attrs={'placeholder': 'Asigne periodo/gestion'}) 
+    ) 
     anio_ingreso = forms.ChoiceField(
         label='Año de Ingreso',
         choices=YEAR_CHOICES,
@@ -23,57 +27,95 @@ class TransferirActividadForm(forms.Form):
     )
     numero_acta = forms.CharField(label='Número de Acta', max_length=50)
     nota_aprobacion = forms.DecimalField(
-        label='Nota de Aprobación',
+        label='Nota',
         max_digits=5,
         decimal_places=2,
         validators=[MinValueValidator(50), MaxValueValidator(100)]
     )
+
     def clean(self):
         cleaned_data = super().clean()
-        anio_ingreso = int(cleaned_data.get('anio_ingreso'))
-        anio_egreso = int(cleaned_data.get('anio_egreso'))
+        anio_ingreso = cleaned_data.get('anio_ingreso')
+        anio_egreso = cleaned_data.get('anio_egreso')
 
-        if anio_ingreso > anio_egreso:
-            raise ValidationError('El Año de Ingreso no puede ser mayor que el Año de Egreso.')
+        if anio_ingreso and anio_egreso:
+            anio_ingreso = int(anio_ingreso)
+            anio_egreso = int(anio_egreso)
+            if anio_ingreso > anio_egreso:
+                raise ValidationError('El Año de Ingreso no puede ser mayor que el Año de Egreso.')
 
         return cleaned_data
-        
-    
+
 class ActividadRepositorioForm(forms.ModelForm):
     nota_aprobacion = forms.DecimalField(
-        label='Nota de Aprobación',
+        label='Nota',
         max_digits=5,
         decimal_places=2,
-        validators=[MinValueValidator(50), MaxValueValidator(100)]
+        validators=[MinValueValidator(50), MaxValueValidator(100)],
+        widget=forms.NumberInput(attrs={'class': 'form-control'})
     )
+
     def clean(self):
         cleaned_data = super().clean()
-        anio_ingreso = int(cleaned_data.get('anio_ingreso'))
-        anio_egreso = int(cleaned_data.get('anio_egreso'))
+        anio_ingreso = cleaned_data.get('anio_ingreso')
+        anio_egreso = cleaned_data.get('anio_egreso')
+
+        if anio_ingreso is None:
+            raise ValidationError({'anio_ingreso': 'El año de ingreso es obligatorio.'})
+        
+        try:
+            anio_ingreso = int(anio_ingreso)
+        except ValueError:
+            raise ValidationError({'anio_ingreso': 'El valor de año de ingreso debe ser un número entero.'})
+
+        if anio_egreso is not None:
+            try:
+                anio_egreso = int(anio_egreso)
+            except ValueError:
+                raise ValidationError({'anio_egreso': 'El valor de año de egreso debe ser un número entero.'})
 
         if anio_ingreso > anio_egreso:
             raise ValidationError('El Año de Ingreso no puede ser mayor que el Año de Egreso.')
 
+        cleaned_data['anio_ingreso'] = anio_ingreso
+        cleaned_data['anio_egreso'] = anio_egreso
+
         return cleaned_data
+
     class Meta:
         model = ActividadRepositorio
         fields = ['periodo', 'anio_ingreso', 'anio_egreso', 'numero_acta', 'nota_aprobacion']
-        
-        
-
+        labels = {
+            'periodo': 'Periodo y Gestion',
+            'anio_ingreso': 'Año Ingreso',
+            'anio_egreso': 'Año Egreso',
+            'numero_acta': 'Número de Acta',
+            'nota_aprobacion': 'Nota'
+        }
 
 class ActividadFilterForm(forms.Form):
-    nombre = forms.CharField(max_length=100, required=False, label='Nombre')
-    modalidad = forms.ModelChoiceField(queryset=Modalidad.objects.all(), required=False, label='Modalidad')
-    fecha = forms.DateField(required=False, label='Fecha', widget=forms.DateInput(attrs={'type': 'date'}))
-    
+    nombre = forms.CharField(
+        max_length=100, 
+        required=False, 
+        label='Nombre',
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
+        )
+    modalidad = forms.ModelChoiceField(
+        queryset=Modalidad.objects.all(), 
+        required=False, label='Modalidad',
+        widget=forms.Select(attrs={'class': 'form-select'}),
+        )
+    fecha = forms.DateField(
+        required=False, 
+        label='Fecha', 
+        widget=forms.DateInput(attrs={'type': 'date', 'class': 'form-control'})
+        )
 
-
-
-from gestion_usuarios.models import User 
+from gestion_usuarios.models import User
 
 class AgregarForm(forms.ModelForm):
     nota_aprobacion = forms.DecimalField(
+        label='Nota',
         max_digits=5,
         decimal_places=2,
         validators=[MinValueValidator(50), MaxValueValidator(100)],
@@ -99,28 +141,29 @@ class AgregarForm(forms.ModelForm):
             'modalidad': forms.Select(attrs={'class': 'form-select'}),
             'guia_externo': forms.TextInput(attrs={'class': 'form-control'}),
             'documentacion': forms.ClearableFileInput(attrs={'class': 'form-control'}),
-            'periodo': forms.Select(attrs={'class': 'form-select'}),
+            'periodo': forms.TextInput(attrs={'class': 'form-control'}),
             'anio_ingreso': forms.NumberInput(attrs={'class': 'form-control'}),
             'anio_egreso': forms.NumberInput(attrs={'class': 'form-control'}),
             'numero_acta': forms.TextInput(attrs={'class': 'form-control'}),
             'fecha': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
+            
         }
         labels = {
-            'estudiante': 'Nombre del Egresado:',
+            'estudiante': 'Nombre Completo Egresado:',
             'tutor': 'Tutor Asignado:',
-            'jurado_1': 'Tribunal Asignado:',
-            'jurado_2': 'Tribunal Asignado:',
-            'jurado_3': 'Tribunal Asignado:',
-            'titulo': 'Titulo de Proyecto:',
+            'jurado_1': '1er. Tribunal Asignado:',
+            'jurado_2': '2do. Tribunal Asignado:',
+            'jurado_3': '3er. Tribunal Asignado:',
+            'titulo': 'Titulo del Proyecto:',
             'resumen': 'Descripción Breve del Proyecto:',
-            'modalidad': 'Modalidad Optada:',
+            'modalidad': 'Modalidad:',
             'guia_externo': 'Tutor Externo:',
-            'documentacion': 'Documentación Egresado:',
-            'periodo': 'Periodo o Gestion:',
+            'documentacion': 'Documentación:',
+            'periodo': 'Periodo y Gestion:',
             'anio_ingreso': 'Año de Ingreso',
             'anio_egreso': 'Año de Egreso',
             'numero_acta': 'Número de Acta',
-            'nota_aprobacion': 'Nota de Aprobación',
+            'nota_aprobacion': 'Nota',
             'fecha': 'Fecha'
         }
         
@@ -152,7 +195,6 @@ class AgregarForm(forms.ModelForm):
         anio_ingreso = cleaned_data.get('anio_ingreso')
         anio_egreso = cleaned_data.get('anio_egreso')
 
-        # Verifica si anio_ingreso no es None y convierte a entero
         if anio_ingreso is None:
             raise ValidationError({'anio_ingreso': 'El año de ingreso es obligatorio.'})
         
@@ -161,18 +203,15 @@ class AgregarForm(forms.ModelForm):
         except ValueError:
             raise ValidationError({'anio_ingreso': 'El valor de año de ingreso debe ser un número entero.'})
 
-        # Verificación similar para anio_egreso
         if anio_egreso is not None:
             try:
                 anio_egreso = int(anio_egreso)
             except ValueError:
                 raise ValidationError({'anio_egreso': 'El valor de año de egreso debe ser un número entero.'})
 
-        # Verifica la lógica de año de ingreso y egreso
         if anio_ingreso > anio_egreso:
             raise ValidationError('El Año de Ingreso no puede ser mayor que el Año de Egreso.')
 
-        # Devuelve los datos limpios después de la validación
         cleaned_data['anio_ingreso'] = anio_ingreso
         cleaned_data['anio_egreso'] = anio_egreso
 

@@ -226,6 +226,9 @@
   height: 130px;
   border-radius: 50%;
   object-fit: cover;
+  background: #f0f0f0;
+  box-shadow: 9px 9px 9px #a6a6a6, -9px -9px 9px #ffffff;
+  border: 6px solid #ececec;
 }
 .rounded-img2 {
   background: #f0f0f0;

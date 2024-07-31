@@ -30,11 +30,18 @@ class TransferirActividadView(View):
             anio_egreso = form.cleaned_data['anio_egreso']
             numero_acta = form.cleaned_data['numero_acta']
             nota_aprobacion = form.cleaned_data['nota_aprobacion']
-            actividad.transferir_a_repositorio(anio_ingreso, anio_egreso, numero_acta, nota_aprobacion)
+            # Asegúrate de que todos los argumentos son proporcionados aquí
+            actividad.transferir_a_repositorio(
+                form.cleaned_data['periodo'],  # Añadido aquí el argumento 'periodo'
+                anio_ingreso,
+                anio_egreso,
+                numero_acta,
+                nota_aprobacion
+                )
             return redirect('dashboard')
         return render(request, 'admrepositorio/transferir_actividad.html', {'form': form, 'actividad': actividad})
-   
-   
+    
+    
     
 def listaractividadesaprovadas(request):
     # Obtén todos los IDs de estudiantes que ya tienen un ActividadRepositorio
@@ -118,7 +125,9 @@ def agregar_actividad_repositorio(request):
         form = AgregarForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect(reverse('listarepositorios')) 
+            return redirect(reverse('listarepositorios'))
+        else:
+            print(form.errors)
     else:
         form = AgregarForm()
     

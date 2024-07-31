@@ -13,10 +13,6 @@ ESTADO_CHOICES = [
     ('Rechazado', 'Rechazado'),
 ]
 
-PERIODO_CHOICES = [
-    ('1', '1'),
-    ('2', '2'),
-]
 
 #class TutorExterno(models.Model):
 #    nombre = models.CharField(max_length=100)
@@ -163,7 +159,7 @@ class Actividad(models.Model):
         
         super().save(*args, **kwargs)
     
-    def transferir_a_repositorio(self, anio_ingreso, anio_egreso, numero_acta, nota_aprobacion):
+    def transferir_a_repositorio(self, periodo, anio_ingreso, anio_egreso, numero_acta, nota_aprobacion):
         repo_actividad, created = ActividadRepositorio.objects.get_or_create(
             estudiante=self.estudiante,
             tutor=self.tutor,
@@ -180,6 +176,7 @@ class Actividad(models.Model):
             jurado_1_aprobado=self.jurado_1_aprobado,
             jurado_2_aprobado=self.jurado_2_aprobado,
             jurado_3_aprobado=self.jurado_3_aprobado,
+            periodo=periodo,
             anio_ingreso=anio_ingreso,
             anio_egreso=anio_egreso,
             numero_acta=numero_acta,
@@ -220,7 +217,7 @@ class ActividadRepositorio(models.Model):
     jurado_1_aprobado = models.BooleanField(default=False)
     jurado_2_aprobado = models.BooleanField(default=False)
     jurado_3_aprobado = models.BooleanField(default=False)
-    periodo = models.CharField(max_length=5, choices=PERIODO_CHOICES, default='1')
+    periodo = models.CharField(max_length=50 )
     anio_ingreso = models.IntegerField()
     anio_egreso = models.IntegerField()
     numero_acta = models.CharField(max_length=50)
