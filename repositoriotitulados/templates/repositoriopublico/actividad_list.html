@@ -2,7 +2,7 @@
 {% load static %}
 <html lang="en">
 <head>
-    <title>Title</title>
+    <title>Repositorio Titulados</title>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta
@@ -25,32 +25,91 @@
 </head>
 
 <body class="contenedorbody ">
-
-<div class="row g-0 text-center pt-3 justify-content-center align-items-center">
-    <h2 class="title text-center pt-1">Repositorio General de Proyecto de Graduación</h2>
     <form method="GET" action="" id="filterForm">
-        <div class="row">
-            <div class="col-1 m-lg-2 m-4 d-flex justify-content-center align-items-center">
-                <a href="{% url 'hometrabajos' %}" class="p-2 stilo rounded-circle">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-x-octagon-fill" viewBox="0 0 16 16">
-                        <path d="M11.46.146A.5.5 0 0 0 11.107 0H4.893a.5.5 0 0 0-.353.146L.146 4.54A.5.5 0 0 0 0 4.893v6.214a.5.5 0 0 0 .146.353l4.394 4.394a.5.5 0 0 0 .353.146h6.214a.5.5 0 0 0 .353-.146l4.394-4.394a.5.5 0 0 0 .146-.353V4.893a.5.5 0 0 0-.146-.353zm-6.106 4.5L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708"/>
-                    </svg>
-                </a>
+    <div id="mySidenav" class="sidenav colortext">
+        <a id="home" class="stilo " href="{% url 'home' %}">Menu Principal        
+             <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-house-check-fill" viewBox="0 0 16 16">
+                <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z"/>
+                <path d="m8 3.293 4.712 4.712A4.5 4.5 0 0 0 8.758 15H3.5A1.5 1.5 0 0 1 2 13.5V9.293z"/>
+                <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m1.679-4.493-1.335 2.226a.75.75 0 0 1-1.174.144l-.774-.773a.5.5 0 0 1 .708-.707l.547.547 1.17-1.951a.5.5 0 1 1 .858.514"/>
+              </svg>
+        </a>
+        <a id="repo" class="stilo " href="{% url 'hometrabajos' %}">Repositorios        
+            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-mortarboard-fill" viewBox="0 0 16 16">
+                <path d="M8.211 2.047a.5.5 0 0 0-.422 0l-7.5 3.5a.5.5 0 0 0 .025.917l7.5 3a.5.5 0 0 0 .372 0L14 7.14V13a1 1 0 0 0-1 1v2h3v-2a1 1 0 0 0-1-1V6.739l.686-.275a.5.5 0 0 0 .025-.917z"/>
+                <path d="M4.176 9.032a.5.5 0 0 0-.656.327l-.5 1.7a.5.5 0 0 0 .294.605l4.5 1.8a.5.5 0 0 0 .372 0l4.5-1.8a.5.5 0 0 0 .294-.605l-.5-1.7a.5.5 0 0 0-.656-.327L8 10.466z"/>
+              </svg>
+        </a>
+        <div id="filnombre" class="d-flex justify-content-end align-items-center row nombre colortext stilo">
+            <div class="col-4">{{ form.nombre.label_tag }}</div>
+            <div class="col-6"> {{ form.nombre }}
             </div>
-            <div class="col-md-4 col-9 p-2 m-2 stilo">
-                {{ form.nombre.label_tag }}<br>
-                {{ form.nombre }}
-            </div>
-            <div class="col-md-4 col-5 p-2 m-2 me-3 me-lg-2 stilo">
-                {{ form.modalidad.label_tag }}<br>
-                {{ form.modalidad }}
-            </div>
-            <div class="col-md-2 col-5 p-2 m-2 stilo">
-                {{ form.fecha.label_tag }}<br>
-                {{ form.fecha }}
+            <div class="col-1 me-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                  </svg>
             </div>
         </div>
+        <div id="filmodalidad" class="d-flex justify-content-end align-items-center row nombre colortext stilo">
+            <div class="col-4">{{ form.modalidad.label_tag }}</div>
+            <div class="col-6"> {{ form.modalidad }}
+            </div>
+            <div class="col-1 me-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-menu-down" viewBox="0 0 16 16">
+                    <path d="M7.646.146a.5.5 0 0 1 .708 0L10.207 2H14a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h3.793zM1 7v3h14V7zm14-1V4a1 1 0 0 0-1-1h-3.793a1 1 0 0 1-.707-.293L8 1.207l-1.5 1.5A1 1 0 0 1 5.793 3H2a1 1 0 0 0-1 1v2zm0 5H1v2a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1zM2 4.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5m0 4a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5m0 4a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5"/>
+                  </svg>
+            </div>
+        </div>
+        <div id="filperyges" class="d-flex justify-content-end align-items-center row nombre colortext stilo">
+            <div class="col-4">{{ form.periodo.label_tag }}</div>
+            <div class="col-6"> {{ form.periodo }}
+            </div>
+            <div class="col-1 me-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-calendar2-check-fill" viewBox="0 0 16 16">
+                    <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5m9.954 3H2.545c-.3 0-.545.224-.545.5v1c0 .276.244.5.545.5h10.91c.3 0 .545-.224.545-.5v-1c0-.276-.244-.5-.546-.5m-2.6 5.854a.5.5 0 0 0-.708-.708L7.5 10.793 6.354 9.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0z"/>
+                  </svg>
+            </div>
+        </div>
+       
+    </div>
     </form>
+<div class="row g-0 text-center pt-3 justify-content-center align-items-center">
+    <h2 class="title text-center pt-1">Repositorio General de Proyecto de Graduación</h2>
+    {% comment %} <form method="GET" action="" id="filterForm">
+        <div class="row stilo">
+            <div class="col-1 m-lg-2 m-2 d-flex justify-content-center align-items-center">
+                <a href="{% url 'hometrabajos' %}" class="p-2 stilo rounded-circle">
+                    
+                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-house-check-fill" viewBox="0 0 16 16">
+                        <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z"/>
+                        <path d="m8 3.293 4.712 4.712A4.5 4.5 0 0 0 8.758 15H3.5A1.5 1.5 0 0 1 2 13.5V9.293z"/>
+                        <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m1.679-4.493-1.335 2.226a.75.75 0 0 1-1.174.144l-.774-.773a.5.5 0 0 1 .708-.707l.547.547 1.17-1.951a.5.5 0 1 1 .858.514"/>
+                      </svg>
+                </a>
+            </div>
+            <div class="col-2  d-flex justify-content-center align-items-center">
+                <a href="{% url 'hometrabajos' %}" class="p-2 stilo ">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-x-octagon-fill" viewBox="0 0 16 16">
+                        <path d="M11.46.146A.5.5 0 0 0 11.107 0H4.893a.5.5 0 0 0-.353.146L.146 4.54A.5.5 0 0 0 0 4.893v6.214a.5.5 0 0 0 .146.353l4.394 4.394a.5.5 0 0 0 .353.146h6.214a.5.5 0 0 0 .353-.146l4.394-4.394a.5.5 0 0 0 .146-.353V4.893a.5.5 0 0 0-.146-.353zm-6.106 4.5L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708"/>
+                    </svg>Repositorios
+                  
+                </a>
+            </div>
+            <div class="col-md-4 col-9 p-2 m-2 ">
+                {{ form.nombre.label_tag }}
+                {{ form.nombre }}
+            </div>
+            <div class="col-md-2 col-5 p-2 m-2 me-3 me-lg-2">
+                {{ form.modalidad.label_tag }}
+                {{ form.modalidad }}
+            </div>
+            <div class="col-md-2 col-5 p-2 m-2 ">
+                {{ form.periodo.label_tag }}
+                {{ form.periodo }}
+            </div>
+        </div>
+    </form> {% endcomment %}
 </div>
 <div class=" px-lg-4 pt-2 ">
     <div class=" stilo p-3">
@@ -62,10 +121,9 @@
                     <th>Nombre</th>
                     <th>Documento</th>
                     <th >Tutor</th>
-                    <th >T. Externo</th>
+                    <th class="tribunales text-center"  >Descripción</th>
                     <th class="tribunales" >Tribunales Asignados</th>
                     <th>Modalidad</th>
-                    <th >Año Egreso</th>
                     <th >Nota</th>
                 </tr>
             </thead>
@@ -95,10 +153,9 @@
                     </td>
                     
                     <td data-label="Tutor">{{ actividad.tutor }}</td>
-                    <td data-label="Tutor Externo">{{ actividad.guia_externo }}</td>
+                    <td data-label="Descripción" class="tribunales text-center">{{ actividad.resumen }}</td>
                     <td data-label="Tribunales" class="tribunales">1: {{ actividad.jurado_1 }}<br>2: {{ actividad.jurado_2 }}<br>3: {{ actividad.jurado_3 }}</td>
                     <td data-label="Modalidad">{{ actividad.modalidad }}</td>
-                    <td data-label="Año Egreso">{{ actividad.anio_egreso }}</td>
                     <td data-label="Nota">{{ actividad.nota_aprobacion }} Pts.</td>
                 </tr>
                 {% endfor %}
@@ -125,7 +182,7 @@
         // Añadir evento de cambio para cada campo del formulario
         const nombreField = document.querySelector('input[name="nombre"]');
         const modalidadField = document.querySelector('select[name="modalidad"]');
-        const fechaField = document.querySelector('input[name="fecha"]');
+        const periodoField = document.querySelector('input[name="periodo"]');
         
         nombreField.addEventListener('change', () => {
             filterForm.submit();

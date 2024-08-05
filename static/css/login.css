@@ -21,6 +21,7 @@ body {
   background: #f0f0f0;
 }
 .fon-stilo {
+  padding-inline-start: 30px;
   border-radius: 18px;
   background: #f0f0f0;
   box-shadow: 9px 9px 9px #a6a6a6, -9px -9px 9px #ffffff;

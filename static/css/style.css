@@ -458,7 +458,8 @@
 }
 
 .comentari-field {
-  width: 800px;
+  width: 100%;
+  max-width: 800px;
   height: 80px; /* Altura fija */
   overflow: auto; /* Agregar barra de desplazamiento si el contenido es más grande que el contenedor */
   resize: vertical; /* Permitir redimensionar verticalmente */
@@ -475,7 +476,8 @@
     height: 250px;
   }
   .comentari-field {
-    width: 250px;
+    width: 100%;
+    min-width: 250px;
   }
   .container {
     padding-left: 0;

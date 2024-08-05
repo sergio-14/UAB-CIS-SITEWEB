@@ -30,8 +30,8 @@
 
 .contenedorbody{
     background: #f0f0f0;
-    padding-left:20px;
-    padding-right: 20px;
+    padding-left:40px;
+    padding-right:40px;
 }
 .rounded-img {
     width: 70px;
@@ -240,3 +240,74 @@
     }
   }
   
+
+  #mySidenav a {
+    position: absolute; /* Position them relative to the browser window */
+    left: -243px; /* Position them outside of the screen */
+    transition: 0.3s; /* Add transition on hover */
+    padding: 15px; /* 15px padding */
+    width: 300px; /* Set a specific width */
+    text-decoration: none; /* Remove underline */
+    font-size: 20px; /* Increase font size */
+    border-radius: 0 5px 5px 0; /* Rounded corners on the top right and bottom right side */
+    text-align: end;
+  }
+
+  #mySidenav .nombre {
+    position: absolute; /* Position them relative to the browser window */
+    left: -430px; /* Position them outside of the screen */
+    transition: 0.3s; /* Add transition on hover */
+    padding: 15px; /* 15px padding */
+    width: 500px; /* Set a specific width */
+    text-decoration: none; /* Remove underline */
+    font-size: 20px; /* Increase font size */
+    border-radius: 0 5px 5px 0; /* Rounded corners on the top right and bottom right side */
+    text-align: end;
+  }
+  
+  #mySidenav #home:hover {
+    left: -90px; /* On mouse-over, make the elements appear as they should */
+  }
+
+  #mySidenav #repo:hover {
+    left: -100px; /* On mouse-over, make the elements appear as they should */
+  }
+
+  #mySidenav #filnombre:hover {
+    left: -80px; /* On mouse-over, make the elements appear as they should */
+  }
+
+  #mySidenav #filmodalidad:hover {
+    left: -80px; /* On mouse-over, make the elements appear as they should */
+  }
+  
+  #mySidenav #filperyges:hover {
+    left: -100px; /* On mouse-over, make the elements appear as they should */
+  }
+  
+  
+  
+  /* The about link: 20px from the top with a green background */
+  #home {
+    top: 80px;    
+  }
+  
+  #repo {
+    top: 154px;
+    /* Blue */
+  }
+  
+  #filnombre {
+    top: 230px;
+   
+  }
+
+  #filmodalidad {
+    top: 312px;
+   
+  }
+  #filperyges {
+    top: 392px;
+  
+  }
+    

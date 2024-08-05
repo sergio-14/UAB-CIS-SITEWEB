@@ -98,18 +98,19 @@ class ActividadFilterForm(forms.Form):
         max_length=100, 
         required=False, 
         label='Nombre',
-        widget=forms.TextInput(attrs={'class': 'form-control'}),
+        widget=forms.TextInput(attrs={'placeholder': 'Escriba el nombre....','class': 'form-control'}),
         )
     modalidad = forms.ModelChoiceField(
         queryset=Modalidad.objects.all(), 
         required=False, label='Modalidad',
         widget=forms.Select(attrs={'class': 'form-select'}),
         )
-    fecha = forms.DateField(
-        required=False, 
-        label='Fecha', 
-        widget=forms.DateInput(attrs={'type': 'date', 'class': 'form-control'})
-        )
+    periodo = forms.CharField(
+        max_length=50,
+        required=False,
+        label='Gestion',
+        widget=forms.TextInput(attrs={'placeholder': 'ejm: "1/año" o "2/año"  ','class': 'form-control'}),
+    )
 
 from gestion_usuarios.models import User
 
@@ -178,6 +179,14 @@ class AgregarForm(forms.ModelForm):
         self.fields['jurado_1'].queryset = docentes
         self.fields['jurado_2'].queryset = docentes
         self.fields['jurado_3'].queryset = docentes
+        
+        # Filtrar las opciones del campo modalidad
+        EXCLUDED_MODALITIES = ['Trabajo Dirigido', 'Proyecto de Grado', 'Tesis de Grado']
+        self.fields['modalidad'].choices = [
+            (choice_value, choice_label)
+            for choice_value, choice_label in self.fields['modalidad'].choices
+            if choice_label not in EXCLUDED_MODALITIES
+        ]
         
     def save(self, commit=True):
         instance = super().save(commit=False)

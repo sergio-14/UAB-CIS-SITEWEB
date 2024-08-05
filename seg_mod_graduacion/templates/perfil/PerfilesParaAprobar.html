@@ -8,7 +8,7 @@
     {% if proyectos.items %}
     {% for proyecto, formulario in proyectos.items %}
     <div class="container">
-        <div class="card mb-4 mx-auto contrevision" style="max-width: 840px;">
+        <div class=" mb-4 mx-auto contrevision" style="max-width: 840px;">
             <div class="row g-0 ">
 
                 <div class="col-md-4 m-2">
@@ -19,13 +19,13 @@
                     {% endif %}
                 </div>
 
-                <div class="col-md-7">
+                <div class="col-md-7 px-2">
                     <div class="card-body"><br>
                         <h5 class="title pb-1 fontI colortitle">Titulo: {{ proyecto.pertitulo }}</h5>
                         <h6 class="fontI comentario colortext">Modalidad Optada: {{ proyecto.permodalidad.nombre }}</h6>
                         <h5 class="fontI colorestados">Postulante: {{ proyecto.user.nombre }} {{ proyecto.user.apellido }}</h5>
                         <p class="fontI text colortext">Descripcion:<br>{{ proyecto.perdescripcion }}</p>
-                        <h2 class="contdoc col-lg-5 " data-label="Documento Proyecto"><a href="{{ proyecto.perdocumentacion.url }}" class="list-group-item list-group-item-action">
+                        <h2 class="contdoc col-lg-5 col-6" data-label="Documento Proyecto"><a href="{{ proyecto.perdocumentacion.url }}" class="list-group-item list-group-item-action">
                             <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-files" viewBox="0 0 16 16">
                                 <path d="M13 0H6a2 2 0 0 0-2 2 2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2 2 2 0 0 0 2-2V2a2 2 0 0 0-2-2m0 13V4a2 2 0 0 0-2-2H5a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1M3 4a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/>
                               </svg> Ver Documento</a></h2>
@@ -35,7 +35,7 @@
             <br>
              <!-- Formulario para aprobar/rechazar con espacio para agregar comentario -->
             <p class="px-3 fontI colortext comentario">Comentario Dirigio para el Proyecto</p>
-            <div class="container fontI">
+            <div class="container fontI px-2">
                 <form id="approvalForm" method="POST" action="{% url 'PerfilesParaAprobar' %}">
                     {% csrf_token %}
                     <input type="hidden" name="proyecto_id" value="{{ proyecto.id }}">

@@ -53,7 +53,24 @@ class PerfilForm(forms.ModelForm):
         widgets = {
             'perdescripcion': forms.Textarea(attrs={'class': 'descripcion-field'}),
         }
+
+    def __init__(self, *args, **kwargs):
+        super(PerfilForm, self).__init__(*args, **kwargs)
         
+         # Set all fields as required
+        self.fields['pertitulo'].required = True
+        self.fields['perdescripcion'].required = True
+        self.fields['perdocumentacion'].required = True
+        self.fields['permodalidad'].required = True
+        
+        INCLUDED_MODALITIES = ['Trabajo Dirigido', 'Proyecto de Grado', 'Tesis de Grado']
+        self.fields['permodalidad'].choices = [
+            (choice_value, choice_label)
+            for choice_value, choice_label in self.fields['permodalidad'].choices
+            if choice_label in INCLUDED_MODALITIES
+        ]
+    
+    
 class PerComentarioForm(forms.ModelForm):
     class Meta:
         model = ComentarioPerfil

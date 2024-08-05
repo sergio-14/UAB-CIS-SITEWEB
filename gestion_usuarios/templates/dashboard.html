@@ -45,7 +45,7 @@
             <div class="spinner-grow text-info" role="status">
                 <span class="visually-hidden">Loading...</span>
             </div>
-            <div class="spinner-grow text-light" role="status">
+            <div class="spinner-grow text-dark" role="status">
                 <span class="visually-hidden">Loading...</span>
             </div>
             <div class="spinner-grow text-dark" role="status">
@@ -94,7 +94,7 @@
                     <!--Para estudiantes-->
                     {% if user|has_group:"Estudiantes" %}
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-graduation-cap me-2"></i>Forms Mod.Grad</a>
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-graduation-cap me-2"></i>Form Mod.Grad.</a>
                         <div class="dropdown-menu bg-transparent border-0">
                             <div class="mx-4  text-end fontsub"><i class="fa fa-solid fa-pen-fancy"></i> Inv. Cientifica</div> 
                             <a href="{% url 'agregar_investigacion' %}" class="mx-2 subtext pe-4 dropdown-item d-flex align-items-center"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-ui-radios me-1" viewBox="0 0 16 16">
@@ -111,7 +111,7 @@
 
                     <!--Para estudiantes-->
                     <div class="nav-item dropdown ">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-spinner me-2"></i>Estado de Forms</a>
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-solid fa-address-card me-2"></i>Progreso Form.</a>
                         <div class="dropdown-menu bg-transparent border-0">
                             <div class="mx-4  text-end fontsub"><i class="fa fa-solid fa-pen-fancy"></i> Inv. Cientifica</div>
                             <a href="{% url 'vista_investigacion' %}" class="mx-2 subtext dropdown-item d-flex align-items-center">
@@ -130,14 +130,14 @@
                         </div>
                     </div>
                     <div class="nav-item dropdown">
-                        <a href="{% url 'lista_actividad' %}" class="nav-link" ><i class="fa fa-info me-2"></i>Pro. Final Mod.G</a>
+                        <a href="{% url 'lista_actividad' %}" class="nav-link" ><i class="fa fa-graduation-cap me-2"></i>Form Final.Mod.G</a>
                     </div>
                     {% endif %}
 
                     <!--Para docentes-->
                     {% if user|has_group:"Docentes" %}
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-graduation-cap me-2"></i>Investigación S.</a>
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-solid fa-folder-open me-2"></i>Inv. Int. Social</a>
                         <div class="dropdown-menu bg-transparent border-0">
                             
                             <a href="{% url 'proyecto_detail' %}" class="mx-2 subtext pe-4 dropdown-item d-flex align-items-center"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-ui-radios me-1" viewBox="0 0 16 16">
@@ -177,10 +177,10 @@
                         </div>
                     </div>
                     <div class="nav-item dropdown">
-                        <a href="{% url 'lista_actividad_control' %}" class="nav-link" ><i class="fa fa-info me-2"></i>Habilitación Pro.</a>
+                        <a href="{% url 'lista_actividad_control' %}" class="nav-link" ><i class="fa fa-solid fa-clipboard-check me-2"></i>Habil. Docs. Final</a>
                     </div>
                     <div class="nav-item dropdown">
-                        <a href="{% url 'listaractividadesaprovadas' %}" class="nav-link" ><i class="fa fa-info me-2"></i>Asig. Repositorio.</a>
+                        <a href="{% url 'listaractividadesaprovadas' %}" class="nav-link" ><i class="fa fa-solid fa-calendar-check me-2"></i>Asig. Repositorio.</a>
                     </div>
                     {% endif %}
 
@@ -200,13 +200,13 @@
                     <!--Para admiiisp-->
                     {% if user|has_group:"ADMIIISP" %}
                     <div class="nav-item dropdown">
-                        <a href="{% url 'inv_soc_settings' %}" class="nav-link" ><i class="fa fa-info me-2"></i>Habilittar Form.</a>
+                        <a href="{% url 'inv_soc_settings' %}" class="nav-link" ><i class="fa fa-solid fa-calendar-week me-2"></i>Habilittar Fechas</a>
                     </div>
                     <div class="nav-item dropdown">
-                        <a href="{% url 'clasificar_proyectos' %}" class="nav-link" ><i class="fa fa-info me-2"></i>Listar Materias</a>
+                        <a href="{% url 'clasificar_proyectos' %}" class="nav-link" ><i class="fa fa-solid fa-table me-2"></i>reporte Inv.Int.S.</a>
                     </div>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-solid fa-layer-group me-2"></i>Inv. Social.</a>
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-solid fa-layer-group me-2"></i>Panel Funciones</a>
                         <div class="dropdown-menu bg-transparent border-0">
                             <div class="mx-4 fontsub text-end"><i class="fa fa-solid fa-pen-fancy"></i> Funciones Validaciones</div> 
                             <a href="{% url 'listart' %}" class="mx-2 subtext pe-4 dropdown-item d-flex align-items-center"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-ui-radios me-1" viewBox="0 0 16 16">

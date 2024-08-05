@@ -105,14 +105,14 @@ def actividad_list(request):
     if form.is_valid():
         estudiante = form.cleaned_data.get('estudiante')
         modalidad = form.cleaned_data.get('modalidad')
-        fecha = form.cleaned_data.get('fecha')
+        periodo = form.cleaned_data.get('periodo')
 
         if estudiante:
             actividades = actividades.filter(estudiante=estudiante)
         if modalidad:
             actividades = actividades.filter(modalidad=modalidad)
-        if fecha:
-            actividades = actividades.filter(fecha=fecha)
+        if periodo:
+            actividades = actividades.filter(periodo=periodo)
 
     return render(request, 'repositoriopublico/actividad_list.html', {'form': form, 'actividades': actividades})
 

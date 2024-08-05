@@ -234,13 +234,14 @@ def crearf(request):
 def editarf(request, pk):
     fase = get_object_or_404(T_Fase_proyecto, pk=pk)
     if request.method == "POST":
-        formf = TipoProyectoForm(request.POST, instance=fase)
+        formf = FaseProyectoForm(request.POST, instance=fase)
         if formf.is_valid():
             formf.save()
             return redirect('listarf')
     else:
         formf = FaseProyectoForm(instance=fase)
     return render(request, 'Tareas/FaseEtapa/editarf.html', {'formf': formf})
+
 @user_passes_test(lambda u: permiso_I_S(u, 'ADMIIISP')) 
 def eliminarf(request, pk):
     fase = get_object_or_404(T_Fase_proyecto, pk=pk)

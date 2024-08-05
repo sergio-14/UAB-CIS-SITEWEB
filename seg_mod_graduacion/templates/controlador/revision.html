@@ -15,7 +15,7 @@
           <form method="post">
             {% csrf_token %}
             <button type="submit" name="cambiar_estado" class="btn btn-dark">Enviar Aprobación</button>
-            <a class="btn btn-secondary" href="{% url 'listaactividades' %}">Cancelar</a>
+            <a class="btn btn-secondary" href="{% url 'listaractividades' %}">Cancelar</a>
           </form>
           {% else %}
           <p class="fontI text colortext ">Estado actual: {{ actividad.estado }}</p>

@@ -15,7 +15,7 @@ User = get_user_model()
 #tipo de proyecto de interaccion social docentes
 class T_Tipo_Proyecto(models.Model):
     Id_tipo=models.AutoField(primary_key=True)
-    S_Tipo= models.CharField(max_length=100, verbose_name='Tipo de Inv. Soc.')
+    S_Tipo= models.CharField(max_length=100, verbose_name='Tipo de Investigación Social.')
     
     def __str__(self):
         return self.S_Tipo
@@ -23,7 +23,7 @@ class T_Tipo_Proyecto(models.Model):
 #tipo fase de interaccion social docentes
 class T_Fase_proyecto(models.Model):
     Id_fase= models.AutoField(primary_key=True)
-    S_Fase=models.CharField(max_length=100,verbose_name='Fase o Etapa ')
+    S_Fase=models.CharField(max_length=100,verbose_name='Fase o Etapa del Proyecto')
     
     def __str__(self):
         return self.S_Fase 
@@ -31,7 +31,7 @@ class T_Fase_proyecto(models.Model):
 #tipo gestion de interaccion social docentes
 class T_Gestion(models.Model):
     Id_Ges=models.AutoField(primary_key=True)
-    S_Gestion= models.CharField(max_length=100,verbose_name='Nombre de Gestion')
+    S_Gestion= models.CharField(max_length=100,verbose_name='Gestion y periodo')
     
     def __str__(self):
         return self.S_Gestion
