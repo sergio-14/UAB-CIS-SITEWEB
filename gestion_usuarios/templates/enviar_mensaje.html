@@ -1,41 +1,48 @@
 {% extends 'dashboard.html'%}
 {% block content %}
-<div class="container font">
-    <div class="row justify-content-center">
-        <br><br><br>
-        <div class="col-md-7 d-flex align-items-center">
-            <h3 class="modal-title me-auto" id="mensajeModalLabel">Enviar Correo</h3>
-            <a href="{% url 'dashboard' %}" class="btn-close"  aria-label="Close"></a>
+<div class="contmsj">
+    <div class="container  fontI no-gutters ">
+        <div class="row justify-content-center pt-4">
+            <br><br><br>
+            <div class="col-md-10 col-10 d-flex align-items-center">
+                <h3 class="modal-title me-auto" id="mensajeModalLabel">Enviar Correo <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-envelope-at-fill" viewBox="0 0 16 16">
+                    <path d="M2 2A2 2 0 0 0 .05 3.555L8 8.414l7.95-4.859A2 2 0 0 0 14 2zm-2 9.8V4.698l5.803 3.546zm6.761-2.97-6.57 4.026A2 2 0 0 0 2 14h6.256A4.5 4.5 0 0 1 8 12.5a4.49 4.49 0 0 1 1.606-3.446l-.367-.225L8 9.586zM16 9.671V4.697l-5.803 3.546.338.208A4.5 4.5 0 0 1 12.5 8c1.414 0 2.675.652 3.5 1.671"/>
+                    <path d="M15.834 12.244c0 1.168-.577 2.025-1.587 2.025-.503 0-1.002-.228-1.12-.648h-.043c-.118.416-.543.643-1.015.643-.77 0-1.259-.542-1.259-1.434v-.529c0-.844.481-1.4 1.26-1.4.585 0 .87.333.953.63h.03v-.568h.905v2.19c0 .272.18.42.411.42.315 0 .639-.415.639-1.39v-.118c0-1.277-.95-2.326-2.484-2.326h-.04c-1.582 0-2.64 1.067-2.64 2.724v.157c0 1.867 1.237 2.654 2.57 2.654h.045c.507 0 .935-.07 1.18-.18v.731c-.219.1-.643.175-1.237.175h-.044C10.438 16 9 14.82 9 12.646v-.214C9 10.36 10.421 9 12.485 9h.035c2.12 0 3.314 1.43 3.314 3.034zm-4.04.21v.227c0 .586.227.8.581.8.31 0 .564-.17.564-.743v-.367c0-.516-.275-.708-.572-.708-.346 0-.573.245-.573.791"/>
+                  </svg> <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-feather" viewBox="0 0 16 16">
+                    <path d="M15.807.531c-.174-.177-.41-.289-.64-.363a3.8 3.8 0 0 0-.833-.15c-.62-.049-1.394 0-2.252.175C10.365.545 8.264 1.415 6.315 3.1S3.147 6.824 2.557 8.523c-.294.847-.44 1.634-.429 2.268.005.316.05.62.154.88q.025.061.056.122A68 68 0 0 0 .08 15.198a.53.53 0 0 0 .157.72.504.504 0 0 0 .705-.16 68 68 0 0 1 2.158-3.26c.285.141.616.195.958.182.513-.02 1.098-.188 1.723-.49 1.25-.605 2.744-1.787 4.303-3.642l1.518-1.55a.53.53 0 0 0 0-.739l-.729-.744 1.311.209a.5.5 0 0 0 .443-.15l.663-.684c.663-.68 1.292-1.325 1.763-1.892.314-.378.585-.752.754-1.107.163-.345.278-.773.112-1.188a.5.5 0 0 0-.112-.172M3.733 11.62C5.385 9.374 7.24 7.215 9.309 5.394l1.21 1.234-1.171 1.196-.027.03c-1.5 1.789-2.891 2.867-3.977 3.393-.544.263-.99.378-1.324.39a1.3 1.3 0 0 1-.287-.018Zm6.769-7.22c1.31-1.028 2.7-1.914 4.172-2.6a7 7 0 0 1-.4.523c-.442.533-1.028 1.134-1.681 1.804l-.51.524zm3.346-3.357C9.594 3.147 6.045 6.8 3.149 10.678c.007-.464.121-1.086.37-1.806.533-1.535 1.65-3.415 3.455-4.976 1.807-1.561 3.746-2.36 5.31-2.68a8 8 0 0 1 1.564-.173"/>
+                  </svg></h3>
+                <a href="{% url 'dashboard' %}" class="btn-close"  aria-label="Close"></a>
+            </div>
         </div>
+        <form class="row g-3 justify-content-center" action="{% url 'enviar_mensaje' %}" method="post">
+            {% csrf_token %}
+            <div class="col-md-5  col-10">
+                <label for="destinatario" class="form-label">Destinatario:</label>
+                <select class="fontf form-select" id="destinatario" name="destinatario">
+                    {% for usuario in usuarios %}
+                        <option value="{{ usuario.id }}" data-firstname="{{ usuario.nombre }}" data-lastname="{{ usuario.apellido }}">{{ usuario.email }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-5 col-10">
+                <label  class="form-label">Nombre completo del usuario seleccionado:</label>
+                <input type="text" class="form-control" id="nombreCompleto" readonly>
+            </div>
+            <div class="col-md-10 col-10">
+                <label for="asunto" class="form-label">Asunto:</label>
+                <input type="text" class="form-control" id="asunto" name="asunto">
+            </div>
+            <div class="col-md-10 col-10">
+              <label for="mensaje" class="form-label">Mensaje:</label>
+              <textarea class="form-control" id="mensaje" name="mensaje" rows="4"></textarea>
+            </div>
+            <div class="col-md-10 col-10">
+                 <button type="submit" class="btn btn-dark">Enviar Mensaje</button>
+            </div>
+        </form>  
+        <br>
     </div>
-    <form class="row g-3 justify-content-center" action="{% url 'enviar_mensaje' %}" method="post">
-        {% csrf_token %}
-        <div class="col-md-3 ">
-            <label for="destinatario" class="form-label">Destinatario:</label>
-            <select class="fontf form-select" id="destinatario" name="destinatario">
-                {% for usuario in usuarios %}
-                    <option value="{{ usuario.id }}" data-firstname="{{ usuario.nombre }}" data-lastname="{{ usuario.apellido }}">{{ usuario.email }}</option>
-                {% endfor %}
-            </select>
-        </div>
-        <div class="col-md-4">
-            <label  class="form-label">Nombre completo del usuario seleccionado:</label>
-            <input type="text" class="form-control" id="nombreCompleto" readonly>
-        </div>
-        <div class="col-md-7">
-            <label for="asunto" class="form-label">Asunto:</label>
-            <input type="text" class="form-control" id="asunto" name="asunto">
-        </div>
-        <div class="col-md-7">
-          <label for="mensaje" class="form-label">Mensaje:</label>
-          <textarea class="form-control" id="mensaje" name="mensaje" rows="4"></textarea>
-        </div>
-        <div class="col-md-7">
-             <button type="submit" class="btn btn-primary">Enviar Mensaje</button>
-        </div>
-    </form>  
-    <br><br><br><br><br><br><br>
-</div>
+</div><br>
 
 <script>
     // Obtener el elemento select

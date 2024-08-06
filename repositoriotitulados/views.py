@@ -97,26 +97,44 @@ def editar_actividad_repositorio(request, pk):
 
 #Repositorio publico
 from .forms import ActividadFilterForm
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.db.models import Q
+
 
 def actividad_list(request):
     actividades = ActividadRepositorio.objects.all()
     form = ActividadFilterForm(request.GET)
 
     if form.is_valid():
-        estudiante = form.cleaned_data.get('estudiante')
+        nombre_completo = form.cleaned_data.get('nombre_completo')
         modalidad = form.cleaned_data.get('modalidad')
         periodo = form.cleaned_data.get('periodo')
 
-        if estudiante:
-            actividades = actividades.filter(estudiante=estudiante)
+        if nombre_completo:
+            nombres = nombre_completo.split()
+            if len(nombres) == 2:
+                nombre, apellido = nombres
+                actividades = actividades.filter(Q(estudiante__nombre__icontains=nombre) & Q(estudiante__apellido__icontains=apellido))
+            else:
+                actividades = actividades.filter(
+                    Q(estudiante__nombre__icontains=nombre_completo) |
+                    Q(estudiante__apellido__icontains=nombre_completo)
+                )
         if modalidad:
             actividades = actividades.filter(modalidad=modalidad)
         if periodo:
             actividades = actividades.filter(periodo=periodo)
 
-    return render(request, 'repositoriopublico/actividad_list.html', {'form': form, 'actividades': actividades})
+    paginator = Paginator(actividades, 15)  
+    page_number = request.GET.get('page')
+    try:
+        actividades_paginated = paginator.page(page_number)
+    except PageNotAnInteger:
+        actividades_paginated = paginator.page(1)
+    except EmptyPage:
+        actividades_paginated = paginator.page(paginator.num_pages)
 
-
+    return render(request, 'repositoriopublico/actividad_list.html', {'form': form, 'actividades': actividades_paginated})
 
 from .forms import AgregarForm
 

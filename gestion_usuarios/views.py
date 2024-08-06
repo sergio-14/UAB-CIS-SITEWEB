@@ -65,29 +65,6 @@ def signout(request):
 
 from django.core.exceptions import PermissionDenied
 
-# Función para verificar pertenencia al grupo 'Estudiantes'
-#def obtener_contenido_por_grupo(user):
-#    user_groups = user.groups.values_list('name', flat=True)
-#    contenido = {}
-
-#    if 'Estudiantes' in user_groups:
-#        contenido['estudiantes'] = True
-#    if 'ADMIIISP' in user_groups:
-#        contenido['admiiisp'] = True
-#    if 'ADMMGS' in user_groups:
-#        contenido['admmgs'] = True
-#    if 'Docentes' in user_groups:
-#        contenido['docentes'] = True
-    
-#    return contenido
-
-#def dashboard(request):
-#    contenido = obtener_contenido_por_grupo(request.user)
-    
-#    context = {
-#        'contenido': contenido,
-#    }
-#    return render(request, 'dashboard.html', context)
 
 # DashBoard
 def dashboard(request):
@@ -185,6 +162,22 @@ def actualizar_usuario(request, pk):
         form = CustomUserChangeForm(instance=usuario)
     
     return render(request, 'Gestion_Usuarios/actualizar_usuario.html', {'form': form, 'usuario': usuario})
+
+
+#editar user
+from .forms import UserUpdateForm
+
+@login_required
+def update_profile(request):
+    user = request.user
+    if request.method == 'POST':
+        form = UserUpdateForm(request.POST, request.FILES, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard') 
+    else:
+        form = UserUpdateForm(instance=user)
+    return render(request, 'Gestion_Usuarios/update_profile.html', {'form': form})
 
 # Eliminar Usuario
 @login_required

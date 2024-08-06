@@ -23,6 +23,7 @@ urlpatterns = [
     path('usuarios/<int:pk>/eliminar/', eliminar_usuario, name='eliminar_usuario'),
     path('usuarios/inactivos/', views.listar_usuarios_inactivos, name='listar_usuarios_inactivos'),
     path('usuarios/<int:pk>/reactivar/', views.reactivar_usuario, name='reactivar_usuario'),
+    path('profile/update/', views.update_profile, name='update_profile'),
     #grupos
     path('grupos/', views.listar_grupos, name='listar_grupos'),
     path('grupos/crear/', views.crear_grupo, name='crear_grupo'),

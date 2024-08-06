@@ -470,7 +470,16 @@
   background: #f3efef;
   box-shadow: 6px 6px 5px #a7a6a6, -6px -6px 5px #ffffff;
 }
+.contmsj{
+  padding-left: 80px;
+  padding-right: 80px;
+}
+
 @media (max-width: 767px) {
+  .contmsj{
+    padding-left: 5px;
+    padding-right: 5px;
+  }
   .imgperfil {
     width: 250px;
     height: 250px;

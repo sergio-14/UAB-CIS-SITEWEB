@@ -111,3 +111,20 @@ class CustomUserChangeForm(forms.ModelForm):
             'is_superuser': forms.CheckboxInput(attrs={'class': 'form-check-input', 'role': 'switch', 'id': 'flexSwitchCheckSuperuser'}),
         }
 
+
+class UserUpdateForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['imagen', 'nombre', 'apellido', 'ci', 'fecha_nac', 'telefono']
+        widgets = {
+            'fecha_nac': forms.DateInput(attrs={'type': 'date'}),
+        }
+        labels = {
+            'imagen': 'Imagen Del Usuario:',
+            'nombre': 'Nombres del usuario',
+            'apellido': 'Apellidos del Usuario',
+            'ci': 'Cedula de Identidad',
+            'fecha_nac': 'Fecha de Nacimiento',
+            'telefono': 'N° Telefono/Celular',
+            
+        }

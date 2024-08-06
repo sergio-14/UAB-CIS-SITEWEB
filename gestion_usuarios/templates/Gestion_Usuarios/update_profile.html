@@ -1,0 +1,143 @@
+{% extends "dashboard.html" %}
+{% load static %}
+{% block content %}
+<div class="px-lg-5 container fontII">
+    <div class="container mt-4  p-lg-5  p-3 no-gutters">
+        <h2 class="titlegeneral pb-3">Editar Datos de mi Perfil de Usuario <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-person-vcard" viewBox="0 0 16 16">
+            <path d="M5 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4m4-2.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5M9 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 9 8m1 2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5"/>
+            <path d="M2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zM1 4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H8.96q.04-.245.04-.5C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1 1 0 0 1 1 12z"/>
+          </svg>
+        </h2>
+        {% if errors %}
+            <div class="alert alert-danger">
+                <ul>
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        <form id="update-user-form" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row radio-border= 50%">
+                <div class="col-md-8">
+                    <div class="form-group">
+                        {{ form.imagen.label_tag }}
+                        {{ form.imagen }}
+                        {{ form.imagen.errors }}
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <img id="preview" src="{% if form.instance.imagen %}{{ form.instance.imagen.url }}{% endif %}" 
+                             alt="Vista previa de la imagen" 
+                             style="max-width: 150px; height: 150px; border-radius: 50%;">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6 form-group">
+                    {{ form.nombre.label_tag }}
+                    {{ form.nombre }}
+                </div>
+                <div class="col-6 form-group">
+                    {{ form.apellido.label_tag }}
+                    {{ form.apellido }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-12 form-group">
+                    {{ form.fecha_nac.label_tag }}
+                    {{ form.fecha_nac }}
+                    {{ form.fecha_nac.errors }}
+                </div>
+                <div class=" col-lg-4 col-6 form-group">
+                    {{ form.ci.label_tag }}
+                    {{ form.ci }}
+                    {{ form.ci.errors }}
+                </div>
+                <div class="col-lg-4 col-6 form-group">
+                    {{ form.telefono.label_tag }}
+                    {{ form.telefono }}
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-dark ">Guardar</button>
+            <a href="{% url 'dashboard' %}" class="btn btn-secondary">Cancelar Cambios </a>
+        </form>
+    </div>
+    
+</div><br><br>
+
+
+<script>
+    document.getElementById('id_imagen').addEventListener('change', function(event) {
+        var input = event.target;
+        var reader = new FileReader();
+        
+        reader.onload = function(){
+            var dataURL = reader.result;
+            var preview = document.getElementById('preview');
+            preview.src = dataURL;
+            preview.style.display = 'block';
+        };
+        
+        if (input.files.length > 0) {
+            reader.readAsDataURL(input.files[0]);
+        } else {
+            document.getElementById('preview').style.display = 'none';
+        }
+    });
+
+    // Mostrar la imagen previa si existe al cargar la página
+    window.onload = function() {
+        var preview = document.getElementById('preview');
+        if (preview.src) {
+            preview.style.display = 'block';
+        }
+    };
+</script>
+
+
+{% endblock %}
+
+{% comment %} <!-- templates/update_profile.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Actualizar Perfil</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Actualizar Perfil</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.imagen.label_tag }} {{ form.imagen }}
+        </div>
+        <div class="form-group">
+            {{ form.nombre.label_tag }} {{ form.nombre }}
+        </div>
+        <div class="form-group">
+            {{ form.apellido.label_tag }} {{ form.apellido }}
+        </div>
+        <div class="form-group">
+            {{ form.ci.label_tag }} {{ form.ci }}
+        </div>
+        <div class="form-group">
+            {{ form.fecha_nac.label_tag }} {{ form.fecha_nac }}
+        </div>
+        <div class="form-group">
+            {{ form.telefono.label_tag }} {{ form.telefono }}
+        </div>
+        <button type="submit" class="btn btn-primary">Actualizar</button>
+    </form>
+</div>
+</body>
+</html> {% endcomment %}

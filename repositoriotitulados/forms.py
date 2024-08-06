@@ -94,12 +94,12 @@ class ActividadRepositorioForm(forms.ModelForm):
         }
 
 class ActividadFilterForm(forms.Form):
-    nombre = forms.CharField(
+    nombre_completo = forms.CharField(
         max_length=100, 
         required=False, 
-        label='Nombre',
-        widget=forms.TextInput(attrs={'placeholder': 'Escriba el nombre....','class': 'form-control'}),
-        )
+        label='Nombre Completo',
+        widget=forms.TextInput(attrs={'placeholder': 'Nombre y apellido del estudiante', 'class': 'form-control'}),
+    )
     modalidad = forms.ModelChoiceField(
         queryset=Modalidad.objects.all(), 
         required=False, label='Modalidad',
